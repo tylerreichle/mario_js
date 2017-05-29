@@ -1,0 +1,27 @@
+{
+  "name": "mario_js",
+  "version": "1.0.0",
+  "description": "Super Mario Bros Level 1-1 in JS",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerreichle/mario_js.git"
+  },
+  "keywords": [],
+  "author": "Tyler Reichle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerreichle/mario_js/issues"
+  },
+  "homepage": "https://github.com/tylerreichle/mario_js#readme",
+  "dependencies": {
+    "webpack": "^2.6.1"
+  }
+}

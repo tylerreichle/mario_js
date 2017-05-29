@@ -22,7 +22,7 @@ In addition this project will include:
 
 ## Wireframes
 
-![Index Page](./docs/screenshots/MarioJS.png)
+![Index Page](./docs/wireframes/MarioJS.png)
 
 Plan for the background to be a Gameboy
 
