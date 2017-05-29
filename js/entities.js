@@ -1,8 +1,8 @@
-import Sprite from '.sprite';
+import Sprite from './sprite';
 
 class Entities {
   init(data) {
-    var background = {
+    const background = {
       sprite: new Sprite(data.spriteSheet, 0, 35, 256, 200),
       x: 0,
       y: 0,
@@ -14,3 +14,5 @@ class Entities {
     data.entities.background = background;
   }
 }
+
+export default Entities;

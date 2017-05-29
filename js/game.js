@@ -1,5 +1,11 @@
+import Entities from './entities';
+import Render from './render';
+
 class Game {
   init() {
+    const entities = new Entities;
+    const render = new Render;
+
     const bgCanvas = document.getElementById('bg-canvas');
     const fgCanvas = document.getElementById('fg-canvas');
 
@@ -17,7 +23,6 @@ class Game {
     spriteSheet.src = './assets/sprites/sprite_sheet.png';
 
     spriteSheet.addEventListener('load', () => {
-      spriteSheet = this;
 
       const data = {
         animationFrame: 0,
@@ -25,10 +30,10 @@ class Game {
         canvas: canvas
       };
 
-      backgroundMusic.play();
+      // backgroundMusic.play();
       // Input.init(data);
-      // Entities.init(data);
-      // Render.init(data);
+      entities.init(data);
+      render.init(data);
       this.init(data);
     });
   }
@@ -56,9 +61,9 @@ class Game {
   //   Physics.update(data);
   // }
   //
-  // render(data) {
-  //   Render.update(data);
-  // }
+  render(data) {
+    Render.update(data);
+  }
 }
 
 const game = new Game;
