@@ -1,4 +1,5 @@
 import Sprite from './sprite';
+import Mario from './mario';
 
 class Entities {
   init(data) {
@@ -10,8 +11,11 @@ class Entities {
       h: 600
     };
 
+    const mario = new Mario(data.spriteSheet, 60, 0, 64, 64);
+
     data.entities = {};
     data.entities.background = background;
+    data.entities.mario = mario;
   }
 }
 
