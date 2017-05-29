@@ -22,7 +22,7 @@ In addition this project will include:
 
 ## Wireframes
 
-![Index Page](./docs/MarioJS.png)
+![Index Page](./docs/screenshots/MarioJS.png)
 
 Plan for the background to be a Gameboy
 
@@ -36,17 +36,17 @@ This project will be implemented with the following technologies:
 
 In addition to the webpack entry file, there will be the following scripts used in this project:
 
-entities.js: Entities will be used to store the current state of all entities in the game. This includes the construction of Mario, enemies, coins and walls locations.
+**entities.js**: Entities will be used to store the current state of all entities in the game. This includes the construction of Mario, enemies, coins and walls locations.
 
-game.js: Game will be the main game class and handle logic for running the game loop. This will also create the foreground and background canvas.
+**game.js**: Game will be the main game class and handle logic for running the game loop. This will also create the foreground and background canvas.
 
-input.js: Input will handle listening for user input and passing on that to the game state.
+**input.js**: Input will handle listening for user input and passing on that to the game state.
 
-animation.js and movement.js: Movement will control enemy movement and update the game state based on player input. Animations will be a helper function used for calling the animation method of each entity in the game after user input.
+**animation.js** and **movement.js**: Movement will control enemy movement and update the game state based on player input. Animations will be a helper function used for calling the animation method of each entity in the game after user input.
 
-physics.js: Physics will be in charge of collision detection of all the game entities. This will also apply gravity to all entities.
+**physics.js**: Physics will be in charge of collision detection of all the game entities. This will also apply gravity to all entities.
 
-render.js: Render will draw each game entity onto the main canvas along with drawing the hud onto the canvas.
+**render.js**: Render will draw each game entity onto the main canvas along with drawing the hud onto the canvas.
 
 ## Implementation Timeline
 
@@ -65,4 +65,5 @@ Add the ability for Mario to shrink upon taking damage and grow when picking up 
 There are many additional feature that could be added in the future. Some anticipated updates are:
 
 - Add the ability to grab flower power-ups and shoot fireballs at enemies
+- Underground portion of level
 - Multiple levels and additional enemy types.
