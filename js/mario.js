@@ -1,10 +1,11 @@
 import Sprite from './sprite';
 
-class Mario extends Sprite {
+class Mario {
   constructor(img, xPos, yPos, width, height) {
-    super(img, xPos, yPos, width, height);
 
-    this.jumpsound = new Audio('./assets/sounds/sounds/mario_jump.mp3');
+    let self = this;
+    this.jumpsound = new Audio('./assets/audio/sounds/mario_jump.mp3');
+    this.sprite = new Sprite(img, xPos, yPos, width, height);
 
     this.spriteAnimations = {
       walkRight : {
@@ -100,10 +101,6 @@ class Mario extends Sprite {
     this.direction = "right";
     this.velY = 0;
     this.velX = 3.8;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.width = width;
-    this.height = height;
   }
 }
 

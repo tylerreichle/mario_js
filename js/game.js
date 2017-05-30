@@ -1,11 +1,19 @@
 import Entities from './entities';
 import Render from './render';
+import Input from './input';
+import Animation from './animation';
+import Movement from './movement';
 
 class Game {
-  init() {
-    const entities = new Entities;
-    const render = new Render;
+  constructor() {
+    this.entities = new Entities;
+    this.render = new Render;
+    this.input = new Input;
+    this.animation = new Animation;
+    this.movement = new Movement;
+  }
 
+  init() {
     const bgCanvas = document.getElementById('bg-canvas');
     const fgCanvas = document.getElementById('fg-canvas');
 
@@ -16,7 +24,7 @@ class Game {
       fgCtx: bgCanvas.getContext('2d')
     };
 
-    const backgroundMusic = new Audio('./assets/sounds/music/underground_theme.mp3');
+    const backgroundMusic = new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
 
     let spriteSheet = new Image();
@@ -31,38 +39,25 @@ class Game {
       };
 
       // backgroundMusic.play();
-      // Input.init(data);
-      entities.init(data);
-      render.init(data);
-      this.init(data);
+      this.input.init(data);
+      this.entities.init(data);
+      this.render.init(data);
+      this.run(data);
     });
   }
 
   run(data) {
     const loop = () => {
-      Game.input(data);
-      Game.update(data);
-      Game.render(data);
+      this.input.update(data);
+      this.animation.update(data);
+      this.movement.update(data);
+      this.render.update(data);
 
       data.animationFrame++;
       window.requestAnimationFrame(loop);
     };
 
     loop();
-  }
-
-  // input(data) {
-  //   Input.update(data);
-  // }
-  //
-  // update(data) {
-  //   Animation.update(data);
-  //   Movement.update(data);
-  //   Physics.update(data);
-  // }
-  //
-  render(data) {
-    Render.update(data);
   }
 }
 

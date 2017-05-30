@@ -10,10 +10,11 @@ class Render {
   update(data) {
     data.canvas.fgCtx.clearRect(0, 0,
       data.canvas.fgCanvas.width, data.canvas.fgCanvas.height);
-    this.drawEntity(data.entities.mario.data.canvas.fgCtx);
+    this.drawEntity(data.entities.mario, data.canvas.fgCtx);
   }
 
   drawEntity(entity, ctx) {
+    debugger;
     ctx.drawImage(
       entity.sprite.img,
       entity.sprite.srcX, entity.sprite.srcY,
