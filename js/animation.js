@@ -1,11 +1,11 @@
 export const Animation = {
   update: function(data) {
-    Animation.jack(data);
+    Animation.mario(data);
     // Animation.coins(data);
   },
 
-  jack: function(data) {
-    data.entities.jack.currentState.animation(data);
+  mario: function(data) {
+    data.entities.mario.currentState.animation(data);
   },
 
   // coins: function(data) {

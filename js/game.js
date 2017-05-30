@@ -1,6 +1,9 @@
 import { Entities } from './entities';
 import { Render } from './render';
+import { Animation } from './animation';
 import { Input } from './input';
+import { Movement } from './movement';
+import { Physics } from './physics';
 
 const Game = {
   init() {
@@ -56,9 +59,9 @@ const Game = {
   },
 
   update: function(data) {
-    // Animation.update(data);
-    // Movement.update(data);
-    // Physics.update(data);
+    Animation.update(data);
+    Movement.update(data);
+    Physics.update(data);
   },
 
   render: function(data) {

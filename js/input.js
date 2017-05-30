@@ -1,29 +1,22 @@
-class Input {
-  constructor() {
-    this.down = {};
-    this.pressed = {};
-
-    this.update = this.update.bind(this);
-    this.isDown = this.isDown.bind(this);
-    this.isPressed = this.isPressed.bind(this);
-  }
-
+export const Input = {
   init() {
+    const self = this;
+
     $(window).on("keydown", (event) => {
-      this.down[event.keyCode] = true;
+      self.helpers.down[event.keyCode] = true;
     });
 
     $(window).on("keyup", () => {
-      delete this.down[event.keyCode];
-      delete this.pressed[event.keyCode];
+      delete self.helpers.down[event.keyCode];
+      delete self.helpers.pressed[event.keyCode];
     });
-  }
+  },
 
-  update(data) {
+  update: function(data) {
     const mario = data.entities.mario;
 
-    // Left Arrow
-    if (this.isDown(37)) {
+    // Left arrow
+    if (Input.helpers.isDown(37)) {
       if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
@@ -31,8 +24,9 @@ class Input {
       }
       mario.direction = "left";
     }
-    // Right Arrow
-    if (this.isDown(39)) {
+
+    // Right arrow
+    if (Input.helpers.isDown(39)) {
       if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
@@ -40,25 +34,30 @@ class Input {
       }
       mario.direction = "right";
     }
-
-    // Up Arrow
-    if (this.isPressed(38)) {
+    
+    // Up arrow
+    if (Input.helpers.isPressed(38)) {
       mario.currentState = mario.states.jumping;
     }
-  }
+  },
 
-  isDown(code) {
-    return this.down[code];
-  }
+  helpers: {
+    isDown(code) {
+      return Input.helpers.down[code];
+    },
 
-  isPressed(code) {
-    if (this.pressed[code]) {
+    isPressed(code) {
+      if (Input.helpers.pressed[code]) {
+        return false;
+      } else if (Input.helpers.down[code]) {
+        Input.helpers.pressed[code] = true;
+        return Input.helpers.pressed[code];
+      }
+
       return false;
-    } else if (this.down[code]) {
-      this.pressed[code] = true;
-      return this.pressed[code];
-    }
-  }
-}
+    },
 
-export default Input;
+    down: {},
+    pressed: {}
+  }
+};
