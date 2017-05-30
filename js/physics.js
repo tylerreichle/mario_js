@@ -21,9 +21,9 @@ export const Physics = {
       entityCollisionCheck(wall);
     });
 
-    // data.entities.coinsArray.forEach(coin => {
-    //   entityCollisionCheck(coin);
-    // });
+    data.entities.coinsArray.forEach(coin => {
+      entityCollisionCheck(coin);
+    });
 
     // entityCollisionCheck(data.entities.exitPipe);
   },
@@ -73,16 +73,16 @@ export const Physics = {
   //     }
   //   }
   //
-  //   if (entity.type === "coin") {
-  //     const coinsArray = data.entities.coinsArray;
-  //     const coinSound = entity.sound.cloneNode(); // clone node allows for simultanious plays of sound
-  //     const index = coinsArray.indexOf(entity);
-  //
-  //
-  //     data.entities.score.value += 1;
-  //     coinSound.play();
-  //     coinsArray.splice(index, 1);
-  //   }
+    if (entity.type === "coin") {
+      const coinsArray = data.entities.coinsArray;
+      const coinSound = entity.sound.cloneNode(); // clone node allows for simultanious plays of sound
+      const index = coinsArray.indexOf(entity);
+
+
+      // data.entities.score.value += 1;
+      coinSound.play();
+      coinsArray.splice(index, 1);
+    }
   },
 
   helpers: {

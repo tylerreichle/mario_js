@@ -18,12 +18,12 @@ export const Entities = {
       [192, 384, 336, 216],
       [726, 0, 42, 600]
     ];
-    //
-    // const coinLocations = [[249, 150], [297, 150], [345, 150], [393, 150],
-    //                      [441, 150], [201, 246], [249, 246], [297, 246],
-    //                      [345, 246], [393, 246], [441, 246], [489, 246],
-    //                      [201, 342], [249, 342], [297, 342], [345, 342],
-    //                      [393, 342], [441, 342], [489, 342]];
+
+    const coinLocations = [[249, 150], [297, 150], [345, 150], [393, 150],
+                         [441, 150], [201, 246], [249, 246], [297, 246],
+                         [345, 246], [393, 246], [441, 246], [489, 246],
+                         [201, 342], [249, 342], [297, 342], [345, 342],
+                         [393, 342], [441, 342], [489, 342]];
 
     data.entities = {};
     data.entities.background = background;
@@ -31,7 +31,7 @@ export const Entities = {
     data.entities.mario = mario;
     // data.entities.exitPipe = exitPipe;
     data.entities.wallsArray = [];
-    // data.entities.coinsArray = [];
+    data.entities.coinsArray = [];
 
     wallLocations.forEach(wallLocation => {
       data.entities.wallsArray.push(
@@ -44,13 +44,13 @@ export const Entities = {
       );
     });
 
-  //   coinLocations.forEach(coinLocation => {
-  //     data.entities.coinsArray.push(
-  //       new Entities.helpers.Coin(
-  //         data.spriteSheet, coinLocation[0], coinLocation[1], 30, 42
-  //       )
-  //     );
-  //   });
+    coinLocations.forEach(coinLocation => {
+      data.entities.coinsArray.push(
+        new Entities.helpers.Coin(
+          data.spriteSheet, coinLocation[0], coinLocation[1], 30, 42
+        )
+      );
+    });
   },
 
   helpers: {
@@ -169,44 +169,44 @@ export const Entities = {
       this.h = h;
     },
 
-    // Coin: function(img, x, y, w, h) {
-    //   var self = this;
-    //   this.type = "coin";
-    //   this.sound = new Audio("audio/lumberjack_coin.mp3");
-    //   this.sprite = new Entities.helpers.Sprite(img, 99, 0, 10, 14);
-    //   this.spriteAnimations = {
-    //     spin: {
-    //       frames: [
-    //         new Entities.helpers.Sprite(img, 99, 0, 10, 14),
-    //         new Entities.helpers.Sprite(img, 115, 0, 10, 14),
-    //         new Entities.helpers.Sprite(img, 131, 0, 10, 14),
-    //         new Entities.helpers.Sprite(img, 147, 0, 10, 14)
-    //       ],
-    //       currentFrame: 0
-    //     }
-    //   };
-    //   this.states = {
-    //     spinning: {
-    //       animation: function(data) {
-    //         if (data.animationFrame % 13 === 0) {
-    //           self.sprite = self.spriteAnimations.spin.
-    //                         frames[self.spriteAnimations.spin.currentFrame];
-    //           self.spriteAnimations.spin.currentFrame++;
-    //
-    //           if (self.spriteAnimations.spin.currentFrame > 3) {
-    //             self.spriteAnimations.spin.currentFrame = 0;
-    //           }
-    //         }
-    //       }
-    //     }
-    //   };
-    //   this.currentState = self.states.spinning;
-    //   this.x = x;
-    //   this.y = y;
-    //   this.w = w;
-    //   this.h = h;
-    // },
-    //
+    Coin: function(img, x, y, w, h) {
+      var self = this;
+      this.type = "coin";
+      this.sound = new Audio("./assets/audio/sounds/coin.wav");
+      this.sprite = new Entities.helpers.Sprite(img, 99, 0, 10, 14);
+      this.spriteAnimations = {
+        spin: {
+          frames: [
+            new Entities.helpers.Sprite(img, 99, 0, 10, 14),
+            new Entities.helpers.Sprite(img, 115, 0, 10, 14),
+            new Entities.helpers.Sprite(img, 131, 0, 10, 14),
+            new Entities.helpers.Sprite(img, 147, 0, 10, 14)
+          ],
+          currentFrame: 0
+        }
+      };
+      this.states = {
+        spinning: {
+          animation: function(data) {
+            if (data.animationFrame % 13 === 0) {
+              self.sprite = self.spriteAnimations.spin.
+                            frames[self.spriteAnimations.spin.currentFrame];
+              self.spriteAnimations.spin.currentFrame++;
+
+              if (self.spriteAnimations.spin.currentFrame > 3) {
+                self.spriteAnimations.spin.currentFrame = 0;
+              }
+            }
+          }
+        }
+      };
+      this.currentState = self.states.spinning;
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    },
+
     Wall: function(x, y, w, h) {
       this.type = "wall";
       this.x = x;

@@ -8,10 +8,10 @@ export const Render = {
     // Render.helpers.drawText(data.entities.score, data.canvas.fgCtx);
 
     Render.helpers.drawEntity(data.entities.mario, data.canvas.fgCtx);
-    //
-    // data.entities.coinsArray.forEach(function(coin) {
-    //   Render.helpers.drawEntity(coin, data.canvas.fgCtx);
-    // });
+    
+    data.entities.coinsArray.forEach(function(coin) {
+      Render.helpers.drawEntity(coin, data.canvas.fgCtx);
+    });
   },
 
   helpers: {

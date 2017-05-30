@@ -8,9 +8,9 @@ export const Animation = {
     data.entities.mario.currentState.animation(data);
   },
 
-  // coins: function(data) {
-  //   data.entities.coinsArray.forEach(coin => {
-  //     coin.currentState.animation(data);
-  //   });
-  // }
+  coins: function(data) {
+    data.entities.coinsArray.forEach(coin => {
+      coin.currentState.animation(data);
+    });
+  }
 };
