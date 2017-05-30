@@ -1,29 +1,25 @@
 export const Entities = {
   init(data) {
     const background = {
-      sprite: new Entities.helpers.Sprite(data.spriteSheet, 0, 64, 225, 200),
+      sprite: new Entities.helpers.Sprite(data.spriteSheet, 5, 79, 3400, 225),
       x: 0,
       y: 0,
-      w: 768,
+      w: 3400,
       h: 600
     };
 
-    const mario = new Entities.helpers.Mario(data.spriteSheet, 60, 0, 64, 64);
+    const mario = new Entities.helpers.Mario(data.spriteSheet, 0, 0, 64, 64);
     // const exitPipe = new Entities.helpers.ExitPipe(624, 432, 144, 186);
     const score = new Entities.helpers.Score(290, 70);
 
     const wallLocations = [
       [0, 0, 48, 600],
       [0, 528, 768, 72],
-      [192, 384, 336, 216],
-      [726, 0, 42, 600]
+      [192, 384, 336, 216]
+      // [726, 0, 42, 600]
     ];
 
-    const coinLocations = [[249, 150], [297, 150], [345, 150], [393, 150],
-                         [441, 150], [201, 246], [249, 246], [297, 246],
-                         [345, 246], [393, 246], [441, 246], [489, 246],
-                         [201, 342], [249, 342], [297, 342], [345, 342],
-                         [393, 342], [441, 342], [489, 342]];
+    const coinLocations = [];
 
     data.entities = {};
     data.entities.background = background;
@@ -66,30 +62,29 @@ export const Entities = {
       const self = this;
 
       this.jumpSound = new Audio("./assets/audio/sounds/mario_jump.mp3");
-      this.sprite = new Entities.helpers.Sprite(img, 0, 0, 16, 16);
 
       this.spriteAnimations = {
         walkRight: {
           frames: [
-            new Entities.helpers.Sprite(img, 16, 0, 16, 16),
-            new Entities.helpers.Sprite(img, 32, 0, 16, 16),
-            new Entities.helpers.Sprite(img, 48, 0, 16, 16)
+            new Entities.helpers.Sprite(img, 667, 5, 16, 16),
+            new Entities.helpers.Sprite(img, 683, 5, 16, 16),
+            new Entities.helpers.Sprite(img, 699, 5, 16, 16)
           ],
           currentFrame: 0
         },
 
         walkLeft: {
           frames: [
-            new Entities.helpers.Sprite(img, 34, 18, 16, 16),
-            new Entities.helpers.Sprite(img, 18, 18, 16, 16),
-            new Entities.helpers.Sprite(img, 2, 18, 16, 16)
+            new Entities.helpers.Sprite(img, 844, 21, 16, 16),
+            new Entities.helpers.Sprite(img, 828, 21, 16, 16),
+            new Entities.helpers.Sprite(img, 812, 21, 16, 16)
           ],
           currentFrame: 0
         },
-        standRight: new Entities.helpers.Sprite(img, 0, 0, 16, 16),
-        standLeft: new Entities.helpers.Sprite(img, 50, 18, 16, 16),
-        jumpLeft: new Entities.helpers.Sprite(img, 67, 18, 16, 16),
-        jumpRight: new Entities.helpers.Sprite(img, 67, 0, 16, 16)
+        standRight: new Entities.helpers.Sprite(img, 651, 5, 16, 16),
+        standLeft: new Entities.helpers.Sprite(img, 860, 21, 16, 16),
+        jumpRight: new Entities.helpers.Sprite(img, 731, 5, 16, 16),
+        jumpLeft: new Entities.helpers.Sprite(img, 778, 21, 16, 16)
       };
 
       this.states = {

@@ -5,7 +5,7 @@ export const Render = {
 
   update: function(data) {
     data.canvas.fgCtx.clearRect(0, 0, data.canvas.fgCanvas.width, data.canvas.fgCanvas.height);
-    Render.helpers.drawText(data.entities.score, data.canvas.fgCtx);
+    // Render.helpers.drawText(data.entities.score, data.canvas.fgCtx);
 
     Render.helpers.drawEntity(data.entities.mario, data.canvas.fgCtx);
 
