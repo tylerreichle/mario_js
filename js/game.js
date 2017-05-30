@@ -20,8 +20,8 @@ const Game = {
     const backgroundMusic = new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
 
-    var spriteSheet = new Image();
-    spriteSheet.src ='./assets/sprites/sprite_sheet.png';
+    let spriteSheet = new Image();
+    spriteSheet.src ='./assets/sprites/spritesheet.png';
 
     spriteSheet.addEventListener('load', function() {
       spriteSheet = this;

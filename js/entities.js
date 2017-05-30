@@ -1,7 +1,7 @@
 export const Entities = {
   init(data) {
     const background = {
-      sprite: new Entities.helpers.Sprite(data.spriteSheet, 0, 35, 256, 200),
+      sprite: new Entities.helpers.Sprite(data.spriteSheet, 0, 64, 225, 200),
       x: 0,
       y: 0,
       w: 768,
@@ -222,7 +222,7 @@ export const Entities = {
     //   this.w = w;
     //   this.h = h;
     // },
-    
+
     Score: function(x, y) {
       this.value = 0;
       this.x = x;
