@@ -1,28 +1,34 @@
-class Render {
-  constructor() {
-    this.drawEntity = this.drawEntity.bind(this);
-  }
-
+export const Render = {
   init(data) {
-    this.drawEntity(data.entities.background, data.canvas.bgCtx);
-  }
+    Render.helpers.drawEntity(data.entities.background, data.canvas.bgCtx);
+  },
 
-  update(data) {
-    data.canvas.fgCtx.clearRect(0, 0,
-      data.canvas.fgCanvas.width, data.canvas.fgCanvas.height);
-    this.drawEntity(data.entities.mario, data.canvas.fgCtx);
-  }
+  update: function(data) {
+    data.canvas.fgCtx.clearRect(0, 0, data.canvas.fgCanvas.width, data.canvas.fgCanvas.height);
+    // Render.helpers.drawText(data.entities.score, data.canvas.fgCtx);
 
-  drawEntity(entity, ctx) {
-    debugger;
-    ctx.drawImage(
-      entity.sprite.img,
-      entity.sprite.srcX, entity.sprite.srcY,
-      entity.sprite.srcW, entity.sprite.srcH,
-      entity.x, entity.y,
-      entity.w, entity.h
-    );
-  }
-}
+    Render.helpers.drawEntity(data.entities.mario, data.canvas.fgCtx);
+    //
+    // data.entities.coinsArray.forEach(function(coin) {
+    //   Render.helpers.drawEntity(coin, data.canvas.fgCtx);
+    // });
+  },
 
-export default Render;
+  helpers: {
+    drawEntity: (entity, ctx) => {
+      ctx.drawImage(
+        entity.sprite.img,
+        entity.sprite.srcX, entity.sprite.srcY,
+        entity.sprite.srcW, entity.sprite.srcH,
+        entity.x, entity.y,
+        entity.w, entity.h
+      );
+    },
+
+    // drawText: function(text, ctx) {
+    //   ctx.font = text.size + " " + text.font;
+    //   ctx.fillStyle = text.color;
+    //   ctx.fillText(`Coins: ${text.value}`, text.x, text.y);
+    // }
+  }
+};

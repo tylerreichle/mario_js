@@ -1,15 +1,16 @@
-class Animation {
-  update(data) {
-    this._mario(data);
-  }
+export const Animation = {
+  update: function(data) {
+    Animation.jack(data);
+    // Animation.coins(data);
+  },
 
-  _mario(data) {
-    data.entities.mario.currentState.animation(data);
-  }
+  jack: function(data) {
+    data.entities.jack.currentState.animation(data);
+  },
 
-  _coins(data) {
-
-  }
-}
-
-export default Animation;
+  // coins: function(data) {
+  //   data.entities.coinsArray.forEach(coin => {
+  //     coin.currentState.animation(data);
+  //   });
+  // }
+};
