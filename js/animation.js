@@ -1,7 +1,7 @@
 export const Animation = {
   update: function(data) {
     Animation.mario(data);
-    // Animation.coins(data);
+    Animation.coins(data);
   },
 
   mario: function(data) {

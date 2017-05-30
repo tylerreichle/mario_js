@@ -79,7 +79,7 @@ export const Physics = {
       const index = coinsArray.indexOf(entity);
 
 
-      // data.entities.score.value += 1;
+      data.entities.score.value += 1;
       coinSound.play();
       coinsArray.splice(index, 1);
     }

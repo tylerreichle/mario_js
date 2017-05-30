@@ -10,8 +10,8 @@ export const Entities = {
 
     const mario = new Entities.helpers.Mario(data.spriteSheet, 60, 0, 64, 64);
     // const exitPipe = new Entities.helpers.ExitPipe(624, 432, 144, 186);
-    // const score = new Entities.helpers.Score(290, 70);
-    //
+    const score = new Entities.helpers.Score(290, 70);
+
     const wallLocations = [
       [0, 0, 48, 600],
       [0, 528, 768, 72],
@@ -27,7 +27,7 @@ export const Entities = {
 
     data.entities = {};
     data.entities.background = background;
-    // data.entities.score = score;
+    data.entities.score = score;
     data.entities.mario = mario;
     // data.entities.exitPipe = exitPipe;
     data.entities.wallsArray = [];
@@ -222,14 +222,14 @@ export const Entities = {
     //   this.w = w;
     //   this.h = h;
     // },
-    //
-    // Score: function(x, y) {
-    //   this.value = 0;
-    //   this.x = x;
-    //   this.y = y;
-    //   this.size = "25px";
-    //   this.font = "PixelEmulator";
-    //   this.color = "white";
-    // }
+    
+    Score: function(x, y) {
+      this.value = 0;
+      this.x = x;
+      this.y = y;
+      this.size = "25px";
+      this.font = "PixelEmulator";
+      this.color = "white";
+    }
   }
 };
