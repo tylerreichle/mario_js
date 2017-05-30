@@ -29,7 +29,7 @@ const Game = {
       var data = {
         animationFrame: 0,
         spriteSheet: spriteSheet,
-        canvas: canvas
+        canvas: canvas,
       };
 
       // backgroundMusic.play();

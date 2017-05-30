@@ -8,7 +8,7 @@ export const Entities = {
       h: 600
     };
 
-    const mario = new Entities.helpers.Mario(data.spriteSheet, 0, 0, 64, 64);
+    const mario = new Entities.helpers.Mario(data.spriteSheet, 200, 200, 38, 38);
     // const exitPipe = new Entities.helpers.ExitPipe(624, 432, 144, 186);
     const score = new Entities.helpers.Score(290, 70);
 
@@ -40,13 +40,13 @@ export const Entities = {
       );
     });
 
-    coinLocations.forEach(coinLocation => {
-      data.entities.coinsArray.push(
-        new Entities.helpers.Coin(
-          data.spriteSheet, coinLocation[0], coinLocation[1], 30, 42
-        )
-      );
-    });
+    // coinLocations.forEach(coinLocation => {
+    //   data.entities.coinsArray.push(
+    //     new Entities.helpers.Coin(
+    //       data.spriteSheet, coinLocation[0], coinLocation[1], 30, 42
+    //     )
+    //   );
+    // });
   },
 
   helpers: {
@@ -158,6 +158,7 @@ export const Entities = {
       this.direction = "right";
       this.velY = 0;
       this.velX = 3.8;
+
       this.x = x;
       this.y = y;
       this.w = w;

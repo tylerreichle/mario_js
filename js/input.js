@@ -34,7 +34,7 @@ export const Input = {
       }
       mario.direction = "right";
     }
-    
+
     // Up arrow
     if (Input.helpers.isPressed(38)) {
       mario.currentState = mario.states.jumping;

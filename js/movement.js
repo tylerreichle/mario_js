@@ -5,5 +5,5 @@ export const Movement = {
 
   mario(data) {
     data.entities.mario.currentState.movement(data);
-  }
+  },
 };
