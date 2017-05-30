@@ -34,7 +34,7 @@ const Game = {
 
       // backgroundMusic.play();
 
-      // Input.init(data);
+      Input.init(data);
       Entities.init(data);
       Render.init(data);
       Game.run(data);
@@ -55,7 +55,7 @@ const Game = {
   },
 
   input: function(data) {
-    // Input.update(data);
+    Input.update(data);
   },
 
   update: function(data) {

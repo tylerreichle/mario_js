@@ -12,12 +12,12 @@ export const Entities = {
     // const exitPipe = new Entities.helpers.ExitPipe(624, 432, 144, 186);
     // const score = new Entities.helpers.Score(290, 70);
     //
-    // const wallLocations = [
-    //   [0, 0, 48, 600],
-    //   [0, 528, 768, 72],
-    //   [192, 384, 336, 216],
-    //   [726, 0, 42, 600]
-    // ];
+    const wallLocations = [
+      [0, 0, 48, 600],
+      [0, 528, 768, 72],
+      [192, 384, 336, 216],
+      [726, 0, 42, 600]
+    ];
     //
     // const coinLocations = [[249, 150], [297, 150], [345, 150], [393, 150],
     //                      [441, 150], [201, 246], [249, 246], [297, 246],
@@ -30,19 +30,19 @@ export const Entities = {
     // data.entities.score = score;
     data.entities.mario = mario;
     // data.entities.exitPipe = exitPipe;
-    // data.entities.wallsArray = [];
+    data.entities.wallsArray = [];
     // data.entities.coinsArray = [];
 
-    // wallLocations.forEach(wallLocation => {
-    //   data.entities.wallsArray.push(
-    //     new Entities.helpers.Wall(
-    //       wallLocation[0],
-    //       wallLocation[1],
-    //       wallLocation[2],
-    //       wallLocation[3]
-    //     )
-    //   );
-    // });
+    wallLocations.forEach(wallLocation => {
+      data.entities.wallsArray.push(
+        new Entities.helpers.Wall(
+          wallLocation[0],
+          wallLocation[1],
+          wallLocation[2],
+          wallLocation[3]
+        )
+      );
+    });
 
   //   coinLocations.forEach(coinLocation => {
   //     data.entities.coinsArray.push(
@@ -207,13 +207,13 @@ export const Entities = {
     //   this.h = h;
     // },
     //
-    // Wall: function(x, y, w, h) {
-    //   this.type = "wall";
-    //   this.x = x;
-    //   this.y = y;
-    //   this.w = w;
-    //   this.h = h;
-    // },
+    Wall: function(x, y, w, h) {
+      this.type = "wall";
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+    },
     //
     // ExitPipe: function(x, y, w, h) {
     //   this.type = "exitPipe";

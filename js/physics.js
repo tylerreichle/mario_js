@@ -17,10 +17,10 @@ export const Physics = {
           }
     };
 
-    // data.entities.wallsArray.forEach(wall => {
-    //   entityCollisionCheck(wall);
-    // });
-    //
+    data.entities.wallsArray.forEach(wall => {
+      entityCollisionCheck(wall);
+    });
+
     // data.entities.coinsArray.forEach(coin => {
     //   entityCollisionCheck(coin);
     // });
@@ -28,26 +28,26 @@ export const Physics = {
     // entityCollisionCheck(data.entities.exitPipe);
   },
 
-  // handleCollision(data, entity) {
-  //   const mario = data.entities.mario;
-  //
-  //   // if (entity.type === "wall") {
-  //   //   // Left side wall
-  //   //   if (mario.x < entity.x && mario.y >= entity.y) {
-  //   //     mario.x = entity.x - mario.w;
-  //   //   }
-  //   //   // Right side wall
-  //   //   if (mario.x > entity.x && mario.y >= entity.y) {
-  //   //     mario.x = entity.x + entity.w;
-  //   //   }
-  //   //   // Top of wall
-  //   //   if (mario.y < entity.y && (mario.x + mario.w) > entity.x + 10 &&
-  //   //       mario.x < (entity.x + entity.w) - 10 && mario.velY >= 0) {
-  //   //         mario.currentState = mario.states.standing;
-  //   //         mario.y = entity.y - mario.h;
-  //   //         mario.velY = 0;
-  //   //   }
-  //   }
+  handleCollision(data, entity) {
+    const mario = data.entities.mario;
+
+    if (entity.type === "wall") {
+      // Left side wall
+      if (mario.x < entity.x && mario.y >= entity.y) {
+        mario.x = entity.x - mario.w;
+      }
+      // Right side wall
+      if (mario.x > entity.x && mario.y >= entity.y) {
+        mario.x = entity.x + entity.w;
+      }
+      // Top of wall
+      if (mario.y < entity.y && (mario.x + mario.w) > entity.x + 10 &&
+          mario.x < (entity.x + entity.w) - 10 && mario.velY >= 0) {
+            mario.currentState = mario.states.standing;
+            mario.y = entity.y - mario.h;
+            mario.velY = 0;
+      }
+    }
   //
   //   if (entity.type === "exitPipe") {
   //     // Left side pipe
@@ -83,7 +83,7 @@ export const Physics = {
   //     coinSound.play();
   //     coinsArray.splice(index, 1);
   //   }
-  // },
+  },
 
   helpers: {
     gravity(entity) {
