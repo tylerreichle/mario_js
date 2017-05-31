@@ -61,6 +61,10 @@ class Game {
 
     loop();
   }
+
+  updateView(data) {
+    
+  }
 }
 
 const game = new Game;

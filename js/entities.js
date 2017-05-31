@@ -7,7 +7,7 @@ class Entities {
       sprite: new Sprite(data.spriteSheet, 5, 79, 3400, 225),
       x: 0,
       y: 0,
-      w: 9000,
+      w: 3400,
       h: 600
     };
 

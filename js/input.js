@@ -21,9 +21,11 @@ class Input {
 
   update(data) {
     const mario = data.entities.mario;
+    const wrapper = document.getElementById('wrapper');
 
     // Left Arrow
     if (this.isDown(37)) {
+      wrapper.scrollLeft -= 2;
       if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
@@ -33,6 +35,7 @@ class Input {
     }
     // Right Arrow
     if (this.isDown(39)) {
+      wrapper.scrollLeft += 2;
       if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
