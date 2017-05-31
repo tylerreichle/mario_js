@@ -29,17 +29,20 @@ class mapBuilder {
     });
   }
 
-  create(ctx) {
+  create(data, ctx) {
     this.groundEntities.forEach(ground => {
       this.drawEntity(ground, ctx);
+      data.entities.scenery.push(ground);
     });
 
     this.pipeEntities.forEach(pipe => {
       this.drawEntity(pipe, ctx);
+      data.entities.scenery.push(pipe);
     });
 
     this.brickEntities.forEach(brick => {
       this.drawEntity(brick, ctx);
+      data.entities.scenery.push(brick);
     });
   }
 

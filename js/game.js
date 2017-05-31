@@ -48,7 +48,7 @@ class Game {
       const mario = new Mario(spriteSheet, 30, 0, 64, 64);
 
       // backgroundMusic.play();
-      // this.input.init(data);
+      this.input.init(data);
       this.entities.init(data);
       data.entities.mario = mario;
       this.render.init(data);
@@ -58,10 +58,10 @@ class Game {
 
   run(data) {
     const loop = () => {
-      // this.input.update(data);
-      // this.animation.update(data);
-      // this.movement.update(data);
-      // this.physics.update(data);
+      this.input.update(data);
+      this.animation.update(data);
+      this.movement.update(data);
+      this.physics.update(data);
       // this.updateView(data);
       this.render.update(data);
 

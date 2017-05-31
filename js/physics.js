@@ -8,46 +8,46 @@ class Physics {
     const mario = data.entities.mario;
 
     const entityCollisionCheck = (entity) => {
-      if (mario.x < entity.x + entity.w &&
-          mario.x + mario.w > entity.x &&
-          mario.y < entity.y + entity.h &&
-          mario.h + mario.y > entity.y) {
+      if (mario.xPos < entity.xPos + entity.width &&
+          mario.xPos + mario.width > entity.xPos &&
+          mario.yPos < entity.yPos + entity.height &&
+          mario.height + mario.yPos > entity.yPos) {
         // Collision Occured
         this.handleCollision(data, entity);
       }
     };
 
-    data.entities.walls.forEach(wall => {
-      entityCollisionCheck(wall);
+    data.entities.scenery.forEach(entity => {
+      entityCollisionCheck(entity);
     });
   }
 
   handleCollision(data, entity) {
     const mario = data.entities.mario;
-    if (entity.type === "wall") {
+    if (entity.type === "ground") {
 
       // Left side wall
-      if (mario.x < entity.x && mario.y >= entity.y) {
+      if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
         console.log('left');
-        mario.x = entity.x - mario.w;
+        mario.xPos = entity.xPos - mario.width;
       }
       // Right side wall
-      if (mario.x > entity.x && mario.y >= entity.y) {
+      if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
         console.log('right');
-        mario.x = entity.x + entity.w;
+        mario.xPos = entity.xPos + entity.width;
       }
       // Top of wall
-      if (mario.y < entity.y && (mario.x + mario.w) > entity.x + 10 &&
-          mario.x < (entity.x + entity.w) - 10 && mario.velY >= 0) {
+      if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
+          mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
             mario.currentState = mario.states.standing;
-            mario.y = entity.y - mario.h;
+            mario.yPos = entity.yPos - mario.height;
             mario.velY = 0;
       }
 
-      // if (mario.y < entity.y && (mario.x + mario.w) > entity.x + 10 &&
-      //     mario.x < (entity.x + entity.w) - 10 && mario.velY >= 0) {
+      // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
+      //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
       //       mario.currentState = mario.states.standing;
-      //       mario.y = entity.y - mario.h;
+      //       mario.yPos = entity.yPos - mario.height;
       //       mario.velY = 0;
       // }
     }
@@ -55,7 +55,7 @@ class Physics {
 
   gravity(entity) {
     entity.velY += 1.2;
-    entity.y += entity.velY;
+    entity.yPos += entity.velY;
   }
 }
 

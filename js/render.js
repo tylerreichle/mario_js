@@ -7,7 +7,7 @@ class Render {
   }
 
   init(data) {
-    // this.drawEntity(data.entities.background, data.canvas.ctx);
+    data.entities.scenery = [];
   }
 
   update(data) {
@@ -19,7 +19,7 @@ class Render {
     ctx.fillStyle = '#6b8cff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.mapBuilder.create(ctx);
+    this.mapBuilder.create(data, ctx);
     this.drawEntity(data.entities.mario, ctx);
   }
 
