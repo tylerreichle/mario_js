@@ -12,7 +12,6 @@ class Render {
   }
 
   drawEntity(entity, ctx) {
-
     ctx.drawImage(
       entity.sprite.img,
       entity.sprite.srcX, entity.sprite.srcY,
