@@ -24,7 +24,9 @@ class Physics {
 
   handleCollision(data, entity) {
     const mario = data.entities.mario;
-    if (entity.type === "ground") {
+    if ((entity.type === 'ground') ||
+       (entity.type === 'pipe') ||
+       (entity.type === 'brick')) {
 
       // Left side wall
       if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {

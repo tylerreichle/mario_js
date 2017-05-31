@@ -45,7 +45,7 @@ class Game {
         movement: false
       };
 
-      const mario = new Mario(spriteSheet, 30, 0, 64, 64);
+      const mario = new Mario(spriteSheet, 30, 0, 16, 16);
 
       // backgroundMusic.play();
       this.input.init(data);
