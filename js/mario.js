@@ -34,9 +34,9 @@ class Mario {
     this.states = {
       jumping: {
         movement(data) {
-          if (self.velY === 0) {
+          if (self.velY === 1.2) {
             const jumpSound = self.jumpSound.cloneNode();
-            jumpSound.play();
+            // jumpSound.play(); comment out for my sanity
             self.velY -= 23;
           }
         },

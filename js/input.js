@@ -24,8 +24,7 @@ class Input {
 
     // Left Arrow
     if (this.isDown(37)) {
-      console.log('left');
-      if (mario.velY !== 0) {
+      if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
         mario.x -= mario.velX;
@@ -34,8 +33,7 @@ class Input {
     }
     // Right Arrow
     if (this.isDown(39)) {
-      console.log('right');
-      if (mario.velY !== 0) {
+      if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
         mario.x += mario.velX;
