@@ -21,11 +21,11 @@ class Input {
 
   update(data) {
     const mario = data.entities.mario;
-    const wrapper = document.getElementById('wrapper');
 
     // Left Arrow
     if (this.isDown(37)) {
-      wrapper.scrollLeft -= 2;
+      data.movement = true;
+
       if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
@@ -34,8 +34,9 @@ class Input {
       mario.direction = "left";
     }
     // Right Arrow
-    if (this.isDown(39)) {
-      wrapper.scrollLeft += 2;
+    else if (this.isDown(39)) {
+      data.movement = true;
+
       if (mario.velY === 1.2) {
         mario.currentState = mario.states.walking;
       } else {
@@ -45,8 +46,12 @@ class Input {
     }
 
     // Up Arrow
-    if (this.isPressed(38)) {
+    else if (this.isPressed(38)) {
       mario.currentState = mario.states.jumping;
+    }
+
+    else {
+      data.movement = false;
     }
   }
 

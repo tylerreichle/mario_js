@@ -22,14 +22,13 @@ canvas {
 }
 
 #wrapper {
-  margin: auto;
   width: 760px;
   height: 600px;
   overflow: hidden;
 }
 
 #game-canvas {
-  width: 3400px;
+  width: 8000px;
   height: 600px;
 }
 

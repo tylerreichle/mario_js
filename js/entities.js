@@ -4,14 +4,14 @@ import Mario from './mario';
 class Entities {
   init(data) {
     const background = {
-      sprite: new Sprite(data.spriteSheet, 5, 79, 3400, 225),
+      sprite: new Sprite(data.spriteSheet, 5, 79, 3392, 225),
       x: 0,
       y: 0,
-      w: 3400,
+      w: 3392,
       h: 600
     };
 
-    const mario = new Mario(data.spriteSheet, 30, 0, 64, 64);
+    const mario = new Mario(data.spriteSheet, 30, 0, 24, 32);
 
     data.entities = {};
     data.entities.background = background;
@@ -42,5 +42,7 @@ class Entities {
 export default Entities;
 
 const wallLocations = [
-  [0, 533, 3400, 72] // ground
+  [-10, 533, 3410, 72], // ground
+  [-50, 533, 50, 200],
+  [1050, 533, 79.9, 77.55]
 ];

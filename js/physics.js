@@ -24,14 +24,16 @@ class Physics {
 
   handleCollision(data, entity) {
     const mario = data.entities.mario;
-
     if (entity.type === "wall") {
+
       // Left side wall
       if (mario.x < entity.x && mario.y >= entity.y) {
+        console.log('left');
         mario.x = entity.x - mario.w;
       }
       // Right side wall
       if (mario.x > entity.x && mario.y >= entity.y) {
+        console.log('right');
         mario.x = entity.x + entity.w;
       }
       // Top of wall
@@ -41,6 +43,13 @@ class Physics {
             mario.y = entity.y - mario.h;
             mario.velY = 0;
       }
+
+      // if (mario.y < entity.y && (mario.x + mario.w) > entity.x + 10 &&
+      //     mario.x < (entity.x + entity.w) - 10 && mario.velY >= 0) {
+      //       mario.currentState = mario.states.standing;
+      //       mario.y = entity.y - mario.h;
+      //       mario.velY = 0;
+      // }
     }
   }
 

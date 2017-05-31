@@ -17,10 +17,11 @@ class Game {
 
   init() {
     const canvasEl = document.getElementById('game-canvas');
+    const ctx = canvasEl.getContext('2d');
 
     const canvas = {
       canvas: canvasEl,
-      ctx: canvasEl.getContext('2d')
+      ctx: ctx
     };
 
     const backgroundMusic =
@@ -35,7 +36,8 @@ class Game {
       const data = {
         animationFrame: 0,
         spriteSheet: spriteSheet,
-        canvas: canvas
+        canvas: canvas,
+        movement: false
       };
 
       // backgroundMusic.play();
@@ -52,6 +54,7 @@ class Game {
       this.animation.update(data);
       this.movement.update(data);
       this.physics.update(data);
+      this.updateView(data);
       this.render.update(data);
 
       data.animationFrame++;
@@ -63,7 +66,18 @@ class Game {
   }
 
   updateView(data) {
-    
+    // view = 380
+
+    const wrapper = document.getElementById('wrapper');
+    const mario = data.entities.mario;
+
+    if (data.movement) {
+      if (mario.direction === 'left') {
+        wrapper.scrollLeft -= mario.velX * 2.3;
+      } else {
+        wrapper.scrollLeft += mario.velX * 2.3;
+      }
+    }
   }
 }
 
