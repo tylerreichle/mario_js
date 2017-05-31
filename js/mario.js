@@ -1,7 +1,7 @@
 import Sprite from './sprite';
 
 class Mario {
-  constructor(img, xPos, yPos, width, height) {
+  constructor(img, x, y, w, h) {
 
     let self = this;
     this.jumpSound = new Audio('./assets/audio/sounds/mario_jump.mp3');
@@ -25,22 +25,22 @@ class Mario {
         ],
         currentFrame: 0
       },
-      standRight: new Sprite(img, 561, 5, 16, 16),
+      standRight: new Sprite(img, 651, 5, 16, 16),
       standLeft: new Sprite(img, 860, 21, 16, 16),
-      jumpRight: new Sprite(img, 731, 5, 17, 17),
-      jumpLeft: new Sprite(img, 779, 22, 17, 17)
+      jumpRight: new Sprite(img, 731, 5, 16, 16),
+      jumpLeft: new Sprite(img, 778, 21, 16, 16)
     };
 
     this.states = {
       jumping: {
-        movement: function(data) {
+        movement(data) {
           if (self.velY === 0) {
             const jumpSound = self.jumpSound.cloneNode();
             jumpSound.play();
             self.velY -= 23;
           }
         },
-        animation: function(data) {
+        animation(data) {
           if (self.direction === "right") {
             self.sprite = self.spriteAnimations.jumpRight;
           } else {
@@ -50,11 +50,11 @@ class Mario {
       },
 
       standing: {
-        movement: function(data) {
+        movement(data) {
           return;
         },
 
-        animation: function(data) {
+        animation(data) {
           if (self.direction === "right") {
             self.sprite = self.spriteAnimations.standRight;
           } else {
@@ -64,7 +64,7 @@ class Mario {
       },
 
       walking: {
-        movement: function(data) {
+        movement(data) {
           if (self.direction === "right") {
             self.x += self.velX;
           } else {
@@ -72,11 +72,12 @@ class Mario {
           }
         },
 
-        animation: function(data) {
+        animation(data) {
           if (self.direction === "right") {
             if (data.animationFrame % 5 === 0) {
               self.sprite = self.spriteAnimations.walkRight.
                 frames[self.spriteAnimations.walkRight.currentFrame];
+
               self.spriteAnimations.walkRight.currentFrame++;
 
               if (self.spriteAnimations.walkRight.currentFrame > 2) {
@@ -97,14 +98,15 @@ class Mario {
         }
       },
     };
+
     this.currentState = this.states.standing;
     this.direction = "right";
     this.velY = 0;
     this.velX = 3.8;
-    this.x = xPos;
-    this.y = yPos;
-    this.w = width;
-    this.h = height;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
   }
 }
 

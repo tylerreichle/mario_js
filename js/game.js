@@ -55,6 +55,7 @@ class Game {
       this.render.update(data);
 
       data.animationFrame++;
+
       window.requestAnimationFrame(loop);
     };
 
