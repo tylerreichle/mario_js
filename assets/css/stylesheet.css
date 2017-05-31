@@ -21,14 +21,14 @@ canvas {
   -webkit-user-drag: none;
 }
 
-#wrapper {
+/*#wrapper {
   width: 760px;
   height: 600px;
   overflow: hidden;
-}
+}*/
 
 #game-canvas {
-  width: 8000px;
+  border: 1px solid black;
   height: 600px;
 }
 

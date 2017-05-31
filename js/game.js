@@ -1,9 +1,12 @@
-import Entities from './entities';
+import Entities from './entity';
 import Render from './render';
 import Input from './input';
 import Animation from './animation';
 import Movement from './movement';
 import Physics from './physics';
+
+import { levelOne } from './level_1-1';
+import mapBuilder from './map_builder';
 
 class Game {
   constructor() {
@@ -41,7 +44,7 @@ class Game {
       };
 
       // backgroundMusic.play();
-      this.input.init(data);
+      // this.input.init(data);
       this.entities.init(data);
       this.render.init(data);
       this.run(data);
@@ -50,11 +53,11 @@ class Game {
 
   run(data) {
     const loop = () => {
-      this.input.update(data);
-      this.animation.update(data);
-      this.movement.update(data);
-      this.physics.update(data);
-      this.updateView(data);
+      // this.input.update(data);
+      // this.animation.update(data);
+      // this.movement.update(data);
+      // this.physics.update(data);
+      // this.updateView(data);
       this.render.update(data);
 
       data.animationFrame++;

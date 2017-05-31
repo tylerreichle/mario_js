@@ -10,10 +10,10 @@ class Entity {
     this.height = height;
   }
 
-  // has sprite
-  // extends sprite?
-  // includes xPos, yPos, width, height
-
+  init(data) {
+    data.entities = {};
+    data.entities.walls = [];
+  }
 }
 
 export default Entity;
