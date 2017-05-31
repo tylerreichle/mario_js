@@ -8,6 +8,7 @@ class mapBuilder {
 
     this.groundEntities = [];
     this.pipeEntities = [];
+    this.brickEntities = [];
 
     level.ground.forEach(ground => {
       this.groundEntities.push(
@@ -16,8 +17,14 @@ class mapBuilder {
     });
 
     level.pipes.forEach(pipe => {
-      this.groundEntities.push(
+      this.pipeEntities.push(
         new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
+      );
+    });
+
+    level.bricks.forEach(brick => {
+      this.brickEntities.push(
+        new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3])
       );
     });
   }
@@ -25,6 +32,14 @@ class mapBuilder {
   create(ctx) {
     this.groundEntities.forEach(ground => {
       this.drawEntity(ground, ctx);
+    });
+
+    this.pipeEntities.forEach(pipe => {
+      this.drawEntity(pipe, ctx);
+    });
+
+    this.brickEntities.forEach(brick => {
+      this.drawEntity(brick, ctx);
     });
   }
 
@@ -52,7 +67,6 @@ class Block extends Entity {
 class Ground extends Entity {
   constructor(tileset, xPos, yPos, width, height) {
     const sprite = new Sprite(tileset, 0, 0, 16, 16);
-    console.log('ground made');
     super('ground', sprite, xPos, yPos, width, height);
   }
 }
@@ -82,8 +96,8 @@ class Mushroom extends Entity {
 }
 
 class Brick extends Entity {
-  constructor(xPos, yPos, width, height) {
-    const sprite = new Sprite('');
+  constructor(tileset, xPos, yPos, width, height) {
+    const sprite = new Sprite(tileset, 0, 18, 17, 17);
 
     super('brick', sprite, xPos, yPos, width, height);
   }

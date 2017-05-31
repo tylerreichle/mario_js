@@ -1,11 +1,13 @@
+import Entity from './entity';
 import Sprite from './sprite';
 
-class Mario {
-  constructor(img, x, y, w, h) {
+class Mario extends Entity {
+  constructor(img, xPos, yPos, width, height) {
+    const sprite = new Sprite(img, 651, 5, 16, 16);
+    super('mario', sprite, xPos, yPos, width, height);
 
     let self = this;
     this.jumpSound = new Audio('./assets/audio/sounds/mario_jump.mp3');
-    this.sprite = new Sprite(img, 651, 5, 16, 16);
 
     this.spriteAnimations = {
       walkRight : {
@@ -66,9 +68,9 @@ class Mario {
       walking: {
         movement(data) {
           if (self.direction === "right") {
-            self.x += self.velX;
+            self.xPos += self.velX;
           } else {
-            self.x -= self.velX;
+            self.xPos -= self.velX;
           }
         },
 
@@ -103,10 +105,10 @@ class Mario {
     this.direction = "right";
     this.velY = 0;
     this.velX = 3.8;
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.width = width;
+    this.height = height;
   }
 }
 

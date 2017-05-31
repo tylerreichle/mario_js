@@ -4,6 +4,7 @@ import Input from './input';
 import Animation from './animation';
 import Movement from './movement';
 import Physics from './physics';
+import Mario from './mario';
 
 import { levelOne } from './level_1-1';
 import mapBuilder from './map_builder';
@@ -21,6 +22,7 @@ class Game {
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
+    ctx.scale(2, 2);
 
     const canvas = {
       canvas: canvasEl,
@@ -43,9 +45,12 @@ class Game {
         movement: false
       };
 
+      const mario = new Mario(spriteSheet, 30, 0, 64, 64);
+
       // backgroundMusic.play();
       // this.input.init(data);
       this.entities.init(data);
+      data.entities.mario = mario;
       this.render.init(data);
       this.run(data);
     });

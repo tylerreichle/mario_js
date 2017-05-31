@@ -11,13 +11,16 @@ class Render {
   }
 
   update(data) {
-    data.canvas.ctx.clearRect(0, 0,
-    data.canvas.canvas.width, data.canvas.canvas.height);
+    const canvas = data.canvas.canvas;
+    const ctx = data.canvas.ctx;
 
-    this.mapBuilder.create(data.canvas.ctx);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // this.drawEntity(data.entities.background, data.canvas.ctx);
-    // this.drawEntity(data.entities.mario, data.canvas.ctx);
+    ctx.fillStyle = '#6b8cff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    this.mapBuilder.create(ctx);
+    this.drawEntity(data.entities.mario, ctx);
   }
 
   drawEntity(entity, ctx) {
@@ -25,8 +28,8 @@ class Render {
       entity.sprite.img,
       entity.sprite.srcX, entity.sprite.srcY,
       entity.sprite.srcW, entity.sprite.srcH,
-      entity.x, entity.y,
-      entity.w, entity.h
+      entity.xPos, entity.yPos,
+      entity.width, entity.height
     );
   }
 }
