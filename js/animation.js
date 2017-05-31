@@ -6,10 +6,6 @@ class Animation {
   _mario(data) {
     data.entities.mario.currentState.animation(data);
   }
-
-  _coins(data) {
-
-  }
 }
 
 export default Animation;

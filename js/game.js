@@ -3,6 +3,7 @@ import Render from './render';
 import Input from './input';
 import Animation from './animation';
 import Movement from './movement';
+import Physics from './physics';
 
 class Game {
   constructor() {
@@ -11,24 +12,23 @@ class Game {
     this.input = new Input;
     this.animation = new Animation;
     this.movement = new Movement;
+    this.physics = new Physics;
   }
 
   init() {
-    const bgCanvas = document.getElementById('bg-canvas');
-    const fgCanvas = document.getElementById('fg-canvas');
+    const canvasEl = document.getElementById('game-canvas');
 
     const canvas = {
-      bgCanvas: bgCanvas,
-      fgCanvas: fgCanvas,
-      bgCtx: bgCanvas.getContext('2d'),
-      fgCtx: bgCanvas.getContext('2d')
+      canvas: canvasEl,
+      ctx: canvasEl.getContext('2d')
     };
 
-    const backgroundMusic = new Audio('./assets/audio/music/underground_theme.mp3');
+    const backgroundMusic =
+      new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
 
     let spriteSheet = new Image();
-    spriteSheet.src = './assets/sprites/sprite_sheet.png';
+    spriteSheet.src = './assets/sprites/spritesheet.png';
 
     spriteSheet.addEventListener('load', () => {
 
@@ -51,6 +51,7 @@ class Game {
       this.input.update(data);
       this.animation.update(data);
       this.movement.update(data);
+      this.physics.update(data);
       this.render.update(data);
 
       data.animationFrame++;

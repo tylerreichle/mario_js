@@ -4,38 +4,38 @@ class Mario {
   constructor(img, xPos, yPos, width, height) {
 
     let self = this;
-    this.jumpsound = new Audio('./assets/audio/sounds/mario_jump.mp3');
-    this.sprite = new Sprite(img, xPos, yPos, width, height);
+    this.jumpSound = new Audio('./assets/audio/sounds/mario_jump.mp3');
+    this.sprite = new Sprite(img, 651, 5, 16, 16);
 
     this.spriteAnimations = {
       walkRight : {
         frames: [
-          new Sprite(img, 16, 0, 16, 16),
-          new Sprite(img, 32, 0, 16, 16),
-          new Sprite(img, 48, 0, 16, 16),
+          new Sprite(img, 667, 5, 16, 16),
+          new Sprite(img, 683, 5, 16, 16),
+          new Sprite(img, 699, 5, 16, 16),
         ],
         currentFrame: 0
       },
 
       walkLeft: {
         frames: [
-          new Sprite(img, 34, 18, 16, 16),
-          new Sprite(img, 18, 18, 16, 16),
-          new Sprite(img, 2, 18, 16, 16),
+          new Sprite(img, 844, 21, 16, 16),
+          new Sprite(img, 828, 21, 16, 16),
+          new Sprite(img, 812, 21, 16, 16),
         ],
         currentFrame: 0
       },
-      standRight: new Sprite(img, 0, 0, 16, 16),
-      standLeft: new Sprite(img, 50, 18, 16, 16),
-      jumpRight: new Sprite(img, 67, 0, 16, 16),
-      jumpLeft: new Sprite(img, 67, 18, 16, 16)
+      standRight: new Sprite(img, 561, 5, 16, 16),
+      standLeft: new Sprite(img, 860, 21, 16, 16),
+      jumpRight: new Sprite(img, 731, 5, 17, 17),
+      jumpLeft: new Sprite(img, 779, 22, 17, 17)
     };
 
     this.states = {
       jumping: {
         movement: function(data) {
           if (self.velY === 0) {
-            var jumpSound = self.jumpSound.cloneNode();
+            const jumpSound = self.jumpSound.cloneNode();
             jumpSound.play();
             self.velY -= 23;
           }
@@ -101,6 +101,10 @@ class Mario {
     this.direction = "right";
     this.velY = 0;
     this.velX = 3.8;
+    this.x = xPos;
+    this.y = yPos;
+    this.w = width;
+    this.h = height;
   }
 }
 

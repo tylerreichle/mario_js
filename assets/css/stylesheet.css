@@ -27,8 +27,8 @@ canvas {
     z-index: 0;
 }
 
-#fg-canvas {
-    z-index: 1;
+#game-canvas {
+
 }
 
 @font-face {
