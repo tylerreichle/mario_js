@@ -7,13 +7,13 @@ import { physics } from './util/physics';
 import Mario from './entities/mario';
 import Goomba from './entities/goomba';
 import Koopa from './entities/koopa';
+import Score from './entities/score';
 
-// TODO: better hitboxes. bricks/coins. mushrooms growing. damage. mario death
+// finish: better hitboxes. brick coin animate. mushrooms growing. damage. mario death
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
 
 // animate blocks
-
 
 class Game {
   init() {
@@ -39,18 +39,20 @@ class Game {
         animationFrame: 0,
         spriteSheet: spriteSheet,
         canvas: canvas,
+        entities: {},
         control: true
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
+      const score = new Score(290, 70);
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
       const koopa = new Koopa(spriteSheet, 200, 0, 16, 24);
 
       // backgroundMusic.play();
       input.init(data);
 
-      data.entities = {};
       data.entities.mario = mario;
+      data.entities.score = score;
       data.entities.goombas = [goomba];
       data.entities.koopas = [koopa];
 
@@ -79,8 +81,10 @@ class Game {
   }
 
   updateView(data) {
-    const wrapper = document.getElementById('wrapper');
-    wrapper.scrollLeft += 1.3;
+    if (data.control) {
+      const wrapper = document.getElementById('wrapper');
+      wrapper.scrollLeft += 1.3;
+    }
   }
 }
 

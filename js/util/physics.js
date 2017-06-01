@@ -119,6 +119,7 @@ export const physics = {
     },
 
     goombaDeath(entity, data) {
+      data.entities.score.value += 100;
       entity.currentState = entity.states.dead;
       entity.type = 'dying';
       const squishSound = entity.squishSound.cloneNode();
@@ -149,6 +150,7 @@ export const physics = {
     },
 
     koopaDeath(entity, data) {
+      data.entities.score.value += 100;
       entity.velY -= 10;
       entity.type = 'dead';
 
@@ -164,12 +166,12 @@ export const physics = {
       const koopas = data.entities.koopas;
       const scenery = data.entities.scenery;
 
-      this.sceneryCollisionCheck([mario], scenery);
-      this.sceneryCollisionCheck(goombas, scenery);
-      this.sceneryCollisionCheck(koopas, scenery);
+      this.sceneryCollisionCheck(data, [mario], scenery);
+      this.sceneryCollisionCheck(data, goombas, scenery);
+      this.sceneryCollisionCheck(data, koopas, scenery);
     },
 
-    sceneryCollisionCheck(entities, scenery) {
+    sceneryCollisionCheck(data, entities, scenery) {
       entities.forEach(entity => {
         scenery.forEach(scene => {
           if (entity.xPos < scene.xPos + scene.width &&
@@ -177,13 +179,13 @@ export const physics = {
             entity.yPos < scene.yPos + scene.height &&
             entity.height + entity.yPos > scene.yPos) {
               // Collision Occured
-              this.sceneryCollision(entity, scene);
+              this.sceneryCollision(data, entity, scene);
             }
           });
         });
       },
 
-      sceneryCollision(entity, scene) {
+      sceneryCollision(data, entity, scene) {
         // Left side
         if (entity.xPos < scene.xPos && entity.yPos >= scene.yPos) {
           entity.xPos = scene.xPos - entity.width;
@@ -226,7 +228,7 @@ export const physics = {
                  const coinSound = scene.coinSound.cloneNode();
                  coinSound.play();
                  scene.coin = false;
-                //  score += 100
+                 data.entities.score.value += 50;
                }
              }
 

@@ -18,6 +18,7 @@ export const render = {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     this.drawEntity(data.entities.mario, ctx);
+    this.drawText(data.entities.score, ctx);
     this.mapBuilder.create(data, ctx);
 
     data.entities.goombas.forEach(goomba => {
@@ -37,5 +38,11 @@ export const render = {
       entity.xPos, entity.yPos,
       entity.width, entity.height
     );
+  },
+
+  drawText(text, ctx) {
+    ctx.font = text.size + " " + text.font;
+    ctx.fillStyle = text.color;
+    ctx.fillText(`Score: ${text.value}`, text.xPos, text.yPos);
   }
 };
