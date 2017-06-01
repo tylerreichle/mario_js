@@ -31,7 +31,7 @@ class Mario extends Entity {
       standLeft:  new Sprite(img, 860, 21, 16, 16),
       jumpRight:  new Sprite(img, 731, 5, 16, 16),
       jumpLeft:   new Sprite(img, 778, 22, 16, 16),
-      dead: new Sprite(img, 754, 21, 16, 16)
+      dead:       new Sprite(img, 754, 21, 16, 16)
     };
 
     this.states = {
@@ -102,10 +102,8 @@ class Mario extends Entity {
 
       dead: {
         movement(data) {
-          console.log('imhere');
           self.velX = 0;
           self.velY = 0;
-          data.control = false;
         },
 
         animation(data) {

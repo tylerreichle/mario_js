@@ -43,20 +43,22 @@ export const physics = {
     handleCollision(data, entity) {
       const mario = data.entities.mario;
 
-      if ((entity.type === 'goomba') ||
-      (entity.type === 'koopa')) {
-
-        // Right side
-        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
+      if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
+        // mario right
+        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) { // mario damage
           mario.xPos = entity.xPos - mario.width;
-          // mario.currentState = mario.states.dead;
+
+          this.marioDeath(data);
+          mario.currentState = mario.states.dead;
         }
-        // Left side
-        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
+        // mario left
+        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) { // mario damage
           mario.xPos = entity.xPos + entity.width;
-          // mario.currentState = mario.states.dead;
+
+          this.marioDeath(data);
+          mario.currentState = mario.states.dead;
         }
-        // Top
+        //  Mario bot
         if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos &&
         mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
           mario.currentState = mario.states.standing;
@@ -82,7 +84,7 @@ export const physics = {
               setTimeout(() => {
                 entity.type = 'koopa';
               }, 200);
-              
+
             } else if (entity.currentState === entity.states.sliding) { // sliding shell stomp
               entity.velY -= 10;
               entity.type = 'dead';
@@ -102,6 +104,17 @@ export const physics = {
           }
         }
       }
+    },
+
+    marioDeath(data) {
+      const mario = data.entities.mario;
+      data.control = false;
+
+      setTimeout(() => {
+        mario.type = 'dead';
+        mario.velY -= 15;
+
+      }, 500);
     },
 
     // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
