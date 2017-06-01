@@ -87,6 +87,14 @@ export const physics = {
             }
           }
         }
+
+        if (mario.yPos > entity.yPos &&
+          (mario.xPos + mario.width) >= entity.xPos &&
+          mario.xPos < (entity.xPos + entity.width)) {
+            mario.velY = 1.2;
+            mario.xPos = entity.xPos;
+            this.marioDeath(data);
+          }
       }
     },
 
@@ -198,16 +206,27 @@ export const physics = {
           }
         }
 
-        // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
-        //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
-        //       mario.currentState = mario.states.standing;
-        //       mario.yPos = entity.yPos - mario.height;
-        //       mario.velY = 0;
-        // }
-      },
+        if (entity.yPos > scene.yPos &&
+          (entity.xPos + entity.width) >= scene.xPos &&
+          entity.xPos < (scene.xPos + scene.width)) {
+            entity.yPos = entity.yPos + entity.height;
+            entity.velY = 1.2;
+            entity.xPos = scene.xPos;
+          }
 
-      gravity(entity) {
-        entity.velY += 1.2;
-        entity.yPos += entity.velY;
-      }
-    };
+        },
+
+        gravity(entity) {
+          entity.velY += 1.2;
+          entity.yPos += entity.velY;
+        }
+      };
+
+      // let mario, entity;
+      //
+      // if (mario.yPos > entity.yPos && (mario.xPos + mario.width) > entity.xPos &&
+      //   mario.xPos < (entity.xPos + entity.width) && mario.velY <= 0) {
+      //   mario.currentState = mario.states.standing;
+      //   mario.yPos = entity.yPos - mario.height;
+      //   mario.velY = 0;
+      // }
