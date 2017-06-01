@@ -8,6 +8,7 @@ class Mario extends Entity {
 
     let self = this;
     this.jumpSound = new Audio('./assets/audio/sounds/mario_jump.mp3');
+    this.deathSound = new Audio('./assets/audio/sounds/mario_death.wav');
 
     this.spriteAnimations = {
       walkRight : {

@@ -46,9 +46,9 @@ export const physics = {
       if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
         // mario right
         if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) { // mario damage
-          mario.xPos = entity.xPos - mario.width;
 
           if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) { // slide shell instead of death
+            mario.xPos = entity.xPos - mario.width;
             entity.currentState = entity.states.sliding;
           } else {
             mario.currentState = mario.states.dead;
@@ -57,7 +57,7 @@ export const physics = {
         }
         // mario left
         if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) { // mario damage
-          mario.xPos = entity.xPos + entity.width;
+          mario.xPos = entity.xPos - mario.width;
 
           if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
             entity.currentState = entity.states.sliding;
@@ -116,7 +116,10 @@ export const physics = {
 
     marioDeath(data) {
       const mario = data.entities.mario;
+      const deathSound = mario.deathSound;
+
       data.control = false;
+      deathSound.play();
 
       setTimeout(() => {
         mario.type = 'dead';
