@@ -30,7 +30,7 @@ class Koopa extends Entity {
         ],
         currentFrame: 0
       },
-      hiding: new Sprite(237, 14, 16, 14)
+      hiding: new Sprite(img, 237, 14, 8, 8)
     };
 
     this.states = {
@@ -70,10 +70,10 @@ class Koopa extends Entity {
       },
       hiding: {
         movement(data) {
-          this.xVel = 0;
+          self.xVel = 0;
         },
         animation(data) {
-          this.sprite = this.spriteAnimations.hiding;
+          self.sprite = self.spriteAnimations.hiding;
         }
       }
     };
@@ -81,7 +81,7 @@ class Koopa extends Entity {
     this.currentState = this.states.walking;
     this.direction = 'right';
     this.yVel = 0;
-    this.xVel = .7;
+    this.xVel = .5;
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;

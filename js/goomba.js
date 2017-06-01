@@ -17,7 +17,7 @@ class Goomba extends Entity {
         ],
         currentFrame: 0
       },
-      death: new Sprite(147, 5, 16, 16)
+      dead: new Sprite(img, 147, 5, 16, 16)
     };
 
     this.states = {
@@ -44,10 +44,10 @@ class Goomba extends Entity {
       },
       dead: {
         movement(data) {
-          this.xVel = 0;
+          self.xVel = 0;
         },
         animation(data) {
-          this.sprite = this.spriteAnimations.death;
+          self.sprite = self.spriteAnimations.dead;
         }
       }
     };
