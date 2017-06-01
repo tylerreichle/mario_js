@@ -103,7 +103,6 @@ class Mario extends Entity {
       dead: {
         movement(data) {
           self.velX = 0;
-          self.velY = 0;
         },
 
         animation(data) {

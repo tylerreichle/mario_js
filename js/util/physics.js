@@ -120,7 +120,7 @@ export const physics = {
 
       setTimeout(() => {
         mario.type = 'dead';
-        mario.velY -= 15;
+        mario.velY -= 13;
 
       }, 500);
     },
