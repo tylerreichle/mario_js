@@ -47,35 +47,38 @@ export const physics = {
         // Right side
         if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
           mario.xPos = entity.xPos - mario.width;
-          console.log('mario dead');
+          // mario.currentState = mario.states.dead;
         }
         // Left side
         if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
           mario.xPos = entity.xPos + entity.width;
-          console.log('mario dead');
+          // mario.currentState = mario.states.dead;
         }
         // Top
         if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos &&
-        mario.xPos < (entity.xPos + entity.width) && mario.yVel >= 0) {
+        mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
           mario.currentState = mario.states.standing;
           mario.yPos = entity.yPos - mario.height;
-          mario.yVel = 0;
+          mario.velY = 0;
 
-          console.log(entity.type);
           if (entity.type === 'goomba') {
             entity.currentState = entity.states.dead;
           } else if (entity.type === 'koopa') {
-            entity.currentState = entity.states.hiding;
+            if (entity.currentState === entity.states.hiding) {
+              entity.currentState = entity.states.sliding;
+            } else {
+              entity.currentState = entity.states.hiding;
+            }
           }
         }
       }
     },
 
     // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
-    //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.yVel >= 0) {
+    //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
     //       mario.currentState = mario.states.standing;
     //       mario.yPos = entity.yPos - mario.height;
-    //       mario.yVel = 0;
+    //       mario.velY = 0;
     // }
 
     sceneryCollisionDetection(data) {
@@ -121,24 +124,24 @@ export const physics = {
         }
         // Top
         if (entity.yPos < scene.yPos && (entity.xPos + entity.width) > scene.xPos + 10 &&
-        entity.xPos < (scene.xPos + scene.width) - 10 && entity.yVel >= 0) {
+        entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
           if (entity.type === 'mario') {
             entity.currentState = entity.states.standing;
           }
           entity.yPos = scene.yPos - entity.height;
-          entity.yVel = 0;
+          entity.velY = 0;
         }
 
         // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
-        //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.yVel >= 0) {
+        //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
         //       mario.currentState = mario.states.standing;
         //       mario.yPos = entity.yPos - mario.height;
-        //       mario.yVel = 0;
+        //       mario.velY = 0;
         // }
       },
 
       gravity(entity) {
-        entity.yVel += 1.2;
-        entity.yPos += entity.yVel;
+        entity.velY += 1.2;
+        entity.yPos += entity.velY;
       }
     };

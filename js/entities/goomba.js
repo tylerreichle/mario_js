@@ -24,9 +24,9 @@ class Goomba extends Entity {
       walking: {
         movement(data) {
           if (self.direction === 'left') {
-            self.xPos -= self.xVel;
+            self.xPos -= self.velX;
           } else {
-            self.xPos += self.xVel;
+            self.xPos += self.velX;
           }
         },
         animation(data) {
@@ -44,7 +44,7 @@ class Goomba extends Entity {
       },
       dead: {
         movement(data) {
-          self.xVel = 0;
+          self.velX = 0;
         },
         animation(data) {
           self.sprite = self.spriteAnimations.dead;
@@ -54,8 +54,8 @@ class Goomba extends Entity {
 
     this.currentState = this.states.walking;
     this.direction = 'right';
-    this.yVel = 0;
-    this.xVel = .7;
+    this.velY = 0;
+    this.velX = .7;
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;

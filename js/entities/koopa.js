@@ -37,9 +37,9 @@ class Koopa extends Entity {
       walking: {
         movement(data) {
           if (self.direction === "right") {
-            self.xPos += self.xVel;
+            self.xPos += self.velX;
           } else {
-            self.xPos -= self.xVel;
+            self.xPos -= self.velX;
           }
         },
 
@@ -68,10 +68,26 @@ class Koopa extends Entity {
           }
         }
       },
+
       hiding: {
         movement(data) {
-          self.xVel = 0;
+          self.velX = 0;
         },
+        animation(data) {
+          self.sprite = self.spriteAnimations.hiding;
+        }
+      },
+
+      sliding: {
+        movement(data) {
+          self.velX = 2;
+          if (self.direction === "right") {
+            self.xPos += self.velX;
+          } else {
+            self.xPos -= self.velX;
+          }
+        },
+
         animation(data) {
           self.sprite = self.spriteAnimations.hiding;
         }
@@ -80,8 +96,8 @@ class Koopa extends Entity {
 
     this.currentState = this.states.walking;
     this.direction = 'right';
-    this.yVel = 0;
-    this.xVel = .5;
+    this.velY = 0;
+    this.velX = .5;
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;

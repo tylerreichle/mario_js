@@ -37,6 +37,7 @@ class Game {
         animationFrame: 0,
         spriteSheet: spriteSheet,
         canvas: canvas,
+        control: true
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);

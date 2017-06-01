@@ -14,30 +14,33 @@ export const input = {
   },
 
   update(data) {
-    const mario = data.entities.mario;
+    if (data.control) {
 
-    // Left Arrow
-    if (this.isDown(37)) {
-      if (mario.yVel === 0) {
-        mario.currentState = mario.states.walking;
-      } else {
-        mario.xPos -= mario.xVel;
-      }
-      mario.direction = "left";
-    }
-    // Right Arrow
-    if (this.isDown(39)) {
-      if (mario.yVel === 0) {
-        mario.currentState = mario.states.walking;
-      } else {
-        mario.xPos += mario.xVel;
-      }
-      mario.direction = "right";
-    }
+      const mario = data.entities.mario;
 
-    // Up Arrow
-    if (this.isPressed(38)) {
-      mario.currentState = mario.states.jumping;
+      // Left Arrow
+      if (this.isDown(37)) {
+        if (mario.velY === 0) {
+          mario.currentState = mario.states.walking;
+        } else {
+          mario.xPos -= mario.velX;
+        }
+        mario.direction = "left";
+      }
+      // Right Arrow
+      if (this.isDown(39)) {
+        if (mario.velY === 0) {
+          mario.currentState = mario.states.walking;
+        } else {
+          mario.xPos += mario.velX;
+        }
+        mario.direction = "right";
+      }
+
+      // Up Arrow
+      if (this.isPressed(38)) {
+        mario.currentState = mario.states.jumping;
+      }
     }
   },
 
