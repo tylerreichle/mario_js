@@ -1,5 +1,3 @@
-import Sprite from './sprite';
-
 class Entity {
   constructor(type, sprite, xPos, yPos, width, height) {
     this.type = type;

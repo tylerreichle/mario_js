@@ -1,8 +1,7 @@
-import Entities from './entity';
 import Render from './render';
 import Input from './input';
 import Animation from './animation';
-import Movement from './movement';
+import { Movement } from './movement';
 import Physics from './physics';
 import Mario from './mario';
 import Goomba from './goomba';
@@ -12,11 +11,9 @@ import mapBuilder from './map_builder';
 
 class Game {
   constructor() {
-    this.entities = new Entities;
     this.render = new Render;
     this.input = new Input;
     this.animation = new Animation;
-    this.movement = new Movement;
     this.physics = new Physics;
   }
 
@@ -65,7 +62,7 @@ class Game {
     const loop = () => {
       this.input.update(data);
       this.animation.update(data);
-      this.movement.update(data);
+      Movement.update(data);
       this.physics.update(data);
       this.updateView(data);
       this.render.update(data);
