@@ -5,6 +5,7 @@ import Animation from './animation';
 import Movement from './movement';
 import Physics from './physics';
 import Mario from './mario';
+import Goomba from './goomba';
 
 import { levelOne } from './level_1-1';
 import mapBuilder from './map_builder';
@@ -45,11 +46,16 @@ class Game {
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
+      const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
 
       // backgroundMusic.play();
       this.input.init(data);
-      this.entities.init(data);
+
+      data.entities = {};
       data.entities.mario = mario;
+      data.entities.goomba = goomba;
+      window.data = data;
+
       this.render.init(data);
       this.run(data);
     });
@@ -73,8 +79,8 @@ class Game {
   }
 
   updateView(data) {
-    const wrapper = document.getElementById('wrapper');
-    wrapper.scrollLeft += 1.3;
+    // const wrapper = document.getElementById('wrapper');
+    // wrapper.scrollLeft += 1.3;
   }
 }
 

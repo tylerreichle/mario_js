@@ -9,10 +9,6 @@ class Entity {
     this.width = width;
     this.height = height;
   }
-
-  init(data) {
-    data.entities = {};
-  }
 }
 
 export default Entity;

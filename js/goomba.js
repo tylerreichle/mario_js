@@ -1,39 +1,53 @@
-import Entity from '/.entity';
+import Entity from './entity';
 import Sprite from './sprite';
 
 class Goomba extends Entity {
   constructor(img, xPos, yPos, width, height) {
-    const sprite = new Sprite(img, 651, 5, 16, 16);
+    const sprite = new Sprite(img, 115, 5, 16, 16);
     super('goomba', sprite, xPos, yPos, width, height);
 
+    let self = this;
     this.squishSound = new Audio('./assets/audio/sounds/stomp.wav');
 
     this.spriteAnimations = {
       walking: {
         frames: [
-          new Sprite(),
-          new Sprite()
+          new Sprite(img, 115, 5, 16, 16),
+          new Sprite(img, 131, 5, 16, 16)
         ],
         currentFrame: 0
       },
-      death: new Sprite()
+      death: new Sprite(147, 5, 16, 16)
     };
 
-    this.state = {
+    this.states = {
       walking: {
         movement(data) {
-
+          if (self.direction === 'left') {
+            self.xPos -= self.velX;
+          } else {
+            self.xPos += self.velX;
+          }
         },
         animation(data) {
+          if (data.animationFrame % 5 === 0) {
+            self.sprite = self.spriteAnimations.walking.
+              frames[self.spriteAnimations.walking.currentFrame];
 
+            self.spriteAnimations.walking.currentFrame++;
+
+            if (self.spriteAnimations.walking.currentFrame > 1) {
+              self.spriteAnimations.walking.currentFrame = 0;
+            }
+          }
         }
       },
       dead: {
         movement(data) {
-
+          this.velX = 0;
         },
         animation(data) {
-
+          this.sprite = this.spriteAnimations.death;
         }
       }
     };
@@ -41,7 +55,7 @@ class Goomba extends Entity {
     this.currentState = this.states.walking;
     this.direction = 'left';
     this.velY = 0;
-    this.velX = 2;
+    this.velX = -2;
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;

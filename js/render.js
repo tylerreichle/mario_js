@@ -13,7 +13,6 @@ class Render {
   update(data) {
     const canvas = data.canvas.canvas;
     const ctx = data.canvas.ctx;
-    const mario = data.entities.mario;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#6b8cff';
@@ -21,6 +20,8 @@ class Render {
 
     this.mapBuilder.create(data, ctx);
     this.drawEntity(data.entities.mario, ctx);
+
+    this.drawEntity(data.entities.goomba, ctx);
   }
 
   drawEntity(entity, ctx) {

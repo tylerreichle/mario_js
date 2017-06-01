@@ -2,6 +2,7 @@ class Physics {
   update(data) {
     this.collisionDetection(data);
     this.gravity(data.entities.mario);
+    this.gravity(data.entities.goomba);
   }
 
   collisionDetection(data) {
