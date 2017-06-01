@@ -1,20 +1,19 @@
-import Render from './render';
-import { input } from './input';
-import { animation } from './animation';
-import { movement } from './movement';
-import { physics } from './physics';
-import Mario from './mario';
-import Goomba from './goomba';
-import Koopa from './koopa';
+import { render } from './util/render';
+import { input } from './util/input';
+import { animation } from './util/animation';
+import { movement } from './util/movement';
+import { physics } from './util/physics';
 
-import { levelOne } from './level_1-1';
-import mapBuilder from './map_builder';
+import Mario from './entities/mario';
+import Goomba from './entities/goomba';
+import Koopa from './entities/koopa';
+
+// TODO: enemy deaths. better hitboxes. bricks/coins. mushrooms growing. damage. mario death
+// create random spawns. endless. design 'blocks' to spawn. speed increases!
+// distance measure. score
+
 
 class Game {
-  constructor() {
-    this.render = new Render;
-  }
-
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
@@ -29,7 +28,7 @@ class Game {
       new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
 
-    let spriteSheet = new Image();
+    const spriteSheet = new Image();
     spriteSheet.src = './assets/sprites/spritesheet.png';
 
     spriteSheet.addEventListener('load', () => {
@@ -54,7 +53,7 @@ class Game {
 
       window.data = data;
 
-      this.render.init(data);
+      render.init(data);
       this.run(data);
     });
   }
@@ -62,16 +61,14 @@ class Game {
   run(data) {
     const loop = () => {
       input.update(data);
-
       animation.update(data);
       movement.update(data);
       physics.update(data);
 
       this.updateView(data);
-      this.render.update(data);
+      render.update(data);
 
       data.animationFrame++;
-
       window.requestAnimationFrame(loop);
     };
 

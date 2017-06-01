@@ -1,14 +1,13 @@
-import { levelOne } from './level_1-1';
-import mapBuilder from './map_builder';
+import { levelOne } from '../map/level_1-1';
+import mapBuilder from '../map/map_builder';
 
-class Render {
-  constructor() {
-    this.mapBuilder = new mapBuilder(levelOne);
-  }
+export const render = {
+
+  mapBuilder: new mapBuilder(levelOne),
 
   init(data) {
     data.entities.scenery = [];
-  }
+  },
 
   update(data) {
     const canvas = data.canvas.canvas;
@@ -28,7 +27,7 @@ class Render {
     data.entities.koopas.forEach(koopa => {
       this.drawEntity(koopa, ctx);
     });
-  }
+  },
 
   drawEntity(entity, ctx) {
     ctx.drawImage(
@@ -39,6 +38,4 @@ class Render {
       entity.width, entity.height
     );
   }
-}
-
-export default Render;
+};

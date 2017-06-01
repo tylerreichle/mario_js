@@ -1,5 +1,5 @@
-import Entity from './entity';
-import Sprite from './sprite';
+import Entity from '../entities/entity';
+import Sprite from '../entities/sprite';
 
 class mapBuilder {
   constructor(level) {
