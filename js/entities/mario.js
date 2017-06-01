@@ -31,7 +31,7 @@ class Mario extends Entity {
       standLeft:  new Sprite(img, 860, 21, 16, 16),
       jumpRight:  new Sprite(img, 731, 5, 16, 16),
       jumpLeft:   new Sprite(img, 778, 22, 16, 16),
-      dead:       new Sprite(img, 754, 21, 16, 16)
+      dead:       new Sprite(img, 748, 5, 16, 16)
     };
 
     this.states = {
@@ -39,7 +39,7 @@ class Mario extends Entity {
         movement(data) {
           if (self.velY === 1.2) {
             const jumpSound = self.jumpSound.cloneNode();
-            jumpSound.play();
+            // jumpSound.play();
             self.velY -= 14;
           }
         },

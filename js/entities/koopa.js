@@ -1,8 +1,3 @@
-// locations
-// <object id="150" x="400" y="176" width="16" height="16"/>
-// <object id="151" x="864" y="176" width="16" height="16"/>
-// <object id="152" x="2352" y="176" width="16" height="16"/>
-
 import Entity from './entity';
 import Sprite from './sprite';
 
@@ -45,7 +40,7 @@ class Koopa extends Entity {
 
         animation(data) {
           if (self.direction === "right") {
-            if (data.animationFrame % 5 === 0) {
+            if (data.animationFrame % 10 === 0) {
               self.sprite = self.spriteAnimations.walkRight.
                 frames[self.spriteAnimations.walkRight.currentFrame];
 
@@ -56,7 +51,7 @@ class Koopa extends Entity {
               }
             }
           } else {
-            if (data.animationFrame % 5 === 0) {
+            if (data.animationFrame % 10 === 0) {
               self.sprite = self.spriteAnimations.walkLeft.
                 frames[self.spriteAnimations.walkLeft.currentFrame];
               self.spriteAnimations.walkLeft.currentFrame++;
@@ -108,11 +103,7 @@ class Koopa extends Entity {
 export default Koopa;
 
 
-// locations
-//
-// <object id="139" x="512" y="176" width="16" height="16"/>
-//   <object id="140" x="672" y="176" width="16" height="16"/>
-//   <object id="141" x="832" y="176" width="16" height="16"/>
-//   <object id="142" x="2768" y="176" width="16" height="16"/>
-//   <object id="143" x="560" y="176" width="16" height="16"/>
-//   <object id="148" x="1920" y="176" width="16" height="16"/>
+// level 1-1 locations
+// <object id="150" x="400" y="176" width="16" height="16"/>
+// <object id="151" x="864" y="176" width="16" height="16"/>
+// <object id="152" x="2352" y="176" width="16" height="16"/>

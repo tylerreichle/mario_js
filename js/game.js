@@ -8,16 +8,16 @@ import Mario from './entities/mario';
 import Goomba from './entities/goomba';
 import Koopa from './entities/koopa';
 
-// TODO: enemy deaths. better hitboxes. bricks/coins. mushrooms growing. damage. mario death
+// TODO: better hitboxes. bricks/coins. mushrooms growing. damage. mario death
 // create random spawns. endless. design 'blocks' to spawn. speed increases!
-// distance measure. score
+// distance measure. score. invisible wall on left edge
 
 
 class Game {
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
-    ctx.scale(3, 3);
+    ctx.scale(2, 2);
 
     const canvas = {
       canvas: canvasEl,

@@ -48,15 +48,23 @@ export const physics = {
         if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) { // mario damage
           mario.xPos = entity.xPos - mario.width;
 
-          this.marioDeath(data);
-          mario.currentState = mario.states.dead;
+          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) { // slide shell instead of death
+            entity.currentState = entity.states.sliding;
+          } else {
+            mario.currentState = mario.states.dead;
+            this.marioDeath(data);
+          }
         }
         // mario left
         if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) { // mario damage
           mario.xPos = entity.xPos + entity.width;
 
-          this.marioDeath(data);
-          mario.currentState = mario.states.dead;
+          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
+            entity.currentState = entity.states.sliding;
+          } else {
+            mario.currentState = mario.states.dead;
+            this.marioDeath(data);
+          }
         }
         //  Mario bot
         if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos &&

@@ -14,10 +14,9 @@ export const input = {
   },
 
   update(data) {
+    const mario = data.entities.mario;
+    
     if (data.control) {
-
-      const mario = data.entities.mario;
-
       // Left Arrow
       if (this.isDown(37)) {
         if (mario.velY === 0) {
@@ -41,6 +40,8 @@ export const input = {
       if (this.isPressed(38)) {
         mario.currentState = mario.states.jumping;
       }
+    } else {
+      mario.currentState = mario.states.dead;
     }
   },
 
