@@ -1,34 +1,38 @@
-export const Render = {
-  init(data) {
-    Render.helpers.drawEntity(data.entities.background, data.canvas.bgCtx);
-  },
+import { levelOne } from './level_1-1';
+import mapBuilder from './map_builder';
 
-  update: function(data) {
-    data.canvas.fgCtx.clearRect(0, 0, data.canvas.fgCanvas.width, data.canvas.fgCanvas.height);
-    // Render.helpers.drawText(data.entities.score, data.canvas.fgCtx);
-
-    Render.helpers.drawEntity(data.entities.mario, data.canvas.fgCtx);
-
-    data.entities.coinsArray.forEach(function(coin) {
-      Render.helpers.drawEntity(coin, data.canvas.fgCtx);
-    });
-  },
-
-  helpers: {
-    drawEntity(entity, ctx) {
-      ctx.drawImage(
-        entity.sprite.img,
-        entity.sprite.srcX, entity.sprite.srcY,
-        entity.sprite.srcW, entity.sprite.srcH,
-        entity.x, entity.y,
-        entity.w, entity.h
-      );
-    },
-
-    drawText(text, ctx) {
-      ctx.font = text.size + " " + text.font;
-      ctx.fillStyle = text.color;
-      ctx.fillText(`Coins: ${text.value}`, text.x, text.y);
-    }
+class Render {
+  constructor() {
+    this.mapBuilder = new mapBuilder(levelOne);
   }
-};
+
+  init(data) {
+    data.entities.scenery = [];
+  }
+
+  update(data) {
+    const canvas = data.canvas.canvas;
+    const ctx = data.canvas.ctx;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#6b8cff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    this.mapBuilder.create(data, ctx);
+    this.drawEntity(data.entities.mario, ctx);
+
+    this.drawEntity(data.entities.goomba, ctx);
+  }
+
+  drawEntity(entity, ctx) {
+    ctx.drawImage(
+      entity.sprite.img,
+      entity.sprite.srcX, entity.sprite.srcY,
+      entity.sprite.srcW, entity.sprite.srcH,
+      entity.xPos, entity.yPos,
+      entity.width, entity.height
+    );
+  }
+}
+
+export default Render;
