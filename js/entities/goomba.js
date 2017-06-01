@@ -65,7 +65,7 @@ class Goomba extends Entity {
 
 export default Goomba;
 
-// locations
+// level 1-1 locations
 // <object id="139" x="512" y="176" width="16" height="16"/>
 //   <object id="140" x="672" y="176" width="16" height="16"/>
 //   <object id="141" x="832" y="176" width="16" height="16"/>

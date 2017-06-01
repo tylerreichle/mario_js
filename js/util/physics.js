@@ -1,8 +1,10 @@
 export const physics = {
   update(data) {
+    // collisions
     this.collisionDetection(data);
     this.sceneryCollisionDetection(data);
 
+    // apply gravity
     this.gravity(data.entities.mario);
 
     data.entities.goombas.forEach(goomba => {
@@ -61,13 +63,41 @@ export const physics = {
           mario.yPos = entity.yPos - mario.height;
           mario.velY = 0;
 
-          if (entity.type === 'goomba') {
+          if (entity.type === 'goomba') { // goomba stomp
             entity.currentState = entity.states.dead;
+            entity.type = 'dying';
+            const squishSound = entity.squishSound.cloneNode();
+            squishSound.play();
+
+            setTimeout(() => {
+              const index = data.entities.goombas.indexOf(entity);
+              delete data.entities.goombas[index];
+            }, 800);
+
           } else if (entity.type === 'koopa') {
-            if (entity.currentState === entity.states.hiding) {
+            if (entity.currentState === entity.states.hiding) { // stationary shell stomp
+              entity.type = 'invulnerable';
               entity.currentState = entity.states.sliding;
+
+              setTimeout(() => {
+                entity.type = 'koopa';
+              }, 200);
+              
+            } else if (entity.currentState === entity.states.sliding) { // sliding shell stomp
+              entity.velY -= 10;
+              entity.type = 'dead';
+
+              setTimeout(() => {
+                const index = data.entities.koopas.indexOf(self);
+                delete data.entities.koopas[index];
+              }, 400);
             } else {
-              entity.currentState = entity.states.hiding;
+              entity.type = 'invulnerable';
+              entity.currentState = entity.states.hiding; // koopa stomp
+
+              setTimeout(() => {
+                entity.type = 'koopa';
+              }, 200);
             }
           }
         }
@@ -86,6 +116,7 @@ export const physics = {
       const goombas = data.entities.goombas;
       const koopas = data.entities.koopas;
       const scenery = data.entities.scenery;
+
       this.sceneryCollisionCheck([mario], scenery);
       this.sceneryCollisionCheck(goombas, scenery);
       this.sceneryCollisionCheck(koopas, scenery);
@@ -125,11 +156,13 @@ export const physics = {
         // Top
         if (entity.yPos < scene.yPos && (entity.xPos + entity.width) > scene.xPos + 10 &&
         entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
-          if (entity.type === 'mario') {
-            entity.currentState = entity.states.standing;
+          if (entity.type !== 'dead') { // fall through ground when dead
+            if (entity.type === 'mario') {
+              entity.currentState = entity.states.standing;
+            }
+            entity.yPos = scene.yPos - entity.height;
+            entity.velY = 0;
           }
-          entity.yPos = scene.yPos - entity.height;
-          entity.velY = 0;
         }
 
         // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
