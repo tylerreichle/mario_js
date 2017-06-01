@@ -12,6 +12,8 @@ import Koopa from './entities/koopa';
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
 
+// animate blocks
+
 
 class Game {
   init() {

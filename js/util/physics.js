@@ -44,10 +44,11 @@ export const physics = {
       const mario = data.entities.mario;
 
       if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
-        // mario right
-        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) { // mario damage
-
-          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) { // slide shell instead of death
+        // mario right. take damage
+        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
+          // slide shell instead of death
+          if (entity.type === 'koopa' &&
+            entity.currentState === entity.states.hiding) {
             mario.xPos = entity.xPos - mario.width;
             entity.direction = 'right';
             entity.currentState = entity.states.sliding;
@@ -56,11 +57,12 @@ export const physics = {
             this.marioDeath(data);
           }
         }
-        // mario left
-        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) { // mario damage
+        // mario left. take damage
+        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
           mario.xPos = entity.xPos - mario.width;
 
-          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
+          if (entity.type === 'koopa' &&
+              entity.currentState === entity.states.hiding) {
             entity.direction = 'left';
             entity.currentState = entity.states.sliding;
           } else {
@@ -69,8 +71,10 @@ export const physics = {
           }
         }
         //  Mario bot
-        if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos &&
-        mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
+        if (mario.yPos < entity.yPos &&
+           (mario.xPos + mario.width) > entity.xPos &&
+           mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
+
           mario.currentState = mario.states.standing;
           mario.yPos = entity.yPos - mario.height;
           mario.velY = 0;
@@ -81,7 +85,6 @@ export const physics = {
           } else if (entity.type === 'koopa') {
             if (entity.currentState === entity.states.hiding) {
               this.koopaSlide(entity);
-
             } else if (entity.currentState === entity.states.sliding) {
               this.koopaDeath(entity, data);
             } else {
@@ -91,12 +94,13 @@ export const physics = {
         }
 
         if (mario.yPos > entity.yPos &&
-          (mario.xPos + mario.width) >= entity.xPos &&
-          mario.xPos < (entity.xPos + entity.width)) {
-            mario.velY = 1.2;
-            mario.xPos = entity.xPos;
-            this.marioDeath(data);
-          }
+           (mario.xPos + mario.width) >= entity.xPos &&
+            mario.xPos < (entity.xPos + entity.width)) {
+
+          mario.velY = 1.2;
+          mario.xPos = entity.xPos;
+          this.marioDeath(data);
+        }
       }
     },
 
@@ -197,8 +201,10 @@ export const physics = {
           }
         }
         // Top
-        if (entity.yPos < scene.yPos && (entity.xPos + entity.width) > scene.xPos + 10 &&
-        entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
+        if (entity.yPos < scene.yPos &&
+           (entity.xPos + entity.width) > scene.xPos + 10 &&
+           entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
+
           if (entity.type !== 'dead') { // fall through ground when dead
             if (entity.type === 'mario') {
               entity.currentState = entity.states.standing;
@@ -208,13 +214,27 @@ export const physics = {
           }
         }
 
+        // Bot
         if (entity.yPos > scene.yPos &&
-          (entity.xPos + entity.width) >= scene.xPos &&
-          entity.xPos < (scene.xPos + scene.width)) {
+           (entity.xPos + entity.width) >= scene.xPos &&
+           entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
+
+             if (scene.type === 'block') {
+               scene.sprite = scene.used;
+
+               if (scene.coin) {
+                 const coinSound = scene.coinSound.cloneNode();
+                 coinSound.play();
+                 scene.coin = false;
+                //  score += 100
+               }
+             }
+
             if (entity.type === 'mario') {
               const bumpSound = entity.bumpSound.cloneNode();
               bumpSound.play();
             }
+
             entity.yPos = entity.yPos + entity.height;
             entity.velY = 1.2;
             entity.xPos = scene.xPos;

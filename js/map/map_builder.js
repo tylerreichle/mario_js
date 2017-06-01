@@ -10,6 +10,7 @@ class mapBuilder {
     this.pipeEntities = [];
     this.brickEntities = [];
     this.breakableEntities = [];
+    this.blockEntities = [];
 
     level.ground.forEach(ground => {
       this.groundEntities.push(
@@ -29,9 +30,17 @@ class mapBuilder {
       );
     });
 
-    level.breakables.forEach(ground => {
-      this.groundEntities.push(
-        new Breakable(this.tileset, ground[0], ground[1], ground[2], ground[3])
+    // coin blocks
+    level.blocks.forEach(block => {
+      this.blockEntities.push(
+        new Block(true, this.tileset, block[0], block[1], block[2], block[3])
+      );
+    });
+
+    level.breakables.forEach(breakable => {
+      this.breakableEntities.push(
+        new Breakable(this.tileset,
+          breakable[0], breakable[1], breakable[2], breakable[3])
       );
     });
   }
@@ -51,6 +60,16 @@ class mapBuilder {
       this.drawEntity(brick, ctx);
       data.entities.scenery.push(brick);
     });
+
+    this.breakableEntities.forEach(breakable => {
+      this.drawEntity(breakable, ctx);
+      data.entities.scenery.push(breakable);
+    });
+
+    this.blockEntities.forEach(block => {
+      this.drawEntity(block, ctx);
+      data.entities.scenery.push(block);
+    });
   }
 
   drawEntity(entity, ctx) {
@@ -67,10 +86,13 @@ class mapBuilder {
 export default mapBuilder;
 
 class Block extends Entity {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 0, 18, 18);
-
+  constructor(coin, tileset, xPos, yPos, width, height) {
+    const sprite = new Sprite(tileset, 432, 0, 18, 18);
     super('block', sprite, xPos, yPos, width, height);
+
+    this.coin = coin;
+    this.coinSound = new Audio('./assets/audio/sounds/coin.wav');
+    this.used = new Sprite(tileset, 486, 0, 18, 18);
   }
 }
 
