@@ -9,8 +9,8 @@ import Goomba from './entities/goomba';
 import Koopa from './entities/koopa';
 
 // TODO: better hitboxes. bricks/coins. mushrooms growing. damage. mario death
-// create random spawns. endless. design 'blocks' to spawn. speed increases!
-// distance measure. score. invisible wall on left edge
+// create random spawns. endless. design obstacles to spawn. speed increases!
+// distance measure. score. invisible wall on left edge. game reset
 
 
 class Game {

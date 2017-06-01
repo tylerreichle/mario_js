@@ -73,41 +73,17 @@ export const physics = {
           mario.yPos = entity.yPos - mario.height;
           mario.velY = 0;
 
-          if (entity.type === 'goomba') { // goomba stomp
-            entity.currentState = entity.states.dead;
-            entity.type = 'dying';
-            const squishSound = entity.squishSound.cloneNode();
-            squishSound.play();
-
-            setTimeout(() => {
-              const index = data.entities.goombas.indexOf(entity);
-              delete data.entities.goombas[index];
-            }, 800);
+          if (entity.type === 'goomba') {
+            this.goombaDeath(entity, data);
 
           } else if (entity.type === 'koopa') {
-            if (entity.currentState === entity.states.hiding) { // stationary shell stomp
-              entity.type = 'invulnerable';
-              entity.currentState = entity.states.sliding;
+            if (entity.currentState === entity.states.hiding) {
+              this.koopaSlide(entity);
 
-              setTimeout(() => {
-                entity.type = 'koopa';
-              }, 200);
-
-            } else if (entity.currentState === entity.states.sliding) { // sliding shell stomp
-              entity.velY -= 10;
-              entity.type = 'dead';
-
-              setTimeout(() => {
-                const index = data.entities.koopas.indexOf(self);
-                delete data.entities.koopas[index];
-              }, 400);
+            } else if (entity.currentState === entity.states.sliding) {
+              this.koopaDeath(entity, data);
             } else {
-              entity.type = 'invulnerable';
-              entity.currentState = entity.states.hiding; // koopa stomp
-
-              setTimeout(() => {
-                entity.type = 'koopa';
-              }, 200);
+              this.koopaHide(entity);
             }
           }
         }
@@ -128,12 +104,45 @@ export const physics = {
       }, 500);
     },
 
-    // if (mario.yPos < entity.yPos && (mario.xPos + mario.width) > entity.xPos + 10 &&
-    //     mario.xPos < (entity.xPos + entity.width) - 10 && mario.velY >= 0) {
-    //       mario.currentState = mario.states.standing;
-    //       mario.yPos = entity.yPos - mario.height;
-    //       mario.velY = 0;
-    // }
+    goombaDeath(entity, data) {
+      entity.currentState = entity.states.dead;
+      entity.type = 'dying';
+      const squishSound = entity.squishSound.cloneNode();
+      squishSound.play();
+
+      setTimeout(() => {
+        const index = data.entities.goombas.indexOf(entity);
+        delete data.entities.goombas[index];
+      }, 800);
+    },
+
+    koopaHide(entity) {
+      entity.type = 'invulnerable';
+      entity.currentState = entity.states.hiding; // koopa stomp
+
+      setTimeout(() => {
+        entity.type = 'koopa';
+      }, 200);
+    },
+
+    koopaSlide(entity) {
+      entity.type = 'invulnerable';
+      entity.currentState = entity.states.sliding;
+
+      setTimeout(() => {
+        entity.type = 'koopa';
+      }, 200);
+    },
+
+    koopaDeath(entity, data) {
+      entity.velY -= 10;
+      entity.type = 'dead';
+
+      setTimeout(() => {
+        const index = data.entities.koopas.indexOf(entity);
+        delete data.entities.koopas[index];
+      }, 400);
+    },
 
     sceneryCollisionDetection(data) {
       const mario = data.entities.mario;
