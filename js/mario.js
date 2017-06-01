@@ -30,7 +30,7 @@ class Mario extends Entity {
       standRight: new Sprite(img, 651, 5, 16, 16),
       standLeft:  new Sprite(img, 860, 21, 16, 16),
       jumpRight:  new Sprite(img, 731, 5, 16, 16),
-      jumpLeft:   new Sprite(img, 778, 21, 16, 16)
+      jumpLeft:   new Sprite(img, 778, 22, 16, 16)
     };
 
     this.states = {

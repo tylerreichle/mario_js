@@ -30,7 +30,7 @@ class Goomba extends Entity {
           }
         },
         animation(data) {
-          if (data.animationFrame % 5 === 0) {
+          if (data.animationFrame % 10 === 0) {
             self.sprite = self.spriteAnimations.walking.
               frames[self.spriteAnimations.walking.currentFrame];
 
@@ -64,7 +64,6 @@ class Goomba extends Entity {
 }
 
 export default Goomba;
-
 
 // locations
 //

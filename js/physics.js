@@ -1,4 +1,4 @@
-class Physics {
+export const physics = {
   update(data) {
     // this.collisionDetection(data);
     this.sceneryCollisionDetection(data);
@@ -7,7 +7,7 @@ class Physics {
     data.entities.goombas.forEach(goomba => {
       this.gravity(goomba);
     });
-  }
+  },
 
   // mario
   // collisionDetection(data) {
@@ -34,7 +34,7 @@ class Physics {
     const scenery = data.entities.scenery;
     this.sceneryCollisionCheck([mario], scenery);
     this.sceneryCollisionCheck(goombas, scenery);
-  }
+  },
 
   sceneryCollisionCheck(entities, scenery) {
     entities.forEach(entity => {
@@ -48,7 +48,7 @@ class Physics {
           }
       });
     });
-  }
+  },
 
 
   sceneryCollision(entity, scene) {
@@ -74,7 +74,7 @@ class Physics {
       //       mario.yPos = entity.yPos - mario.height;
       //       mario.velY = 0;
       // }
-    }
+    },
 
   handleCollision(data, entity) {
     const mario = data.entities.mario;
@@ -105,12 +105,10 @@ class Physics {
       //       mario.velY = 0;
       // }
     }
-  }
+  },
 
   gravity(entity) {
     entity.velY += 1.2;
     entity.yPos += entity.velY;
   }
-}
-
-export default Physics;
+};

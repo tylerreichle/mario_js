@@ -1,7 +1,7 @@
-export const Movement = {
+export const movement = {
   update(data) {
-    Movement.mario(data);
-    Movement.goombas(data);
+    movement.mario(data);
+    movement.goombas(data);
   },
 
   mario(data) {

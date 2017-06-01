@@ -1,4 +1,4 @@
-class Animation {
+export const animation = {
   update(data) {
     data.entities.mario.currentState.animation(data);
 
@@ -6,6 +6,4 @@ class Animation {
       goomba.currentState.animation(data);
     });
   }
-}
-
-export default Animation;
+};

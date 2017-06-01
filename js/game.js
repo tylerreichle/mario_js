@@ -1,8 +1,8 @@
 import Render from './render';
 import Input from './input';
-import Animation from './animation';
-import { Movement } from './movement';
-import Physics from './physics';
+import { animation } from './animation';
+import { movement } from './movement';
+import { physics } from './physics';
 import Mario from './mario';
 import Goomba from './goomba';
 
@@ -13,14 +13,12 @@ class Game {
   constructor() {
     this.render = new Render;
     this.input = new Input;
-    this.animation = new Animation;
-    this.physics = new Physics;
   }
 
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
-    ctx.scale(1, 1);
+    ctx.scale(2, 2);
 
     const canvas = {
       canvas: canvasEl,
@@ -61,9 +59,11 @@ class Game {
   run(data) {
     const loop = () => {
       this.input.update(data);
-      this.animation.update(data);
-      Movement.update(data);
-      this.physics.update(data);
+
+      animation.update(data);
+      movement.update(data);
+      physics.update(data);
+      
       this.updateView(data);
       this.render.update(data);
 
