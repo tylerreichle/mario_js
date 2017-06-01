@@ -37,9 +37,9 @@ class Mario extends Entity {
       jumping: {
         movement(data) {
           if (self.yVel === 0) {
+            console.log('iamhere');
             const jumpSound = self.jumpSound.cloneNode();
             jumpSound.play();
-            self.yVel -= 23;
           }
         },
         animation(data) {

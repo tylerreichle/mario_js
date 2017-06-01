@@ -18,7 +18,7 @@ class Game {
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
-    ctx.scale(2, 2);
+    ctx.scale(3, 3);
 
     const canvas = {
       canvas: canvasEl,
@@ -79,8 +79,8 @@ class Game {
   }
 
   updateView(data) {
-    // const wrapper = document.getElementById('wrapper');
-    // wrapper.scrollLeft += 1.3;
+    const wrapper = document.getElementById('wrapper');
+    wrapper.scrollLeft += 1.3;
   }
 }
 

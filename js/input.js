@@ -38,6 +38,7 @@ export const input = {
     // Up Arrow
     if (this.isPressed(38)) {
       mario.currentState = mario.states.jumping;
+      mario.yVel -= 14;
     }
   },
 
