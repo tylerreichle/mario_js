@@ -1,11 +1,9 @@
-class Movement {
+export const Movement = {
   update(data) {
-    this.mario(data);
-  }
+    Movement.mario(data);
+  },
 
   mario(data) {
     data.entities.mario.currentState.movement(data);
-  }
-}
-
-export default Movement;
+  },
+};
