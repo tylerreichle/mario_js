@@ -1,5 +1,5 @@
 import Render from './render';
-import Input from './input';
+import { input } from './input';
 import { animation } from './animation';
 import { movement } from './movement';
 import { physics } from './physics';
@@ -12,7 +12,6 @@ import mapBuilder from './map_builder';
 class Game {
   constructor() {
     this.render = new Render;
-    this.input = new Input;
   }
 
   init() {
@@ -44,7 +43,7 @@ class Game {
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
 
       // backgroundMusic.play();
-      this.input.init(data);
+      input.init(data);
 
       data.entities = {};
       data.entities.mario = mario;
@@ -58,12 +57,12 @@ class Game {
 
   run(data) {
     const loop = () => {
-      this.input.update(data);
+      input.update(data);
 
       animation.update(data);
       movement.update(data);
       physics.update(data);
-      
+
       this.updateView(data);
       this.render.update(data);
 

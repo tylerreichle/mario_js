@@ -38,7 +38,7 @@ class Mario extends Entity {
         movement(data) {
           if (self.velY === 0) {
             const jumpSound = self.jumpSound.cloneNode();
-            // jumpSound.play(); comment out for my sanity
+            jumpSound.play();
             self.velY -= 23;
           }
         },
@@ -55,7 +55,6 @@ class Mario extends Entity {
         movement(data) {
           return;
         },
-
         animation(data) {
           if (self.direction === "right") {
             self.sprite = self.spriteAnimations.standRight;

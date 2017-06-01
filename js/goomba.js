@@ -53,7 +53,7 @@ class Goomba extends Entity {
     };
 
     this.currentState = this.states.walking;
-    this.direction = 'left';
+    this.direction = 'right';
     this.velY = 0;
     this.velX = .7;
     this.xPos = xPos;

@@ -1,8 +1,6 @@
-class Input {
-  constructor() {
-    this.down = {};
-    this.pressed = {};
-  }
+export const input = {
+  down: {},
+  pressed: {},
 
   init() {
     $(window).on("keydown", (event) => {
@@ -13,7 +11,7 @@ class Input {
       delete this.down[event.keyCode];
       delete this.pressed[event.keyCode];
     });
-  }
+  },
 
   update(data) {
     const mario = data.entities.mario;
@@ -23,7 +21,7 @@ class Input {
       if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
-        mario.x -= mario.velX;
+        mario.xPos -= mario.velX;
       }
       mario.direction = "left";
     }
@@ -32,7 +30,7 @@ class Input {
       if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
-        mario.x += mario.velX;
+        mario.xPos += mario.velX;
       }
       mario.direction = "right";
     }
@@ -41,11 +39,11 @@ class Input {
     if (this.isPressed(38)) {
       mario.currentState = mario.states.jumping;
     }
-  }
+  },
 
   isDown(code) {
     return this.down[code];
-  }
+  },
 
   isPressed(code) {
     if (this.pressed[code]) {
@@ -55,6 +53,4 @@ class Input {
       return this.pressed[code];
     }
   }
-}
-
-export default Input;
+};

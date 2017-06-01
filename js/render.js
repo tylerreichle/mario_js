@@ -18,8 +18,8 @@ class Render {
     ctx.fillStyle = '#6b8cff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.mapBuilder.create(data, ctx);
     this.drawEntity(data.entities.mario, ctx);
+    this.mapBuilder.create(data, ctx);
 
     data.entities.goombas.forEach(goomba => {
       this.drawEntity(goomba, ctx);
