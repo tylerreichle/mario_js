@@ -1,6 +1,9 @@
 html, body {
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 canvas {
@@ -29,7 +32,6 @@ canvas {
 
 #game-canvas {
   border: 1px solid black;
-  height: 600px;
 }
 
 /*@font-face {

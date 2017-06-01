@@ -20,7 +20,7 @@ class Game {
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
-    ctx.scale(2, 2);
+    ctx.scale(1, 1);
 
     const canvas = {
       canvas: canvasEl,
@@ -50,7 +50,7 @@ class Game {
 
       data.entities = {};
       data.entities.mario = mario;
-      data.entities.goomba = goomba;
+      data.entities.goombas = [goomba];
       window.data = data;
 
       this.render.init(data);

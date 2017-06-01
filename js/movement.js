@@ -9,6 +9,8 @@ export const Movement = {
   },
 
   goombas(data) {
-    data.entities.goomba.currentState.movement(data);
+    data.entities.goombas.forEach(goomba => {
+      goomba.currentState.movement(data);
+    });
   }
 };

@@ -21,7 +21,9 @@ class Render {
     this.mapBuilder.create(data, ctx);
     this.drawEntity(data.entities.mario, ctx);
 
-    this.drawEntity(data.entities.goomba, ctx);
+    data.entities.goombas.forEach(goomba => {
+      this.drawEntity(goomba, ctx);
+    });
   }
 
   drawEntity(entity, ctx) {
