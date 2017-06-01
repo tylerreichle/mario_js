@@ -21,11 +21,11 @@ canvas {
   -webkit-user-drag: none;
 }
 
-/*#wrapper {
+#wrapper {
   width: 760px;
   height: 600px;
   overflow: hidden;
-}*/
+}
 
 #game-canvas {
   border: 1px solid black;

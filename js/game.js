@@ -42,7 +42,6 @@ class Game {
         animationFrame: 0,
         spriteSheet: spriteSheet,
         canvas: canvas,
-        movement: false
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
@@ -62,7 +61,7 @@ class Game {
       this.animation.update(data);
       this.movement.update(data);
       this.physics.update(data);
-      // this.updateView(data);
+      this.updateView(data);
       this.render.update(data);
 
       data.animationFrame++;
@@ -74,18 +73,8 @@ class Game {
   }
 
   updateView(data) {
-    // view = 380
-
     const wrapper = document.getElementById('wrapper');
-    const mario = data.entities.mario;
-
-    if (data.movement) {
-      if (mario.direction === 'left') {
-        wrapper.scrollLeft -= mario.velX * 2.3;
-      } else {
-        wrapper.scrollLeft += mario.velX * 2.3;
-      }
-    }
+    wrapper.scrollLeft += 1.3;
   }
 }
 

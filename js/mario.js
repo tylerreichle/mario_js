@@ -36,7 +36,7 @@ class Mario extends Entity {
     this.states = {
       jumping: {
         movement(data) {
-          if (self.velY === 1.2) {
+          if (self.velY === 0) {
             const jumpSound = self.jumpSound.cloneNode();
             // jumpSound.play(); comment out for my sanity
             self.velY -= 23;

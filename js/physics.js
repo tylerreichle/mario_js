@@ -30,12 +30,10 @@ class Physics {
 
       // Left side wall
       if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
-        console.log('left');
         mario.xPos = entity.xPos - mario.width;
       }
       // Right side wall
       if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
-        console.log('right');
         mario.xPos = entity.xPos + entity.width;
       }
       // Top of wall

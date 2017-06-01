@@ -13,9 +13,9 @@ class Render {
   update(data) {
     const canvas = data.canvas.canvas;
     const ctx = data.canvas.ctx;
+    const mario = data.entities.mario;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     ctx.fillStyle = '#6b8cff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 

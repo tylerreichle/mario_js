@@ -2,10 +2,6 @@ class Input {
   constructor() {
     this.down = {};
     this.pressed = {};
-
-    this.update = this.update.bind(this);
-    this.isDown = this.isDown.bind(this);
-    this.isPressed = this.isPressed.bind(this);
   }
 
   init() {
@@ -24,9 +20,7 @@ class Input {
 
     // Left Arrow
     if (this.isDown(37)) {
-      data.movement = true;
-
-      if (mario.velY === 1.2) {
+      if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
         mario.x -= mario.velX;
@@ -34,10 +28,8 @@ class Input {
       mario.direction = "left";
     }
     // Right Arrow
-    else if (this.isDown(39)) {
-      data.movement = true;
-
-      if (mario.velY === 1.2) {
+    if (this.isDown(39)) {
+      if (mario.velY === 0) {
         mario.currentState = mario.states.walking;
       } else {
         mario.x += mario.velX;
@@ -46,12 +38,8 @@ class Input {
     }
 
     // Up Arrow
-    else if (this.isPressed(38)) {
+    if (this.isPressed(38)) {
       mario.currentState = mario.states.jumping;
-    }
-
-    else {
-      data.movement = false;
     }
   }
 
