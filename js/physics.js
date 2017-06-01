@@ -5,6 +5,7 @@ class Physics {
     this.gravity(data.entities.goomba);
   }
 
+  // pass in any entity
   collisionDetection(data) {
     const mario = data.entities.mario;
 
