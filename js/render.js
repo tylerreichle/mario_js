@@ -24,6 +24,10 @@ class Render {
     data.entities.goombas.forEach(goomba => {
       this.drawEntity(goomba, ctx);
     });
+
+    data.entities.koopas.forEach(koopa => {
+      this.drawEntity(koopa, ctx);
+    });
   }
 
   drawEntity(entity, ctx) {

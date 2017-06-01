@@ -5,6 +5,7 @@ import { movement } from './movement';
 import { physics } from './physics';
 import Mario from './mario';
 import Goomba from './goomba';
+import Koopa from './koopa';
 
 import { levelOne } from './level_1-1';
 import mapBuilder from './map_builder';
@@ -41,6 +42,7 @@ class Game {
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
+      const koopa = new Koopa(spriteSheet, 200, 0, 16, 24);
 
       // backgroundMusic.play();
       input.init(data);
@@ -48,6 +50,8 @@ class Game {
       data.entities = {};
       data.entities.mario = mario;
       data.entities.goombas = [goomba];
+      data.entities.koopas = [koopa];
+
       window.data = data;
 
       this.render.init(data);

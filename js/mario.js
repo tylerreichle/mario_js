@@ -14,7 +14,7 @@ class Mario extends Entity {
         frames: [
           new Sprite(img, 667, 5, 16, 16),
           new Sprite(img, 683, 5, 16, 16),
-          new Sprite(img, 699, 5, 16, 16),
+          new Sprite(img, 699, 5, 16, 16)
         ],
         currentFrame: 0
       },
@@ -23,7 +23,7 @@ class Mario extends Entity {
         frames: [
           new Sprite(img, 844, 21, 16, 16),
           new Sprite(img, 828, 21, 16, 16),
-          new Sprite(img, 812, 21, 16, 16),
+          new Sprite(img, 812, 21, 16, 16)
         ],
         currentFrame: 0
       },
@@ -36,10 +36,10 @@ class Mario extends Entity {
     this.states = {
       jumping: {
         movement(data) {
-          if (self.velY === 0) {
+          if (self.yVel === 0) {
             const jumpSound = self.jumpSound.cloneNode();
             jumpSound.play();
-            self.velY -= 23;
+            self.yVel -= 23;
           }
         },
         animation(data) {
@@ -67,9 +67,9 @@ class Mario extends Entity {
       walking: {
         movement(data) {
           if (self.direction === "right") {
-            self.xPos += self.velX;
+            self.xPos += self.xVel;
           } else {
-            self.xPos -= self.velX;
+            self.xPos -= self.xVel;
           }
         },
 
@@ -97,13 +97,13 @@ class Mario extends Entity {
             }
           }
         }
-      },
+      }
     };
 
     this.currentState = this.states.standing;
     this.direction = "right";
-    this.velY = 0;
-    this.velX = 3.8;
+    this.yVel = 0;
+    this.xVel = 3.8;
     this.xPos = xPos;
     this.yPos = yPos;
     this.width = width;

@@ -18,19 +18,19 @@ export const input = {
 
     // Left Arrow
     if (this.isDown(37)) {
-      if (mario.velY === 0) {
+      if (mario.yVel === 0) {
         mario.currentState = mario.states.walking;
       } else {
-        mario.xPos -= mario.velX;
+        mario.xPos -= mario.xVel;
       }
       mario.direction = "left";
     }
     // Right Arrow
     if (this.isDown(39)) {
-      if (mario.velY === 0) {
+      if (mario.yVel === 0) {
         mario.currentState = mario.states.walking;
       } else {
-        mario.xPos += mario.velX;
+        mario.xPos += mario.xVel;
       }
       mario.direction = "right";
     }

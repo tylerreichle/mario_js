@@ -5,5 +5,9 @@ export const animation = {
     data.entities.goombas.forEach(goomba => {
       goomba.currentState.animation(data);
     });
+
+    data.entities.koopas.forEach(koopa => {
+      koopa.currentState.animation(data);
+    });
   }
 };
