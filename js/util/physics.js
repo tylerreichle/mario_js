@@ -23,9 +23,9 @@ export const physics = {
 
     const entityCollisionCheck = (entity) => {
       if (mario.xPos < entity.xPos + entity.width &&
-        mario.xPos + mario.width > entity.xPos &&
-        mario.yPos < entity.yPos + entity.height &&
-        mario.height + mario.yPos > entity.yPos) {
+          mario.xPos + mario.width > entity.xPos &&
+          mario.yPos < entity.yPos + entity.height &&
+          mario.height + mario.yPos > entity.yPos) {
           // Collision Occured
           this.handleCollision(data, entity);
         }
@@ -49,6 +49,7 @@ export const physics = {
 
           if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) { // slide shell instead of death
             mario.xPos = entity.xPos - mario.width;
+            entity.direction = 'right';
             entity.currentState = entity.states.sliding;
           } else {
             mario.currentState = mario.states.dead;
@@ -60,6 +61,7 @@ export const physics = {
           mario.xPos = entity.xPos - mario.width;
 
           if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
+            entity.direction = 'left';
             entity.currentState = entity.states.sliding;
           } else {
             mario.currentState = mario.states.dead;
@@ -209,6 +211,10 @@ export const physics = {
         if (entity.yPos > scene.yPos &&
           (entity.xPos + entity.width) >= scene.xPos &&
           entity.xPos < (scene.xPos + scene.width)) {
+            if (entity.type === 'mario') {
+              const bumpSound = entity.bumpSound.cloneNode();
+              bumpSound.play();
+            }
             entity.yPos = entity.yPos + entity.height;
             entity.velY = 1.2;
             entity.xPos = scene.xPos;

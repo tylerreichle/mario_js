@@ -9,6 +9,7 @@ class mapBuilder {
     this.groundEntities = [];
     this.pipeEntities = [];
     this.brickEntities = [];
+    this.breakableEntities = [];
 
     level.ground.forEach(ground => {
       this.groundEntities.push(
@@ -25,6 +26,12 @@ class mapBuilder {
     level.bricks.forEach(brick => {
       this.brickEntities.push(
         new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3])
+      );
+    });
+
+    level.breakables.forEach(ground => {
+      this.groundEntities.push(
+        new Breakable(this.tileset, ground[0], ground[1], ground[2], ground[3])
       );
     });
   }
@@ -61,9 +68,17 @@ export default mapBuilder;
 
 class Block extends Entity {
   constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 0, 16, 16);
+    const sprite = new Sprite(tileset, 0, 0, 18, 18);
 
     super('block', sprite, xPos, yPos, width, height);
+  }
+}
+
+class Breakable extends Entity {
+  constructor(tileset, xPos, yPos, width, height) {
+    const sprite = new Sprite(tileset, 18, 0, 18, 18);
+
+    super('breakable', sprite, xPos, yPos, width, height);
   }
 }
 
@@ -100,7 +115,7 @@ class Mushroom extends Entity {
 
 class Brick extends Entity {
   constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 18, 17, 17);
+    const sprite = new Sprite(tileset, 0, 18, 18, 18);
 
     super('brick', sprite, xPos, yPos, width, height);
   }
