@@ -49,62 +49,56 @@ export const physics = {
       const mario = data.entities.mario;
 
       if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
-
-        if (mario.type !== 'invulnerable') {
-
-          // mario right. take damage
-          if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
-            // slide shell instead of death
-            if (entity.type === 'koopa' &&
-            entity.currentState === entity.states.hiding) {
-              mario.xPos = entity.xPos - mario.width;
-              entity.direction = 'right';
+        // mario's right
+        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
+          mario.xPos = entity.xPos - mario.width;
+          // slide shell instead of death
+          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
+            entity.direction = 'right';
+            entity.xPos += 5;
+            setTimeout(() => {
               entity.currentState = entity.states.sliding;
-            } else {
-              mario.currentState = mario.states.dead;
-              this.marioDeath(data);
-            }
+            }, 100);
+
+          } else {
+            mario.currentState = mario.states.dead;
+            this.marioDeath(data);
           }
-          // mario left. take damage
-          if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
-            mario.xPos = entity.xPos - mario.width;
+        }
+        // mario's left
+        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
+          mario.xPos = entity.xPos + mario.width;
 
-            if (entity.type === 'koopa' &&
-            entity.currentState === entity.states.hiding) {
-              mario.type = 'invulnerable';
-              entity.direction = 'left';
-              entity.currentState = entity.states.sliding;
+          if (entity.type === 'koopa' &&
+          entity.currentState === entity.states.hiding) {
 
-              // doesn't die on kick
-              setTimeout(() => {
-                mario.type = 'mario';
-              }, 100);
+            entity.direction = 'left';
+            entity.currentState = entity.states.sliding;
 
-            } else {
-              mario.currentState = mario.states.dead;
-              this.marioDeath(data);
-            }
+          } else {
+            mario.currentState = mario.states.dead;
+            this.marioDeath(data);
           }
-          //  Mario bot
-          if (mario.yPos < entity.yPos &&
-            (mario.xPos + mario.width) > entity.xPos &&
-            mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
+        }
+        //  Mario bot
+        if (mario.yPos < entity.yPos &&
+          (mario.xPos + mario.width) > entity.xPos &&
+          mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
 
-              mario.currentState = mario.states.standing;
-              mario.yPos = entity.yPos - mario.height;
-              mario.velY = 0;
+            mario.currentState = mario.states.standing;
+            mario.yPos = entity.yPos - mario.height;
+            mario.velY = 0;
 
-              if (entity.type === 'goomba') {
-                this.goombaDeath(entity, data);
+            if (entity.type === 'goomba') {
+              this.goombaDeath(entity, data);
 
-              } else if (entity.type === 'koopa') {
-                if (entity.currentState === entity.states.hiding) {
-                  this.koopaSlide(entity);
-                } else if (entity.currentState === entity.states.sliding) {
-                  this.koopaDeath(entity, data);
-                } else {
-                  this.koopaHide(entity);
-                }
+            } else if (entity.type === 'koopa') {
+              if (entity.currentState === entity.states.hiding) {
+                this.koopaSlide(entity);
+              } else if (entity.currentState === entity.states.sliding) {
+                this.koopaDeath(entity, data);
+              } else {
+                this.koopaHide(entity);
               }
             }
 
@@ -118,6 +112,7 @@ export const physics = {
               }
             }
           }
+
 
           if (entity.type === 'coin') {
             const coins = data.entities.coins;
