@@ -16,10 +16,10 @@ import Score  from './entities/score';
 // mario shrink on damage. no growing while dying
 // build level
 // finish: better hitboxes. damage.
-// invisible wall on left edge. game reset
+// game reset
 // shells kill goombas
 
-// extras: animate blocks. mario duck/run
+// extras: animate blocks. mario duck/run. breakable blocks when large
 
 class Game {
   init() {

@@ -10,6 +10,8 @@ class Mario extends Entity {
     this.jumpSound  = new Audio('./assets/audio/sounds/mario_jump.mp3');
     this.deathSound = new Audio('./assets/audio/sounds/mario_death.wav');
     this.bumpSound  = new Audio('./assets/audio/sounds/bump.wav');
+    this.powerupSound = new Audio('./assets/audio/sounds/powerup.wav');
+    this.powerdownSound = new Audio('./assets/audio/sounds/powerdown.wav');
 
     this.spriteAnimations = {
       walkRight : {

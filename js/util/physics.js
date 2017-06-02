@@ -181,6 +181,9 @@ export const physics = {
             mario.bigMario = true;
             mario.height = 32;
 
+            const powerupSound = mario.powerupSound.cloneNode();
+            powerupSound.play();
+
             const mushrooms = data.entities.mushrooms;
             const index = mushrooms.indexOf(entity);
             delete mushrooms[index];
@@ -303,8 +306,8 @@ export const physics = {
             }
             // Top
             if (entity.yPos < scene.yPos &&
-              (entity.xPos + entity.width) > scene.xPos + 10 &&
-              entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
+               (entity.xPos + entity.width) > scene.xPos + 10 &&
+                entity.xPos < (scene.xPos + scene.width) - 10 && entity.velY >= 0) {
 
                 if (entity.type !== 'dead') { // fall through ground when dead
                   if (entity.type === 'mario') {
@@ -321,8 +324,8 @@ export const physics = {
 
               // Bot
               if (entity.yPos > scene.yPos &&
-                (entity.xPos + entity.width) >= scene.xPos &&
-                entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
+                 (entity.xPos + entity.width) >= scene.xPos &&
+                  entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
 
                   if (scene.type === 'block') {
                     scene.sprite = scene.used;
