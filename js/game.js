@@ -11,14 +11,14 @@ import Mushroom  from './entities/mushroom';
 import Coin   from './entities/coin';
 import Score  from './entities/score';
 
-// COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VOL > 0
+// COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
 
-// finish: better hitboxes. mushrooms growing. damage.
+// finish: better hitboxes. damage.
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
 // shells kill goombas
 
-// score: = pos/rel position. move with jquery
+// score: = pos/rel position. update with jquery
 // extras: animate blocks
 
 class Game {
@@ -57,16 +57,14 @@ class Game {
       const mushroom  = new Mushroom(spriteSheet, 250, 0, 16, 16);
 
       // backgroundMusic.play();
-      input.init(data);
 
+      input.init(data);
       data.entities.mario = mario;
       data.entities.score = score;
       data.entities.coins = [];
       data.entities.mushrooms = [mushroom];
       data.entities.goombas = [goomba];
       data.entities.koopas = [koopa];
-
-      window.data = data;
 
       render.init(data);
       this.run(data);

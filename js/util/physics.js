@@ -26,6 +26,8 @@ export const physics = {
     const goombas = data.entities.goombas;
     const koopas = data.entities.koopas;
 
+    const collidables = [ coins, mushrooms, goombas, koopas ];
+
     const entityCollisionCheck = (entity) => {
       if (mario.xPos < entity.xPos + entity.width &&
         mario.xPos + mario.width > entity.xPos &&
@@ -36,22 +38,57 @@ export const physics = {
         }
       };
 
-      mushrooms.forEach(mushroom => {
-        entityCollisionCheck(mushroom);
-      });
-
-      coins.forEach(coin => {
-        entityCollisionCheck(coin);
-      });
-
-      goombas.forEach(goomba => {
-        entityCollisionCheck(goomba);
-      });
-
-      koopas.forEach(koopa => {
-        entityCollisionCheck(koopa);
-      });
+      collidables.forEach(entities =>
+        entities.forEach(entity => {
+          entityCollisionCheck(entity);
+        })
+      );
+      // this.enemyCollisions(data);
     },
+
+    // enemyCollisions(data) {
+    //   const goombas = data.entities.goombas;
+    //   const koopas = data.entities.koopas;
+    //
+    //   const checkCollisions = (entityOne, entityTwo) => {
+    //     if ((entityOne.xPos < entityTwo.xPos && entityOne.yPos >= entityTwo.yPos) ||
+    //         (entityOne.xPos > entityTwo.xPos && entityOne.yPos >= entityTwo.yPos)) {
+    //           console.log('collision');
+    //       // E1 Sliding Koopa
+    //       if (entityOne.type === 'koopa' && entityOne.currentState === entityOne.states.sliding) {
+    //         if (entityTwo.type === 'koopa' && entityOne.currentState === entityOne.states.sliding) {
+    //           this.koopaDeath(entityOne, data);
+    //           this.koopaDeath(entityTwo, data);
+    //         } else {
+    //           this.enemyDeath(entityTwo, data); // write single method for both
+    //         } // E2 Sliding Koopa
+    //       } else if (entityTwo.type === 'koopa' && entityTwo.currentState === entityTwo.states.sliding) {
+    //         this.enemyDeath(entityOne, data);
+    //       } else {
+    //         entityOne.direction = entityOne.direction === 'left' ? 'right' : 'left';
+    //         entityTwo.direction = entityTwo.direction === 'left' ? 'right' : 'left';
+    //       }
+    //     }
+    //
+    //     goombas.forEach(goomba => {
+    //       koopas.forEach(koopa => {
+    //         checkCollisions(goomba, koopa);
+    //       });
+    //     });
+    //
+    //     goombas.forEach(goombaOne => {
+    //       goombas.forEach(goombaTwo => {
+    //         checkCollisions(goombaOne, goombaTwo);
+    //       });
+    //     });
+    //
+    //     koopas.forEach(koopaOne => {
+    //       koopas.forEach(koopaTwo => {
+    //         checkCollisions(koopaOne, koopaTwo);
+    //       });
+    //     });
+    //   };
+    // },
 
     handleCollision(data, entity) {
       const mario = data.entities.mario;
@@ -109,13 +146,14 @@ export const physics = {
             mario.velY = 0;
 
             if (entity.type === 'goomba') {
-              this.goombaDeath(entity, data);
+              this.enemyDeath(entity, data);
 
             } else if (entity.type === 'koopa') {
               if (entity.currentState === entity.states.hiding) {
                 this.koopaSlide(entity);
               } else if (entity.currentState === entity.states.sliding) {
-                this.koopaDeath(entity, data);
+                // this.koopaDeath(entity, data);
+                this.enemyDeath(entity, data);
               } else {
                 this.koopaHide(entity);
               }
@@ -172,19 +210,6 @@ export const physics = {
           }, 500);
         },
 
-        goombaDeath(entity, data) {
-          data.entities.score.value += 100;
-          entity.currentState = entity.states.dead;
-          entity.type = 'dying';
-          const squishSound = entity.squishSound.cloneNode();
-          squishSound.play();
-
-          setTimeout(() => {
-            const index = data.entities.goombas.indexOf(entity);
-            delete data.entities.goombas[index];
-          }, 800);
-        },
-
         koopaHide(entity) {
           entity.type = 'invulnerable';
           entity.currentState = entity.states.hiding; // koopa stomp
@@ -203,15 +228,28 @@ export const physics = {
           }, 200);
         },
 
-        koopaDeath(entity, data) {
-          data.entities.score.value += 100;
-          entity.velY -= 10;
-          entity.type = 'dead';
+        enemyDeath(entity, data) {
+          if (entity.type === 'goomba') {
+            data.entities.score.value += 100;
+            entity.currentState = entity.states.dead;
+            entity.type = 'dying';
+            const squishSound = entity.squishSound.cloneNode();
+            squishSound.play();
 
-          setTimeout(() => {
-            const index = data.entities.koopas.indexOf(entity);
-            delete data.entities.koopas[index];
-          }, 400);
+            setTimeout(() => {
+              const index = data.entities.goombas.indexOf(entity);
+              delete data.entities.goombas[index];
+            }, 800);
+          } else {
+            data.entities.score.value += 100;
+            entity.velY -= 10;
+            entity.type = 'dead';
+
+            setTimeout(() => {
+              const index = data.entities.koopas.indexOf(entity);
+              delete data.entities.koopas[index];
+            }, 400);
+          }
         },
 
         sceneryCollisionDetection(data) {
