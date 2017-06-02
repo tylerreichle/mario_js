@@ -18,7 +18,7 @@ export const render = {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     this.drawEntity(data.entities.mario, data);
-    this.drawText(data.entities.score, ctx);
+    this.drawText(data);
     this.mapBuilder.create(data);
 
     data.entities.coins.forEach(coin => {
@@ -57,7 +57,11 @@ export const render = {
     }
   },
 
-  drawText(text, ctx) {
+  drawText(data) {
+    const ctx = data.canvas.ctx;
+    const viewport = data.viewport;
+    const text = data.entities.score;
+
     ctx.font = text.size + " " + text.font;
     ctx.fillStyle = text.color;
     ctx.fillText(`Score: ${text.value}`, text.xPos, text.yPos);

@@ -13,13 +13,13 @@ import Score  from './entities/score';
 
 // COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
 
+// mario shrink on damage. no growing while dying
+// build level
 // finish: better hitboxes. damage.
-// create random spawns. endless. design obstacles to spawn. speed increases!
-// distance measure. score. invisible wall on left edge. game reset
+// invisible wall on left edge. game reset
 // shells kill goombas
 
-// score: = pos/rel position. update with jquery
-// extras: animate blocks
+// extras: animate blocks. mario duck
 
 class Game {
   init() {
@@ -100,20 +100,22 @@ class Game {
     const viewport = data.viewport;
     const margin = viewport.width / 4;
     const mario = data.entities.mario;
+    const score = data.entities.score;
+
     const center = {
-      x: mario.xPos + (mario.width * 0.5),
+      x: mario.xPos + (mario.width  * 0.5),
       y: mario.yPos + (mario.height * 0.5)
     };
 
     if (center.x < viewport.vX + margin * 2) {
       viewport.vX = Math.max(center.x - margin, 0);
-    }  else if (center.x > viewport.vX + viewport.width - margin * 2) {
+    } else if (center.x > viewport.vX + viewport.width - margin * 2) {
       viewport.vX = Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
     }
 
     if (center.y < viewport.vY + margin) {
       viewport.vY = Math.max(center.y - margin, 0);
-    }  else if (center.y > viewport.vY + viewport.height - margin) {
+    } else if (center.y > viewport.vY + viewport.height - margin) {
       viewport.vY = Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
   }

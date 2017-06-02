@@ -18,7 +18,7 @@ export const input = {
 
     if (data.userControl) {
       // Left Arrow
-      if (this.isDown(37)) {
+      if (this.isDown(37) || this.isDown(65)) {
         if (mario.velY === 1.2) {
           if (mario.bigMario) {
             mario.currentState = mario.states.bigWalking;
@@ -31,7 +31,7 @@ export const input = {
         mario.direction = "left";
       }
       // Right Arrow
-      if (this.isDown(39)) {
+      if (this.isDown(39) || this.isDown(68)) {
         if (mario.velY === 1.2) {
           if (mario.bigMario) {
             mario.currentState = mario.states.bigWalking;
@@ -45,7 +45,7 @@ export const input = {
       }
 
       // Up Arrow
-      if (this.isPressed(38) || this.isPressed(32)) {
+      if (this.isPressed(38) || this.isPressed(32) || this.isPressed(87)) {
         if (mario.bigMario) {
           mario.currentState = mario.states.bigJumping;
         } else {
