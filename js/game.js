@@ -1,20 +1,19 @@
-import { render } from './util/render';
-import { input } from './util/input';
+import { render }    from './util/render';
+import { input }     from './util/input';
 import { animation } from './util/animation';
-import { movement } from './util/movement';
-import { physics } from './util/physics';
+import { movement }  from './util/movement';
+import { physics }   from './util/physics';
 
-import Mario from './entities/mario';
+import Mario  from './entities/mario';
 import Goomba from './entities/goomba';
-import Koopa from './entities/koopa';
-import Coin from './entities/coin';
-import Score from './entities/score';
+import Koopa  from './entities/koopa';
+import Coin   from './entities/coin';
+import Score  from './entities/score';
 
 // finish: better hitboxes. mushrooms growing. damage.
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
 
-// why mario no animate
 // score: = pos/rel position. move with jquery
 // extras: animate blocks
 
@@ -47,7 +46,7 @@ class Game {
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
-      const score = new Score(290, 70);
+      const score = new Score(290, 30);
 
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
       const koopa  = new Koopa(spriteSheet, 200, 0, 16, 24);

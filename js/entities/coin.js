@@ -48,9 +48,9 @@ class Coin extends Entity {
       }
     };
     this.currentState = this.states.spinning;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.width = width;
+    this.xPos   = xPos;
+    this.yPos   = yPos;
+    this.width  = width;
     this.height = height;
   }
 }

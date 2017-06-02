@@ -122,6 +122,7 @@ export const physics = {
             const index = coins.indexOf(entity);
 
             data.entities.score.value += 50;
+            data.entities.score.coinCount += 1;
             coinSound.play();
             delete coins[index];
           }
@@ -253,6 +254,7 @@ export const physics = {
                       scene.coin = false;
                       scene.drawCoin(data);
                       data.entities.score.value += 50;
+                      data.entities.score.coinCount += 1;
                     }
                   }
 
