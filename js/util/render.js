@@ -21,6 +21,10 @@ export const render = {
     this.drawText(data.entities.score, ctx);
     this.mapBuilder.create(data, ctx);
 
+    data.entities.coins.forEach(coin => {
+      this.drawEntity(coin, ctx);
+    });
+
     data.entities.goombas.forEach(goomba => {
       this.drawEntity(goomba, ctx);
     });

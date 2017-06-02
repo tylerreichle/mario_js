@@ -18,6 +18,7 @@ export const physics = {
 
   collisionDetection(data) {
     const mario = data.entities.mario;
+    const coins = data.entities.coins;
     const goombas = data.entities.goombas;
     const koopas = data.entities.koopas;
 
@@ -30,6 +31,10 @@ export const physics = {
           this.handleCollision(data, entity);
         }
       };
+
+      coins.forEach(coin => {
+        entityCollisionCheck(coin);
+      });
 
       goombas.forEach(goomba => {
         entityCollisionCheck(goomba);
@@ -101,6 +106,17 @@ export const physics = {
           mario.xPos = entity.xPos;
           this.marioDeath(data);
         }
+      }
+
+      if (entity.type === 'coin') {
+        const coins = data.entities.coins;
+        const coinSound = entity.coinSound.cloneNode();
+        const index = coins.indexOf(entity);
+
+
+        data.entities.score.value += 50;
+        coinSound.play();
+        delete coins[index];
       }
     },
 
@@ -175,9 +191,9 @@ export const physics = {
       entities.forEach(entity => {
         scenery.forEach(scene => {
           if (entity.xPos < scene.xPos + scene.width &&
-            entity.xPos + entity.width > scene.xPos &&
-            entity.yPos < scene.yPos + scene.height &&
-            entity.height + entity.yPos > scene.yPos) {
+             entity.xPos + entity.width > scene.xPos &&
+             entity.yPos < scene.yPos + scene.height &&
+             entity.height + entity.yPos > scene.yPos) {
               // Collision Occured
               this.sceneryCollision(data, entity, scene);
             }
@@ -228,6 +244,7 @@ export const physics = {
                  const coinSound = scene.coinSound.cloneNode();
                  coinSound.play();
                  scene.coin = false;
+                //  scene.drawCoin(data.canvas.ctx);
                  data.entities.score.value += 50;
                }
              }
@@ -249,12 +266,3 @@ export const physics = {
           entity.yPos += entity.velY;
         }
       };
-
-      // let mario, entity;
-      //
-      // if (mario.yPos > entity.yPos && (mario.xPos + mario.width) > entity.xPos &&
-      //   mario.xPos < (entity.xPos + entity.width) && mario.velY <= 0) {
-      //   mario.currentState = mario.states.standing;
-      //   mario.yPos = entity.yPos - mario.height;
-      //   mario.velY = 0;
-      // }

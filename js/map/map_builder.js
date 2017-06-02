@@ -1,5 +1,6 @@
 import Entity from '../entities/entity';
 import Sprite from '../entities/sprite';
+import Block from '../entities/block';
 
 class mapBuilder {
   constructor(level) {
@@ -84,17 +85,6 @@ class mapBuilder {
 }
 
 export default mapBuilder;
-
-class Block extends Entity {
-  constructor(coin, tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 432, 0, 18, 18);
-    super('block', sprite, xPos, yPos, width, height);
-
-    this.coin = coin;
-    this.coinSound = new Audio('./assets/audio/sounds/coin.wav');
-    this.used = new Sprite(tileset, 486, 0, 18, 18);
-  }
-}
 
 class Breakable extends Entity {
   constructor(tileset, xPos, yPos, width, height) {

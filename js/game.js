@@ -7,13 +7,16 @@ import { physics } from './util/physics';
 import Mario from './entities/mario';
 import Goomba from './entities/goomba';
 import Koopa from './entities/koopa';
+import Coin from './entities/coin';
 import Score from './entities/score';
 
 // finish: better hitboxes. brick coin animate. mushrooms growing. damage. mario death
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
 
-// animate blocks
+// why mario no animate
+// score: = pos/rel position. move with jquery
+// extras: animate blocks
 
 class Game {
   init() {
@@ -45,14 +48,16 @@ class Game {
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
       const score = new Score(290, 70);
+
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
       const koopa = new Koopa(spriteSheet, 200, 0, 16, 24);
-
+      const coin = new Coin(spriteSheet, 170, 170, 10, 14);
       // backgroundMusic.play();
       input.init(data);
 
       data.entities.mario = mario;
       data.entities.score = score;
+      data.entities.coins = [coin];
       data.entities.goombas = [goomba];
       data.entities.koopas = [koopa];
 
@@ -81,8 +86,11 @@ class Game {
   }
 
   updateView(data) {
+    // scroll window
     if (data.control) {
       const wrapper = document.getElementById('wrapper');
+      // move score with screen
+      // data.entities.score.xPos = $(wrapper).scrollLeft();
       wrapper.scrollLeft += 1.3;
     }
   }
