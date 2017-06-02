@@ -25,7 +25,7 @@ class Koopa extends Entity {
         ],
         currentFrame: 0
       },
-      hiding: new Sprite(img, 237, 14, 8, 8)
+      hiding: new Sprite(img, 237, 14, 16, 15)
     };
 
     this.states = {
@@ -66,6 +66,8 @@ class Koopa extends Entity {
 
       hiding: {
         movement(data) {
+          self.width = 16;
+          self.height = 15;
           self.velX = 0;
         },
         animation(data) {
@@ -101,7 +103,6 @@ class Koopa extends Entity {
 }
 
 export default Koopa;
-
 
 // level 1-1 locations
 // <object id="150" x="400" y="176" width="16" height="16"/>

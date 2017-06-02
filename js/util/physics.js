@@ -10,7 +10,6 @@ export const physics = {
     data.entities.goombas.forEach(goomba => {
       this.gravity(goomba);
     });
-
     data.entities.koopas.forEach(koopa => {
       this.gravity(koopa);
     });
@@ -24,13 +23,13 @@ export const physics = {
 
     const entityCollisionCheck = (entity) => {
       if (mario.xPos < entity.xPos + entity.width &&
-        mario.xPos + mario.width > entity.xPos &&
-        mario.yPos < entity.yPos + entity.height &&
-        mario.height + mario.yPos > entity.yPos) {
-          // Collision Occured
-          this.handleCollision(data, entity);
-        }
-      };
+          mario.xPos + mario.width > entity.xPos &&
+          mario.yPos < entity.yPos + entity.height &&
+          mario.height + mario.yPos > entity.yPos) {
+        // Collision Occured
+        this.handleCollision(data, entity);
+      }
+    };
 
       coins.forEach(coin => {
         entityCollisionCheck(coin);
@@ -58,7 +57,7 @@ export const physics = {
             entity.xPos += 5;
             setTimeout(() => {
               entity.currentState = entity.states.sliding;
-            }, 100);
+            }, 50);
 
           } else {
             mario.currentState = mario.states.dead;
@@ -73,7 +72,10 @@ export const physics = {
           entity.currentState === entity.states.hiding) {
 
             entity.direction = 'left';
-            entity.currentState = entity.states.sliding;
+            entity.xPos -= 5;
+            setTimeout(() => {
+              entity.currentState = entity.states.sliding;
+            }, 50);
 
           } else {
             mario.currentState = mario.states.dead;
