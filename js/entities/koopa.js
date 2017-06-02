@@ -67,7 +67,7 @@ class Koopa extends Entity {
       hiding: {
         movement(data) {
           self.width = 16;
-          self.height = 15;
+          self.height = 17;
           self.velX = 0;
         },
         animation(data) {
@@ -77,7 +77,7 @@ class Koopa extends Entity {
 
       sliding: {
         movement(data) {
-          self.velX = 2;
+          self.velX = 3;
           if (self.direction === "right") {
             self.xPos += self.velX;
           } else {

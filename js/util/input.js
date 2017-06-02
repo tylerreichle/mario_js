@@ -15,11 +15,11 @@ export const input = {
 
   update(data) {
     const mario = data.entities.mario;
-    
+
     if (data.control) {
       // Left Arrow
       if (this.isDown(37)) {
-        if (mario.velY === 0) {
+        if (mario.velY === 1.2) {
           mario.currentState = mario.states.walking;
         } else {
           mario.xPos -= mario.velX;
@@ -28,7 +28,7 @@ export const input = {
       }
       // Right Arrow
       if (this.isDown(39)) {
-        if (mario.velY === 0) {
+        if (mario.velY === 1.2) {
           mario.currentState = mario.states.walking;
         } else {
           mario.xPos += mario.velX;

@@ -50,14 +50,13 @@ class Game {
       const score = new Score(290, 70);
 
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
-      const koopa = new Koopa(spriteSheet, 200, 0, 16, 24);
-      const coin = new Coin(spriteSheet, 170, 170, 10, 14);
+      const koopa  = new Koopa(spriteSheet, 200, 0, 16, 24);
       // backgroundMusic.play();
       input.init(data);
 
       data.entities.mario = mario;
       data.entities.score = score;
-      data.entities.coins = [coin];
+      data.entities.coins = [];
       data.entities.goombas = [goomba];
       data.entities.koopas = [koopa];
 
