@@ -20,7 +20,11 @@ export const input = {
       // Left Arrow
       if (this.isDown(37)) {
         if (mario.velY === 1.2) {
-          mario.currentState = mario.states.walking;
+          if (mario.bigMario) {
+            mario.currentState = mario.states.bigWalking;
+          } else {
+            mario.currentState = mario.states.walking;
+          }
         } else {
           mario.xPos -= mario.velX;
         }
@@ -29,7 +33,11 @@ export const input = {
       // Right Arrow
       if (this.isDown(39)) {
         if (mario.velY === 1.2) {
-          mario.currentState = mario.states.walking;
+          if (mario.bigMario) {
+            mario.currentState = mario.states.bigWalking;
+          } else {
+            mario.currentState = mario.states.walking;
+          }
         } else {
           mario.xPos += mario.velX;
         }
@@ -38,7 +46,11 @@ export const input = {
 
       // Up Arrow
       if (this.isPressed(38)) {
-        mario.currentState = mario.states.jumping;
+        if (mario.bigMario) {
+          mario.currentState = mario.states.bigJumping;
+        } else {
+          mario.currentState = mario.states.jumping;
+        }
       }
     } else {
       mario.currentState = mario.states.dead;

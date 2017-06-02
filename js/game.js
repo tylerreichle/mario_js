@@ -11,6 +11,8 @@ import Mushroom  from './entities/mushroom';
 import Coin   from './entities/coin';
 import Score  from './entities/score';
 
+// COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VOL > 0
+
 // finish: better hitboxes. mushrooms growing. damage.
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset

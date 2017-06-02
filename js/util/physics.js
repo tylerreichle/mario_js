@@ -28,13 +28,13 @@ export const physics = {
 
     const entityCollisionCheck = (entity) => {
       if (mario.xPos < entity.xPos + entity.width &&
-          mario.xPos + mario.width > entity.xPos &&
-          mario.yPos < entity.yPos + entity.height &&
-          mario.height + mario.yPos > entity.yPos) {
+        mario.xPos + mario.width > entity.xPos &&
+        mario.yPos < entity.yPos + entity.height &&
+        mario.height + mario.yPos > entity.yPos) {
           // Collision Occured
-        this.handleCollision(data, entity);
-      }
-    };
+          this.handleCollision(data, entity);
+        }
+      };
 
       mushrooms.forEach(mushroom => {
         entityCollisionCheck(mushroom);
@@ -69,8 +69,12 @@ export const physics = {
             }, 50);
 
           } else {
-            mario.currentState = mario.states.dead;
-            this.marioDeath(data);
+            if (mario.bigMario) {
+              mario.bigMario = false;
+            } else {
+              mario.currentState = mario.states.dead;
+              this.marioDeath(data);
+            }
           }
         }
         // mario's left
@@ -87,8 +91,12 @@ export const physics = {
             }, 50);
 
           } else {
-            mario.currentState = mario.states.dead;
-            this.marioDeath(data);
+            if (mario.bigMario) {
+              mario.bigMario = false;
+            } else {
+              mario.currentState = mario.states.dead;
+              this.marioDeath(data);
+            }
           }
         }
         //  Mario bot
@@ -119,13 +127,19 @@ export const physics = {
 
                 mario.velY = 1.2;
                 mario.xPos = entity.xPos;
-                this.marioDeath(data);
+                if (mario.bigMario) {
+                  mario.bigMario = false;
+                } else {
+                  mario.currentState = mario.states.dead;
+                  this.marioDeath(data);
+                }
               }
             }
           }
 
           if (entity.type === 'mushroom') {
             mario.bigMario = true;
+            mario.height = 32;
 
             const mushrooms = data.entities.mushrooms;
             const index = mushrooms.indexOf(entity);
@@ -255,7 +269,11 @@ export const physics = {
 
                 if (entity.type !== 'dead') { // fall through ground when dead
                   if (entity.type === 'mario') {
-                    entity.currentState = entity.states.standing;
+                    if (entity.bigMario) {
+                      entity.currentState = entity.states.bigStanding;
+                    } else {
+                      entity.currentState = entity.states.standing;
+                    }
                   }
                   entity.yPos = scene.yPos - entity.height;
                   entity.velY = 0;
