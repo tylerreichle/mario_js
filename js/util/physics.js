@@ -203,7 +203,7 @@ export const physics = {
           const mario = data.entities.mario;
           const deathSound = mario.deathSound;
 
-          data.control = false;
+          data.userControl = false;
           deathSound.play();
 
           setTimeout(() => {

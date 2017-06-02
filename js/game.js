@@ -54,7 +54,7 @@ class Game {
         canvas: canvas,
         viewport: viewport,
         entities: {},
-        control: true
+        userControl: true
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
@@ -97,13 +97,6 @@ class Game {
   }
 
   updateView(data) {
-    // scroll window
-    // if (data.control) {
-    //   const wrapper = document.getElementById('wrapper');
-    //   // move score with screen
-    //   // data.entities.score.xPos = $(wrapper).scrollLeft();
-    //   wrapper.scrollLeft += 1.3;
-    // }
     const viewport = data.viewport;
     const margin = viewport.width / 4;
     const mario = data.entities.mario;
@@ -123,9 +116,6 @@ class Game {
     }  else if (center.y > viewport.vY + viewport.height - margin) {
       viewport.vY = Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
-
-    console.log('x ',viewport.vX);
-    console.log('y ',viewport.vY);
   }
 }
 
