@@ -14,6 +14,7 @@ export const physics = {
     data.entities.goombas.forEach(goomba => {
       this.gravity(goomba);
     });
+
     data.entities.koopas.forEach(koopa => {
       this.gravity(koopa);
     });
@@ -95,7 +96,8 @@ export const physics = {
 
       if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
         // mario's right
-        if (mario.xPos < entity.xPos && mario.yPos >= entity.yPos) {
+        if (mario.xPos < entity.xPos && mario.velY <= entity.velY) {
+
           mario.xPos = entity.xPos - mario.width;
           // slide shell instead of death
           if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
@@ -115,11 +117,11 @@ export const physics = {
           }
         }
         // mario's left
-        if (mario.xPos > entity.xPos && mario.yPos >= entity.yPos) {
+        if (mario.xPos > entity.xPos && mario.velY <= entity.velY) {
           mario.xPos = entity.xPos + mario.width;
 
           if (entity.type === 'koopa' &&
-          entity.currentState === entity.states.hiding) {
+              entity.currentState === entity.states.hiding) {
 
             entity.direction = 'left';
             entity.xPos -= 5;
@@ -138,8 +140,9 @@ export const physics = {
         }
         //  Mario bot
         if (mario.yPos < entity.yPos &&
-          (mario.xPos + mario.width) > entity.xPos &&
-          mario.xPos < (entity.xPos + entity.width) && mario.velY >= 0) {
+           (mario.xPos + mario.width) > entity.xPos &&
+            mario.xPos < (entity.xPos + entity.width) &&
+            mario.velY >= entity.velY) {
 
             mario.currentState = mario.states.standing;
             mario.yPos = entity.yPos - mario.height;
@@ -160,8 +163,8 @@ export const physics = {
             }
 
             if (mario.yPos > entity.yPos &&
-              (mario.xPos + mario.width) >= entity.xPos &&
-              mario.xPos < (entity.xPos + entity.width)) {
+               (mario.xPos + mario.width) >= entity.xPos &&
+                mario.xPos < (entity.xPos + entity.width)) {
 
                 mario.velY = 1.2;
                 mario.xPos = entity.xPos;
@@ -200,7 +203,7 @@ export const physics = {
           const mario = data.entities.mario;
           const deathSound = mario.deathSound;
 
-          data.control = false;
+          data.userControl = false;
           deathSound.play();
 
           setTimeout(() => {

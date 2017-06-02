@@ -16,7 +16,7 @@ export const input = {
   update(data) {
     const mario = data.entities.mario;
 
-    if (data.control) {
+    if (data.userControl) {
       // Left Arrow
       if (this.isDown(37)) {
         if (mario.velY === 1.2) {
@@ -45,7 +45,7 @@ export const input = {
       }
 
       // Up Arrow
-      if (this.isPressed(38)) {
+      if (this.isPressed(38) || this.isPressed(32)) {
         if (mario.bigMario) {
           mario.currentState = mario.states.bigJumping;
         } else {

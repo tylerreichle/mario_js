@@ -46,41 +46,50 @@ class mapBuilder {
     });
   }
 
-  create(data, ctx) {
+  create(data) {
     this.groundEntities.forEach(ground => {
-      this.drawEntity(ground, ctx);
+      this.drawEntity(ground, data);
       data.entities.scenery.push(ground);
     });
 
     this.pipeEntities.forEach(pipe => {
-      this.drawEntity(pipe, ctx);
+      this.drawEntity(pipe, data);
       data.entities.scenery.push(pipe);
     });
 
     this.brickEntities.forEach(brick => {
-      this.drawEntity(brick, ctx);
+      this.drawEntity(brick, data);
       data.entities.scenery.push(brick);
     });
 
     this.breakableEntities.forEach(breakable => {
-      this.drawEntity(breakable, ctx);
+      this.drawEntity(breakable, data);
       data.entities.scenery.push(breakable);
     });
 
     this.blockEntities.forEach(block => {
-      this.drawEntity(block, ctx);
+      this.drawEntity(block, data);
       data.entities.scenery.push(block);
     });
   }
 
-  drawEntity(entity, ctx) {
-    ctx.drawImage(
-      entity.sprite.img,
-      entity.sprite.srcX, entity.sprite.srcY,
-      entity.sprite.srcW, entity.sprite.srcH,
-      entity.xPos, entity.yPos,
-      entity.width, entity.height
-    );
+  drawEntity(entity, data) {
+    const ctx = data.canvas.ctx;
+    const viewport = data.viewport;
+
+    if (((entity.xPos >= viewport.vX &&
+          entity.xPos <= viewport.vX + viewport.width)) &&
+        ((entity.yPos >= viewport.vY &&
+          entity.yPos <= viewport.vY + viewport.height))) {
+
+      ctx.drawImage(
+        entity.sprite.img,
+        entity.sprite.srcX, entity.sprite.srcY,
+        entity.sprite.srcW, entity.sprite.srcH,
+        entity.xPos - viewport.vX, entity.yPos - viewport.vY,
+        entity.width, entity.height
+      );
+    }
   }
 }
 

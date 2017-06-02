@@ -17,35 +17,44 @@ export const render = {
     ctx.fillStyle = '#6b8cff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.drawEntity(data.entities.mario, ctx);
+    this.drawEntity(data.entities.mario, data);
     this.drawText(data.entities.score, ctx);
-    this.mapBuilder.create(data, ctx);
+    this.mapBuilder.create(data);
 
     data.entities.coins.forEach(coin => {
-      this.drawEntity(coin, ctx);
+      this.drawEntity(coin, data);
     });
 
     data.entities.mushrooms.forEach(mushroom => {
-      this.drawEntity(mushroom, ctx);
+      this.drawEntity(mushroom, data);
     });
 
     data.entities.goombas.forEach(goomba => {
-      this.drawEntity(goomba, ctx);
+      this.drawEntity(goomba, data);
     });
 
     data.entities.koopas.forEach(koopa => {
-      this.drawEntity(koopa, ctx);
+      this.drawEntity(koopa, data);
     });
   },
 
-  drawEntity(entity, ctx) {
-    ctx.drawImage(
-      entity.sprite.img,
-      entity.sprite.srcX, entity.sprite.srcY,
-      entity.sprite.srcW, entity.sprite.srcH,
-      entity.xPos, entity.yPos,
-      entity.width, entity.height
-    );
+  drawEntity(entity, data) {
+    const ctx = data.canvas.ctx;
+    const viewport = data.viewport;
+
+    if (((entity.xPos >= viewport.vX &&
+          entity.xPos <= viewport.vX + viewport.width)) &&
+        ((entity.yPos >= viewport.vY &&
+          entity.yPos <= viewport.vY + viewport.height)))  {
+
+      ctx.drawImage(
+        entity.sprite.img,
+        entity.sprite.srcX, entity.sprite.srcY,
+        entity.sprite.srcW, entity.sprite.srcH,
+        entity.xPos - viewport.vX,  entity.yPos - viewport.vY,
+        entity.width, entity.height
+      );
+    }
   },
 
   drawText(text, ctx) {

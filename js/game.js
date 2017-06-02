@@ -7,7 +7,7 @@ import { physics }   from './util/physics';
 import Mario  from './entities/mario';
 import Goomba from './entities/goomba';
 import Koopa  from './entities/koopa';
-import Mushroom  from './entities/mushroom';
+import Mushroom from './entities/mushroom';
 import Coin   from './entities/coin';
 import Score  from './entities/score';
 
@@ -32,6 +32,13 @@ class Game {
       ctx: ctx
     };
 
+    const viewport = {
+      width: 760,
+      height: 600,
+      vX: 0,
+      vY: 0
+    };
+
     const backgroundMusic =
       new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
@@ -45,8 +52,9 @@ class Game {
         animationFrame: 0,
         spriteSheet: spriteSheet,
         canvas: canvas,
+        viewport: viewport,
         entities: {},
-        control: true
+        userControl: true
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
@@ -89,12 +97,24 @@ class Game {
   }
 
   updateView(data) {
-    // scroll window
-    if (data.control) {
-      const wrapper = document.getElementById('wrapper');
-      // move score with screen
-      // data.entities.score.xPos = $(wrapper).scrollLeft();
-      wrapper.scrollLeft += 1.3;
+    const viewport = data.viewport;
+    const margin = viewport.width / 4;
+    const mario = data.entities.mario;
+    const center = {
+      x: mario.xPos + (mario.width * 0.5),
+      y: mario.yPos + (mario.height * 0.5)
+    };
+
+    if (center.x < viewport.vX + margin * 2) {
+      viewport.vX = Math.max(center.x - margin, 0);
+    }  else if (center.x > viewport.vX + viewport.width - margin * 2) {
+      viewport.vX = Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
+    }
+
+    if (center.y < viewport.vY + margin) {
+      viewport.vY = Math.max(center.y - margin, 0);
+    }  else if (center.y > viewport.vY + viewport.height - margin) {
+      viewport.vY = Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
   }
 }
