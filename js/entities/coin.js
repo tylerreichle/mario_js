@@ -10,16 +10,20 @@ class Coin extends Entity {
     this.type = "coin";
     this.coinSound = new Audio("./assets/audio/sounds/coin.wav");
 
+    this.tileset = new Image();
+    this.tileset.src = './assets/sprites/tileset_gutter.png';
+
     this.spriteAnimations = {
       spin: {
         frames: [
-          new Sprite(spriteSheet, 5, 5, 10, 14),
+          new Sprite(spriteSheet, 5,  5, 10, 14),
           new Sprite(spriteSheet, 21, 5, 10, 14),
           new Sprite(spriteSheet, 37, 5, 10, 14),
           new Sprite(spriteSheet, 53, 5, 10, 14)
         ],
         currentFrame: 0
-      }
+      },
+      blockCoin: new Sprite(this.tileset, 486, 18, 18, 18)
     };
 
     this.states = {
@@ -34,6 +38,12 @@ class Coin extends Entity {
               self.spriteAnimations.spin.currentFrame = 0;
             }
           }
+        }
+      },
+
+      blockCoin: {
+        animation(data) {
+          self.sprite = self.spriteAnimations.blockCoin;
         }
       }
     };
