@@ -6,6 +6,10 @@ export const animation = {
       coin.currentState.animation(data);
     });
 
+    data.entities.mushrooms.forEach(mushroom => {
+      mushroom.currentState.animation(data);
+    });
+
     data.entities.goombas.forEach(goomba => {
       goomba.currentState.animation(data);
     });

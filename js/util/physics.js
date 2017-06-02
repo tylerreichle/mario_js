@@ -7,6 +7,10 @@ export const physics = {
     // apply gravity
     this.gravity(data.entities.mario);
 
+    data.entities.mushrooms.forEach(mushroom => {
+      this.gravity(mushroom);
+    });
+
     data.entities.goombas.forEach(goomba => {
       this.gravity(goomba);
     });
@@ -18,6 +22,7 @@ export const physics = {
   collisionDetection(data) {
     const mario = data.entities.mario;
     const coins = data.entities.coins;
+    const mushrooms = data.entities.mushrooms;
     const goombas = data.entities.goombas;
     const koopas = data.entities.koopas;
 
@@ -26,10 +31,14 @@ export const physics = {
           mario.xPos + mario.width > entity.xPos &&
           mario.yPos < entity.yPos + entity.height &&
           mario.height + mario.yPos > entity.yPos) {
-        // Collision Occured
+          // Collision Occured
         this.handleCollision(data, entity);
       }
     };
+
+      mushrooms.forEach(mushroom => {
+        entityCollisionCheck(mushroom);
+      });
 
       coins.forEach(coin => {
         entityCollisionCheck(coin);
@@ -186,11 +195,13 @@ export const physics = {
 
         sceneryCollisionDetection(data) {
           const mario = data.entities.mario;
+          const mushrooms = data.entities.mushrooms;
           const goombas = data.entities.goombas;
           const koopas = data.entities.koopas;
           const scenery = data.entities.scenery;
 
           this.sceneryCollisionCheck(data, [mario], scenery);
+          this.sceneryCollisionCheck(data, mushrooms, scenery);
           this.sceneryCollisionCheck(data, goombas, scenery);
           this.sceneryCollisionCheck(data, koopas, scenery);
         },
@@ -214,7 +225,9 @@ export const physics = {
             if (entity.xPos < scene.xPos && entity.yPos >= scene.yPos) {
               entity.xPos = scene.xPos - entity.width;
 
-              if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
+              if ((entity.type === 'goomba') ||
+              (entity.type === 'koopa')  ||
+              (entity.type === 'mushroom')) {
                 entity.direction = entity.direction === 'left' ? 'right' : 'left';
               }
             }
@@ -222,7 +235,9 @@ export const physics = {
             if (entity.xPos > scene.xPos && entity.yPos >= scene.yPos) {
               entity.xPos = scene.xPos + scene.width;
 
-              if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
+              if ((entity.type === 'goomba') ||
+              (entity.type === 'koopa')  ||
+              (entity.type === 'mushroom')) {
                 entity.direction = entity.direction === 'left' ? 'right' : 'left';
               }
             }

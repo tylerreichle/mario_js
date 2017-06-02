@@ -25,6 +25,10 @@ export const render = {
       this.drawEntity(coin, ctx);
     });
 
+    data.entities.mushrooms.forEach(mushroom => {
+      this.drawEntity(mushroom, ctx);
+    });
+
     data.entities.goombas.forEach(goomba => {
       this.drawEntity(goomba, ctx);
     });

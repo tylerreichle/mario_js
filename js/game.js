@@ -7,12 +7,14 @@ import { physics }   from './util/physics';
 import Mario  from './entities/mario';
 import Goomba from './entities/goomba';
 import Koopa  from './entities/koopa';
+import Mushroom  from './entities/mushroom';
 import Coin   from './entities/coin';
 import Score  from './entities/score';
 
 // finish: better hitboxes. mushrooms growing. damage.
 // create random spawns. endless. design obstacles to spawn. speed increases!
 // distance measure. score. invisible wall on left edge. game reset
+// shells kill goombas
 
 // score: = pos/rel position. move with jquery
 // extras: animate blocks
@@ -50,12 +52,15 @@ class Game {
 
       const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
       const koopa  = new Koopa(spriteSheet, 200, 0, 16, 24);
+      const mushroom  = new Mushroom(spriteSheet, 250, 0, 16, 16);
+
       // backgroundMusic.play();
       input.init(data);
 
       data.entities.mario = mario;
       data.entities.score = score;
       data.entities.coins = [];
+      data.entities.mushrooms = [mushroom];
       data.entities.goombas = [goomba];
       data.entities.koopas = [koopa];
 

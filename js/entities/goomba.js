@@ -6,7 +6,7 @@ class Goomba extends Entity {
     const sprite = new Sprite(img, 115, 5, 16, 16);
     super('goomba', sprite, xPos, yPos, width, height);
 
-    let self = this;
+    const self = this;
     this.squishSound = new Audio('./assets/audio/sounds/stomp.wav');
 
     this.spriteAnimations = {
