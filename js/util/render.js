@@ -64,6 +64,6 @@ export const render = {
 
     ctx.font = text.size + " " + text.font;
     ctx.fillStyle = text.color;
-    ctx.fillText(`Score: ${text.value}`, text.xPos, text.yPos);
+    ctx.fillText(`Score: ${text.value}`, text.xPos - viewport.width / 3, text.yPos);
   }
 };

@@ -155,7 +155,6 @@ export const physics = {
               if (entity.currentState === entity.states.hiding) {
                 this.koopaSlide(entity);
               } else if (entity.currentState === entity.states.sliding) {
-                // this.koopaDeath(entity, data);
                 this.enemyDeath(entity, data);
               } else {
                 this.koopaHide(entity);
@@ -209,7 +208,6 @@ export const physics = {
           setTimeout(() => {
             mario.type = 'dead';
             mario.velY -= 13;
-
           }, 500);
         },
 

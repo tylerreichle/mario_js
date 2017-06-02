@@ -17,7 +17,7 @@ export const input = {
     const mario = data.entities.mario;
 
     if (data.userControl) {
-      // Left Arrow
+      // Move Left. Left-Arrow or A
       if (this.isDown(37) || this.isDown(65)) {
         if (mario.velY === 1.2) {
           if (mario.bigMario) {
@@ -30,7 +30,7 @@ export const input = {
         }
         mario.direction = "left";
       }
-      // Right Arrow
+      // Move Right. Right-Arrow or D
       if (this.isDown(39) || this.isDown(68)) {
         if (mario.velY === 1.2) {
           if (mario.bigMario) {
@@ -44,7 +44,7 @@ export const input = {
         mario.direction = "right";
       }
 
-      // Up Arrow
+      // Jump. Up-Arrow, W, or Spacebar
       if (this.isPressed(38) || this.isPressed(32) || this.isPressed(87)) {
         if (mario.bigMario) {
           mario.currentState = mario.states.bigJumping;
