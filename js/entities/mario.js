@@ -116,6 +116,7 @@ class Mario extends Entity {
 
     this.currentState = this.states.standing;
     this.direction = "right";
+    this.bigMario = false;
     this.velY = 0;
     this.velX = 3.8;
     this.xPos = xPos;

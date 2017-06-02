@@ -124,6 +124,13 @@ export const physics = {
             }
           }
 
+          if (entity.type === 'mushroom') {
+            mario.bigMario = true;
+
+            const mushrooms = data.entities.mushrooms;
+            const index = mushrooms.indexOf(entity);
+            delete mushrooms[index];
+          }
 
           if (entity.type === 'coin') {
             const coins = data.entities.coins;
