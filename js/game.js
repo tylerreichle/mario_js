@@ -15,13 +15,6 @@ import Score  from './entities/score';
 
 // COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
 
-// mario shrink on damage. no growing while dying
-// mushrooms exit blocks
-// build level
-// finish: better hitboxes. damage.
-// game reset
-// shells kill goombas
-
 // extras: animate blocks. mario duck/run. breakable blocks when large
 
 class Game {
@@ -87,7 +80,7 @@ class Game {
             goomba[0], goomba[1], goomba[2], goomba[3])
         );
       });
-      
+
       render.init(data);
       this.run(data);
     });

@@ -6,6 +6,7 @@
 *.db
 *.sqlite*
 .byebug_history
+.vscode/
 
 
 ### OSX ###

@@ -94,7 +94,9 @@ export const physics = {
     handleCollision(data, entity) {
       const mario = data.entities.mario;
 
-      if ((entity.type === 'goomba') || (entity.type === 'koopa')) {
+      if (entity.type === 'goomba' || 
+          entity.type === 'koopa' && 
+          mario.type !=='invincible') {
         // mario's right
         if (mario.xPos < entity.xPos && mario.velY <= entity.velY) {
 
@@ -109,8 +111,7 @@ export const physics = {
 
           } else {
             if (mario.bigMario) {
-              mario.bigMario = false;
-              mario.height = 16;
+              this.marioShrink(mario);
             } else {
               mario.currentState = mario.states.dead;
               this.marioDeath(data);
@@ -132,8 +133,7 @@ export const physics = {
 
           } else {
             if (mario.bigMario) {
-              mario.bigMario = false;
-              mario.height = 16;
+              this.marioShrink(mario);
             } else {
               mario.currentState = mario.states.dead;
               this.marioDeath(data);
@@ -170,7 +170,7 @@ export const physics = {
                 mario.velY = 1.2;
                 mario.xPos = entity.xPos;
                 if (mario.bigMario) {
-                  mario.bigMario = false;
+                  this.marioShrink(mario);
                 } else {
                   mario.currentState = mario.states.dead;
                   this.marioDeath(data);
@@ -214,6 +214,22 @@ export const physics = {
             mario.type = 'dead';
             mario.velY -= 13;
           }, 500);
+        },
+        // freeze one sec while resize. return to movement
+        marioShrink(mario) {
+          mario.bigMario = false;
+          mario.powerdownSound.play();
+          mario.type = 'invincible';
+          mario.currentState = mario.states.resizing;
+
+          setTimeout(() => {
+            mario.currentState = mario.states.standing;
+            mario.height = 16;
+          }, 1000);
+
+          setTimeout(() => {
+            mario.type = 'mario';
+          }, 1500);
         },
 
         koopaHide(entity) {
@@ -289,11 +305,13 @@ export const physics = {
             // Left side
             if (entity.xPos < scene.xPos && entity.yPos >= scene.yPos) {
               entity.xPos = scene.xPos - entity.width;
-
+              
               if ((entity.type === 'goomba') ||
               (entity.type === 'koopa')  ||
               (entity.type === 'mushroom')) {
                 entity.direction = entity.direction === 'left' ? 'right' : 'left';
+              } else {
+                console.log('left col');
               }
             }
             // Right side
@@ -313,6 +331,7 @@ export const physics = {
 
                 if (entity.type !== 'dead') { // fall through ground when dead
                   if (entity.type === 'mario') {
+                    if (scene.type === 'pipe') { console.log('top col'); }
                     if (entity.bigMario) {
                       entity.currentState = entity.states.bigStanding;
                     } else {
@@ -328,7 +347,6 @@ export const physics = {
               if (entity.yPos > scene.yPos &&
                  (entity.xPos + entity.width) >= scene.xPos &&
                   entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
-
                   if (scene.type === 'block') {
                     scene.sprite = scene.used;
 

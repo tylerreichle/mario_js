@@ -22,7 +22,6 @@ class Mario extends Entity {
         ],
         currentFrame: 0
       },
-
       walkLeft: {
         frames: [
           new Sprite(img, 844, 21, 16, 16),
@@ -31,7 +30,6 @@ class Mario extends Entity {
         ],
         currentFrame: 0
       },
-
       bigWalkRight : {
         frames: [
           new Sprite(img, 295, 7, 16, 32),
@@ -40,12 +38,29 @@ class Mario extends Entity {
         ],
         currentFrame: 0
       },
-
       bigWalkLeft: {
         frames: [
           new Sprite(img, 583, 37, 16, 32),
           new Sprite(img, 567, 37, 16, 32),
           new Sprite(img, 561, 37, 16, 32)
+        ],
+        currentFrame: 0
+      },
+      resizeRight: {
+        frames: [
+          new Sprite(img, 519, 5, 16, 32),
+          new Sprite(img, 279, 5, 16, 32),
+          new Sprite(img, 519, 5, 16, 32),
+          new Sprite(img, 279, 5, 16, 32)
+        ],
+        currentFrame: 0
+      },
+      resizeLeft: {
+        frames: [
+          new Sprite(img, 519, 5, 16, 32),
+          new Sprite(img, 279, 5, 16, 32),
+          new Sprite(img, 519, 5, 16, 32),
+          new Sprite(img, 279, 5, 16, 32)
         ],
         currentFrame: 0
       },
@@ -66,7 +81,7 @@ class Mario extends Entity {
         movement(data) {
           if (self.velY === 1.2) {
             const jumpSound = self.jumpSound.cloneNode();
-            // jumpSound.play();
+            jumpSound.play();
             self.velY -= 14;
           }
         },
@@ -186,6 +201,37 @@ class Mario extends Entity {
 
               if (self.spriteAnimations.bigWalkLeft.currentFrame > 2) {
                 self.spriteAnimations.bigWalkLeft.currentFrame = 0;
+              }
+            }
+          }
+        }
+      },
+
+      resizing: {
+        movement(data) {
+          return;
+        },
+
+        animation(data) {
+          if (self.direction === "right") {
+            if (data.animationFrame % 5 === 0) {
+              self.sprite = self.spriteAnimations.resizeRight.
+                frames[self.spriteAnimations.resizeRight.currentFrame];
+
+              self.spriteAnimations.resizeRight.currentFrame++;
+
+              if (self.spriteAnimations.resizeRight.currentFrame > 3) {
+                self.spriteAnimations.resizeRight.currentFrame = 0;
+              }
+            }
+          } else {
+            if (data.animationFrame % 5 === 0) {
+              self.sprite = self.spriteAnimations.resizeLeft.
+                frames[self.spriteAnimations.resizeLeft.currentFrame];
+              self.spriteAnimations.resizeLeft.currentFrame++;
+
+              if (self.spriteAnimations.resizeLeft.currentFrame > 3) {
+                self.spriteAnimations.resizeLeft.currentFrame = 0;
               }
             }
           }

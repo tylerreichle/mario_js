@@ -11,7 +11,6 @@ export const animation = {
     });
 
     data.entities.goombas.forEach(goomba => {
-      debugger;
       goomba.currentState.animation(data);
     });
 
