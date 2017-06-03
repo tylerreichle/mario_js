@@ -6,7 +6,6 @@ import { physics }   from './util/physics';
 
 import Mario  from './entities/mario';
 import Goomba from './entities/goomba';
-import Koopa  from './entities/koopa';
 import Mushroom from './entities/mushroom';
 import Coin   from './entities/coin';
 import Score  from './entities/score';
@@ -14,6 +13,7 @@ import Score  from './entities/score';
 // COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
 
 // mario shrink on damage. no growing while dying
+// mushrooms exit blocks
 // build level
 // finish: better hitboxes. damage.
 // game reset
@@ -60,8 +60,6 @@ class Game {
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
       const score = new Score(290, 30);
 
-      const goomba = new Goomba(spriteSheet, 100, 0, 16, 16);
-      const koopa  = new Koopa(spriteSheet, 200, 0, 16, 24);
       const mushroom  = new Mushroom(spriteSheet, 250, 0, 16, 16);
 
       // backgroundMusic.play();
@@ -71,8 +69,8 @@ class Game {
       data.entities.score = score;
       data.entities.coins = [];
       data.entities.mushrooms = [mushroom];
-      data.entities.goombas = [goomba];
-      data.entities.koopas = [koopa];
+      data.entities.goombas = [];
+      data.entities.koopas = [];
 
       render.init(data);
       this.run(data);
@@ -100,8 +98,6 @@ class Game {
     const viewport = data.viewport;
     const margin = viewport.width / 4;
     const mario = data.entities.mario;
-    const score = data.entities.score;
-
     const center = {
       x: mario.xPos + (mario.width  * 0.5),
       y: mario.yPos + (mario.height * 0.5)

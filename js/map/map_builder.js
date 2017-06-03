@@ -1,17 +1,25 @@
 import Entity from '../entities/entity';
 import Sprite from '../entities/sprite';
 import Block from '../entities/block';
+import Koopa from '../entities/koopa';
+import Goomba from '../entities/goomba';
 
 class mapBuilder {
   constructor(level) {
+    this.level = level;
     this.tileset = new Image();
     this.tileset.src = './assets/sprites/tileset_gutter.png';
+
+    this.spriteSheet = new Image();
+    this.spriteSheet.src = './assets/sprites/spritesheet.png';
 
     this.groundEntities = [];
     this.pipeEntities = [];
     this.brickEntities = [];
     this.breakableEntities = [];
     this.blockEntities = [];
+    this.koopas = [];
+    this.goombas = [];
 
     level.ground.forEach(ground => {
       this.groundEntities.push(
@@ -44,9 +52,32 @@ class mapBuilder {
           breakable[0], breakable[1], breakable[2], breakable[3])
       );
     });
+
+    this.level.koopas.forEach(koopa => {
+      this.koopas.push(
+        new Koopa(this.spriteSheet,
+          koopa[0], koopa[1], koopa[2], koopa[3])
+      );
+    });
+
+    this.level.goombas.forEach(goomba => {
+      this.goombas.push(
+        new Goomba(this.spriteSheet,
+          goomba[0], goomba[1], goomba[2], goomba[3])
+      );
+    });
   }
 
   create(data) {
+
+    if (this.goombas.length > 0) {
+      data.entities.goombas.push(this.goombas.shift());
+    }
+
+    if (this.koopas.length > 0) {
+      data.entities.koopas.push(this.koopas.shift());
+    }
+
     this.groundEntities.forEach(ground => {
       this.drawEntity(ground, data);
       data.entities.scenery.push(ground);
