@@ -18,8 +18,6 @@ class mapBuilder {
     this.brickEntities = [];
     this.breakableEntities = [];
     this.blockEntities = [];
-    this.koopas = [];
-    this.goombas = [];
 
     level.ground.forEach(ground => {
       this.groundEntities.push(
@@ -33,11 +31,11 @@ class mapBuilder {
       );
     });
 
-    level.bricks.forEach(brick => {
-      this.brickEntities.push(
-        new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3])
-      );
-    });
+    // level.bricks.forEach(brick => {
+    //   this.brickEntities.push(
+    //     new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3])
+    //   );
+    // });
 
     // coin blocks
     level.blocks.forEach(block => {
@@ -50,125 +48,109 @@ class mapBuilder {
       this.breakableEntities.push(
         new Breakable(this.tileset,
           breakable[0], breakable[1], breakable[2], breakable[3])
-      );
-    });
-
-    this.level.koopas.forEach(koopa => {
-      this.koopas.push(
-        new Koopa(this.spriteSheet,
-          koopa[0], koopa[1], koopa[2], koopa[3])
-      );
-    });
-
-    this.level.goombas.forEach(goomba => {
-      this.goombas.push(
-        new Goomba(this.spriteSheet,
-          goomba[0], goomba[1], goomba[2], goomba[3])
-      );
-    });
-  }
-
-  create(data) {
-
-    if (this.goombas.length > 0) {
-      data.entities.goombas.push(this.goombas.shift());
+        );
+      });
     }
 
-    if (this.koopas.length > 0) {
-      data.entities.koopas.push(this.koopas.shift());
+    create(data) {
+      this.groundEntities.forEach(ground => {
+        this.drawEntity(ground, data);
+        data.entities.scenery.push(ground);
+      });
+
+      this.pipeEntities.forEach(pipe => {
+        this.drawEntity(pipe, data);
+        data.entities.scenery.push(pipe);
+      });
+
+      this.brickEntities.forEach(brick => {
+        this.drawEntity(brick, data);
+        data.entities.scenery.push(brick);
+      });
+
+      this.breakableEntities.forEach(breakable => {
+        this.drawEntity(breakable, data);
+        data.entities.scenery.push(breakable);
+      });
+
+      this.blockEntities.forEach(block => {
+        this.drawEntity(block, data);
+        data.entities.scenery.push(block);
+      });
     }
 
-    this.groundEntities.forEach(ground => {
-      this.drawEntity(ground, data);
-      data.entities.scenery.push(ground);
-    });
+    drawEntity(entity, data) {
+      const ctx = data.canvas.ctx;
+      const viewport = data.viewport;
 
-    this.pipeEntities.forEach(pipe => {
-      this.drawEntity(pipe, data);
-      data.entities.scenery.push(pipe);
-    });
+      if (((entity.xPos + entity.width >= viewport.vX &&
+        entity.xPos + entity.width <= viewport.vX + viewport.width)) &&
+        ((entity.yPos + entity.height >= viewport.vY &&
+          entity.yPos + entity.height <= viewport.vY + viewport.height))) {
 
-    this.brickEntities.forEach(brick => {
-      this.drawEntity(brick, data);
-      data.entities.scenery.push(brick);
-    });
+            ctx.drawImage(
+              entity.sprite.img,
+              entity.sprite.srcX, entity.sprite.srcY,
+              entity.sprite.srcW, entity.sprite.srcH,
+              entity.xPos - viewport.vX, entity.yPos - viewport.vY,
+              entity.width, entity.height
+            );
+          }
+        }
+      }
 
-    this.breakableEntities.forEach(breakable => {
-      this.drawEntity(breakable, data);
-      data.entities.scenery.push(breakable);
-    });
+      export default mapBuilder;
 
-    this.blockEntities.forEach(block => {
-      this.drawEntity(block, data);
-      data.entities.scenery.push(block);
-    });
-  }
+      class Breakable extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 18, 0, 18, 18);
 
-  drawEntity(entity, data) {
-    const ctx = data.canvas.ctx;
-    const viewport = data.viewport;
+          super('breakable', sprite, xPos, yPos, width, height);
+        }
+      }
 
-    if (((entity.xPos >= viewport.vX &&
-          entity.xPos <= viewport.vX + viewport.width)) &&
-        ((entity.yPos >= viewport.vY &&
-          entity.yPos <= viewport.vY + viewport.height))) {
+      class Ground extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 0, 16, 16);
+          super('ground', sprite, xPos, yPos, width, height);
+        }
+      }
 
-      ctx.drawImage(
-        entity.sprite.img,
-        entity.sprite.srcX, entity.sprite.srcY,
-        entity.sprite.srcW, entity.sprite.srcH,
-        entity.xPos - viewport.vX, entity.yPos - viewport.vY,
-        entity.width, entity.height
-      );
-    }
-  }
-}
+      class Pipe extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 180, 35, 35);
 
-export default mapBuilder;
+          super('pipe', sprite, xPos, yPos, width, height);
+        }
+      }
 
-class Breakable extends Entity {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 18, 0, 18, 18);
+      class Coin extends Entity {
+        constructor(xPos, yPos, width, height) {
+          const sprite = new Sprite('');
 
-    super('breakable', sprite, xPos, yPos, width, height);
-  }
-}
+          super('coin', sprite, xPos, yPos, width, height);
+        }
+      }
 
-class Ground extends Entity {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 0, 16, 16);
-    super('ground', sprite, xPos, yPos, width, height);
-  }
-}
+      class Mushroom extends Entity {
+        constructor(xPos, yPos, width, height) {
+          const sprite = new Sprite('');
 
-class Pipe extends Entity {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 180, 35, 35);
+          super('mushroom', sprite, xPos, yPos, width, height);
+        }
+      }
 
-    super('pipe', sprite, xPos, yPos, width, height);
-  }
-}
+      class Brick extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 18, 18, 18);
 
-class Coin extends Entity {
-  constructor(xPos, yPos, width, height) {
-    const sprite = new Sprite('');
+          super('brick', sprite, xPos, yPos, width, height);
+        }
+      }
+      class Shrub extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 198, 162, 54, 18);
 
-    super('coin', sprite, xPos, yPos, width, height);
-  }
-}
-
-class Mushroom extends Entity {
-  constructor(xPos, yPos, width, height) {
-    const sprite = new Sprite('');
-
-    super('mushroom', sprite, xPos, yPos, width, height);
-  }
-}
-
-class Brick extends Entity {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 0, 18, 18, 18);
-
-    super('brick', sprite, xPos, yPos, width, height);
-  }
-}
+          super('brick', sprite, xPos, yPos, width, height);
+        }
+      }

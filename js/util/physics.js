@@ -110,6 +110,7 @@ export const physics = {
           } else {
             if (mario.bigMario) {
               mario.bigMario = false;
+              mario.height = 16;
             } else {
               mario.currentState = mario.states.dead;
               this.marioDeath(data);
@@ -132,6 +133,7 @@ export const physics = {
           } else {
             if (mario.bigMario) {
               mario.bigMario = false;
+              mario.height = 16;
             } else {
               mario.currentState = mario.states.dead;
               this.marioDeath(data);

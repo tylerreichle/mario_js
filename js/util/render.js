@@ -42,10 +42,10 @@ export const render = {
     const ctx = data.canvas.ctx;
     const viewport = data.viewport;
 
-    if (((entity.xPos >= viewport.vX &&
-          entity.xPos <= viewport.vX + viewport.width)) &&
-        ((entity.yPos >= viewport.vY &&
-          entity.yPos <= viewport.vY + viewport.height)))  {
+    if (((entity.xPos + entity.width >= viewport.vX &&
+          entity.xPos + entity.width <= viewport.vX + viewport.width)) &&
+        ((entity.yPos + entity.height >= viewport.vY &&
+          entity.yPos + entity.height <= viewport.vY + viewport.height)))  {
 
       ctx.drawImage(
         entity.sprite.img,

@@ -4,10 +4,13 @@ import { animation } from './util/animation';
 import { movement }  from './util/movement';
 import { physics }   from './util/physics';
 
+import { levelOne } from './map/level_1-1';
+
 import Mario  from './entities/mario';
+import Sprite from './entities/sprite';
 import Goomba from './entities/goomba';
+import Koopa from './entities/koopa';
 import Mushroom from './entities/mushroom';
-import Coin   from './entities/coin';
 import Score  from './entities/score';
 
 // COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
@@ -40,12 +43,11 @@ class Game {
     };
 
     const backgroundMusic =
-      new Audio('./assets/audio/music/underground_theme.mp3');
+    new Audio('./assets/audio/music/underground_theme.mp3');
     backgroundMusic.loop = true;
 
     const spriteSheet = new Image();
     spriteSheet.src = './assets/sprites/spritesheet.png';
-
     spriteSheet.addEventListener('load', () => {
 
       const data = {
@@ -72,6 +74,20 @@ class Game {
       data.entities.goombas = [];
       data.entities.koopas = [];
 
+      levelOne.koopas.forEach(koopa => {
+        data.entities.koopas.push(
+          new Koopa(spriteSheet,
+            koopa[0], koopa[1], koopa[2], koopa[3])
+        );
+      });
+
+      levelOne.goombas.forEach(goomba => {
+        data.entities.goombas.push(
+          new Goomba(spriteSheet,
+            goomba[0], goomba[1], goomba[2], goomba[3])
+        );
+      });
+      
       render.init(data);
       this.run(data);
     });
@@ -107,14 +123,14 @@ class Game {
       viewport.vX = Math.max(center.x - margin, 0);
     } else if (center.x > viewport.vX + viewport.width - margin * 2) {
       viewport.vX =
-        Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
+      Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
     }
 
     if (center.y < viewport.vY + margin) {
       viewport.vY = Math.max(center.y - margin, 0);
     } else if (center.y > viewport.vY + viewport.height - margin) {
       viewport.vY =
-        Math.min(center.y + margin - viewport.height, 800 - viewport.height);
+      Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
   }
 }
