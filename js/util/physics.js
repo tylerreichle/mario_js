@@ -214,6 +214,10 @@ export const physics = {
             mario.type = 'dead';
             mario.velY -= 13;
           }, 500);
+
+          setTimeout(() => {
+            data.reset();
+          }, 3000);
         },
         // freeze one sec while resize. return to movement
         marioShrink(mario) {

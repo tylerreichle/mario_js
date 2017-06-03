@@ -49,7 +49,8 @@ class Game {
         canvas: canvas,
         viewport: viewport,
         entities: {},
-        userControl: true
+        userControl: true,
+        reset: this.reset
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
@@ -125,6 +126,10 @@ class Game {
       viewport.vY =
       Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
+  }
+
+  reset() {
+    location.reload();
   }
 }
 
