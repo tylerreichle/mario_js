@@ -81,7 +81,7 @@ class Mario extends Entity {
         movement(data) {
           if (self.velY === 1.2) {
             const jumpSound = self.jumpSound.cloneNode();
-            jumpSound.play();
+            // jumpSound.play();
             self.velY -= 14;
           }
         },

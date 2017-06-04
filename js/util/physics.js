@@ -102,7 +102,8 @@ export const physics = {
 
           mario.xPos = entity.xPos - mario.width;
           // slide shell instead of death
-          if (entity.type === 'koopa' && entity.currentState === entity.states.hiding) {
+          if (entity.type === 'koopa' && 
+              entity.currentState === entity.states.hiding) {
             entity.direction = 'right';
             entity.xPos += 5;
             setTimeout(() => {
@@ -311,11 +312,9 @@ export const physics = {
               entity.xPos = scene.xPos - entity.width;
               
               if ((entity.type === 'goomba') ||
-              (entity.type === 'koopa')  ||
-              (entity.type === 'mushroom')) {
+                  (entity.type === 'koopa')  ||
+                  (entity.type === 'mushroom')) {
                 entity.direction = entity.direction === 'left' ? 'right' : 'left';
-              } else {
-                console.log('left col');
               }
             }
             // Right side
@@ -335,7 +334,6 @@ export const physics = {
 
                 if (entity.type !== 'dead') { // fall through ground when dead
                   if (entity.type === 'mario') {
-                    if (scene.type === 'pipe') { console.log('top col'); }
                     if (entity.bigMario) {
                       entity.currentState = entity.states.bigStanding;
                     } else {
@@ -352,28 +350,31 @@ export const physics = {
                  (entity.xPos + entity.width) >= scene.xPos &&
                   entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
                   if (scene.type === 'block') {
-                    scene.sprite = scene.used;
-
                     if (scene.coin) {
-                      const coinSound = scene.coinSound.cloneNode();
-                      coinSound.play();
+                      scene.coinSound.play();
                       scene.coin = false;
                       scene.drawCoin(data);
                       data.entities.score.value += 50;
                       data.entities.score.coinCount += 1;
                     }
+                    scene.sprite = scene.used;
+                  } else if (scene.type === 'breakable') {
+                      if (entity.bigMario) {
+                        scene.breakSound.play();
+                        const index = data.mapBuilder.breakableEntities.indexOf(scene);
+                        delete data.mapBuilder.breakableEntities[index];
+                      } else {
+                        entity.bumpSound.play();
+                      }
                   }
 
                   if (entity.type === 'mario') {
-                    const bumpSound = entity.bumpSound.cloneNode();
-                    bumpSound.play();
+                    entity.bumpSound.play();
                   }
-
                   entity.yPos = entity.yPos + entity.height;
                   entity.velY = 1.2;
                   entity.xPos = scene.xPos;
                 }
-
               },
 
               gravity(entity) {

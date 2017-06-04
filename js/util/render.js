@@ -1,9 +1,7 @@
 import { levelOne } from '../map/level_1-1';
-import mapBuilder from '../map/map_builder';
+import MapBuilder from '../map/map_builder';
 
 export const render = {
-
-  mapBuilder: new mapBuilder(levelOne),
 
   init(data) {
     data.entities.scenery = [];
@@ -19,7 +17,7 @@ export const render = {
 
     this.drawEntity(data.entities.mario, data);
     this.drawText(data);
-    this.mapBuilder.create(data);
+    data.mapBuilder.create(data);
 
     data.entities.coins.forEach(coin => {
       this.drawEntity(coin, data);

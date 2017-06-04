@@ -1,17 +1,15 @@
 import Entity from '../entities/entity';
 import Sprite from '../entities/sprite';
 import Block from '../entities/block';
+import Breakable from '../entities/breakable';
 import Koopa from '../entities/koopa';
 import Goomba from '../entities/goomba';
 
-class mapBuilder {
-  constructor(level) {
+class MapBuilder {
+  constructor(level, tileset, spriteSheet) {
     this.level = level;
-    this.tileset = new Image();
-    this.tileset.src = './assets/sprites/tileset_gutter.png';
-
-    this.spriteSheet = new Image();
-    this.spriteSheet.src = './assets/sprites/spritesheet.png';
+    this.tileset = tileset;
+    this.spriteSheet = spriteSheet;
 
     this.groundEntities = [];
     this.pipeEntities = [];
@@ -30,12 +28,6 @@ class mapBuilder {
         new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
       );
     });
-
-    // level.bricks.forEach(brick => {
-    //   this.brickEntities.push(
-    //     new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3])
-    //   );
-    // });
 
     // coin blocks
     level.blocks.forEach(block => {
@@ -99,15 +91,7 @@ class mapBuilder {
         }
       }
 
-      export default mapBuilder;
-
-      class Breakable extends Entity {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new Sprite(tileset, 18, 0, 18, 18);
-
-          super('breakable', sprite, xPos, yPos, width, height);
-        }
-      }
+      export default MapBuilder;
 
       class Ground extends Entity {
         constructor(tileset, xPos, yPos, width, height) {

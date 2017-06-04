@@ -5,6 +5,7 @@ import { movement }  from './util/movement';
 import { physics }   from './util/physics';
 
 import { levelOne } from './map/level_1-1';
+import MapBuilder from './map/map_builder';
 
 import Mario  from './entities/mario';
 import Sprite from './entities/sprite';
@@ -41,6 +42,10 @@ class Game {
 
     const spriteSheet = new Image();
     spriteSheet.src = './assets/sprites/spritesheet.png';
+
+    const tileset = new Image();
+    tileset.src = './assets/sprites/tileset_gutter.png';
+
     spriteSheet.addEventListener('load', () => {
 
       const data = {
@@ -48,6 +53,7 @@ class Game {
         spriteSheet: spriteSheet,
         canvas: canvas,
         viewport: viewport,
+        mapBuilder: new MapBuilder(levelOne, tileset, spriteSheet),
         entities: {},
         userControl: true,
         reset: this.reset
