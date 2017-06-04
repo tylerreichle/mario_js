@@ -12,9 +12,9 @@ export const render = {
     data.canvas.ctx.fillStyle = '#6b8cff';
     data.canvas.ctx.fillRect(0, 0, data.canvas.canvas.width, data.canvas.canvas.height);
 
-    this.drawEntity(data.entities.mario, data);
     this.drawText(data);
     data.mapBuilder.create(data);
+    this.drawEntity(data.entities.mario, data);
 
     data.entities.coins.forEach(coin => {
       this.drawEntity(coin, data);
@@ -54,6 +54,8 @@ export const render = {
 
     data.canvas.ctx.font = text.size + " " + text.font;
     data.canvas.ctx.fillStyle = text.color;
-    data.canvas.ctx.fillText(`Score: ${text.value}`, text.xPos - data.viewport.width / 3, text.yPos);
+    data.canvas.ctx.fillText(
+      `Score: ${text.value}`, text.xPos - data.viewport.width / 3, text.yPos
+    );
   }
 };

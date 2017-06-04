@@ -11,20 +11,25 @@ class MapBuilder {
     this.tileset = tileset;
     this.spriteSheet = spriteSheet;
 
-    this.groundEntities = [];
-    this.pipeEntities = [];
+    this.sceneryEntities = [];
     this.brickEntities = [];
     this.breakableEntities = [];
     this.blockEntities = [];
 
     level.ground.forEach(ground => {
-      this.groundEntities.push(
+      this.sceneryEntities.push(
         new Ground(this.tileset, ground[0], ground[1], ground[2], ground[3])
       );
     });
 
+    level.shrubs.forEach(shrub => {
+      this.sceneryEntities.push(
+        new Shrub(this.tileset, shrub[0], shrub[1], shrub[2], shrub[3])
+      );
+    });
+
     level.pipes.forEach(pipe => {
-      this.pipeEntities.push(
+      this.sceneryEntities.push(
         new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
       );
     });
@@ -51,14 +56,9 @@ class MapBuilder {
     }
 
     create(data) {
-      this.groundEntities.forEach(ground => {
-        this.drawEntity(ground, data);
-        data.entities.scenery.push(ground);
-      });
-
-      this.pipeEntities.forEach(pipe => {
-        this.drawEntity(pipe, data);
-        data.entities.scenery.push(pipe);
+      this.sceneryEntities.forEach(scene => {
+        this.drawEntity(scene, data);
+        data.entities.scenery.push(scene);
       });
 
       this.brickEntities.forEach(brick => {
@@ -139,8 +139,8 @@ class MapBuilder {
       }
       class Shrub extends Entity {
         constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new Sprite(tileset, 198, 162, 54, 18);
+          const sprite = new Sprite(tileset, 198.5, 162.5, 53, 17);
 
-          super('brick', sprite, xPos, yPos, width, height);
+          super('shrub', sprite, xPos, yPos, width, height);
         }
       }

@@ -24,7 +24,7 @@ export const physics = {
     const collidables = [
       data.entities.coins,
       data.entities.mushrooms,
-      data.entities.goombas, 
+      data.entities.goombas,
       data.entities.koopas
     ];
 
@@ -286,7 +286,9 @@ export const physics = {
           entity.yPos < scene.yPos + scene.height &&
           entity.height + entity.yPos > scene.yPos) {
           // Collision Occured
-          this.sceneryCollision(data, entity, scene);
+          if (scene.type !== 'shrub') {
+            this.sceneryCollision(data, entity, scene);
+          }
         }
       });
     });
@@ -327,7 +329,7 @@ export const physics = {
             entity.currentState = entity.states.standing;
           }
         }
-        entity.yPos = scene.yPos - entity.height + 1;
+        entity.yPos = scene.yPos - entity.height - 1;
         entity.velY = 0;
       }
     }
@@ -351,13 +353,9 @@ export const physics = {
           entity.bumpSound.play();
         }
       }
-
-      if (entity.type === 'mario') {
-        entity.bumpSound.play();
-      }
       entity.yPos = entity.yPos + entity.height;
-      entity.velY = 1.2;
       entity.xPos = scene.xPos;
+      entity.velY = 1.2;
     }
   },
 
