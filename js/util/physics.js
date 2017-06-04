@@ -94,8 +94,8 @@ export const physics = {
   handleCollision(data, entity) {
     const mario = data.entities.mario;
 
-    if (entity.type === 'goomba' ||
-      entity.type === 'koopa' &&
+    if ((entity.type === 'goomba' ||
+      entity.type === 'koopa') &&
       mario.type !== 'invincible') {
       // mario's right
       if (mario.xPos < entity.xPos && mario.velY <= entity.velY) {
@@ -216,6 +216,7 @@ export const physics = {
     data.entities.mario.deathSound.play();
 
     setTimeout(() => {
+      data.entities.mario.height = 16;
       data.entities.mario.type = 'dead';
       data.entities.mario.velY -= 13;
     }, 500);
@@ -229,6 +230,7 @@ export const physics = {
     mario.bigMario = false;
     mario.powerdownSound.play();
     mario.type = 'invincible';
+    console.log(mario.type);
     mario.currentState = mario.states.resizing;
 
     setTimeout(() => {
@@ -238,6 +240,7 @@ export const physics = {
 
     setTimeout(() => {
       mario.type = 'mario';
+      console.log(mario.type);
     }, 1500);
   },
 

@@ -101,7 +101,6 @@ class Game {
 
       this.updateView(data);
       render.update(data);
-      console.log(data.entities.mario.xPos);
 
       data.animationFrame++;
       window.requestAnimationFrame(loop);

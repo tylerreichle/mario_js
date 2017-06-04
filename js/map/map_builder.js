@@ -86,15 +86,16 @@ class MapBuilder {
       this.breakableEntities.push(
         new Breakable(this.tileset, breakable[0], breakable[1], breakable[2], breakable[3]));
       });
+
+    level.bricks.forEach(brick => {
+      this.sceneryEntities.push(
+        new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3]));
+      });
     }
 
     create(data) {
       this.sceneryEntities.forEach(scene => {
         data.entities.scenery.push(scene);
-      });
-
-      this.brickEntities.forEach(brick => {
-        data.entities.scenery.push(brick);
       });
 
       this.breakableEntities.forEach(breakable => {
