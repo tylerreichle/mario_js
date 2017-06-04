@@ -15,8 +15,6 @@ import Koopa from './entities/koopa';
 import Mushroom from './entities/mushroom';
 import Score  from './entities/score';
 
-// COLISSIONS. STOMP IF MARIO IS COMING DOWN. Y VEL > 0
-
 // extras: animate blocks. mario duck/run. breakable blocks when large
 
 class Game {

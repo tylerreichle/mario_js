@@ -1,5 +1,7 @@
 html, body {
   overflow: hidden;
+  width: 1200px;
+  height: 600px;
 }
 
 header img {
@@ -14,11 +16,14 @@ header img {
 }
 
 .main {
-  background-image: url('../sprites/gameboy2.png');
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-image: url('../sprites/gameboy2.png') no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   display: flex;
   justify-content: center;
+  align-content: center;
   width: 100%;
   height: 100%;
   border: 1px solid red;
@@ -27,7 +32,6 @@ header img {
 canvas {
   height: 560px;
   width: 700px;
-  margin: 160px;
   /*display: block;*/
   /*position: absolute;
   margin: auto;
