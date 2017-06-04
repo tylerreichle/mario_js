@@ -8,12 +8,9 @@ export const render = {
   },
 
   update(data) {
-    const canvas = data.canvas.canvas;
-    const ctx = data.canvas.ctx;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#6b8cff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    data.canvas.ctx.clearRect(0, 0, data.canvas.canvas.width, data.canvas.canvas.height);
+    data.canvas.ctx.fillStyle = '#6b8cff';
+    data.canvas.ctx.fillRect(0, 0, data.canvas.canvas.width, data.canvas.canvas.height);
 
     this.drawEntity(data.entities.mario, data);
     this.drawText(data);
@@ -37,31 +34,26 @@ export const render = {
   },
 
   drawEntity(entity, data) {
-    const ctx = data.canvas.ctx;
-    const viewport = data.viewport;
+    if (((entity.xPos + entity.width >= data.viewport.vX &&
+          entity.xPos + entity.width <= data.viewport.vX + data.viewport.width)) &&
+        ((entity.yPos + entity.height >= data.viewport.vY &&
+          entity.yPos + entity.height <= data.viewport.vY + data.viewport.height)))  {
 
-    if (((entity.xPos + entity.width >= viewport.vX &&
-          entity.xPos + entity.width <= viewport.vX + viewport.width)) &&
-        ((entity.yPos + entity.height >= viewport.vY &&
-          entity.yPos + entity.height <= viewport.vY + viewport.height)))  {
-
-      ctx.drawImage(
+      data.canvas.ctx.drawImage(
         entity.sprite.img,
         entity.sprite.srcX, entity.sprite.srcY,
         entity.sprite.srcW, entity.sprite.srcH,
-        entity.xPos - viewport.vX,  entity.yPos - viewport.vY,
+        entity.xPos - data.viewport.vX,  entity.yPos - data.viewport.vY,
         entity.width, entity.height
       );
     }
   },
 
   drawText(data) {
-    const ctx = data.canvas.ctx;
-    const viewport = data.viewport;
     const text = data.entities.score;
 
-    ctx.font = text.size + " " + text.font;
-    ctx.fillStyle = text.color;
-    ctx.fillText(`Score: ${text.value}`, text.xPos - viewport.width / 3, text.yPos);
+    data.canvas.ctx.font = text.size + " " + text.font;
+    data.canvas.ctx.fillStyle = text.color;
+    data.canvas.ctx.fillText(`Score: ${text.value}`, text.xPos - data.viewport.width / 3, text.yPos);
   }
 };

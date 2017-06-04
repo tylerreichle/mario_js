@@ -55,15 +55,15 @@ class Game {
         viewport: viewport,
         mapBuilder: new MapBuilder(levelOne, tileset, spriteSheet),
         entities: {},
+        sounds: {
+          breakSound: new Audio('./assets/audio/sounds/break_block.wav')
+        },
         userControl: true,
         reset: this.reset
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
       const score = new Score(290, 30);
-
-      const mushroom  = new Mushroom(spriteSheet, 250, 0, 16, 16);
-
       // backgroundMusic.play();
 
       input.init(data);
@@ -74,19 +74,19 @@ class Game {
       data.entities.goombas = [];
       data.entities.koopas = [];
 
-      levelOne.koopas.forEach(koopa => {
-        data.entities.koopas.push(
-          new Koopa(spriteSheet,
-            koopa[0], koopa[1], koopa[2], koopa[3])
-        );
-      });
+      // levelOne.koopas.forEach(koopa => {
+      //   data.entities.koopas.push(
+      //     new Koopa(spriteSheet,
+      //       koopa[0], koopa[1], koopa[2], koopa[3])
+      //   );
+      // });
 
-      levelOne.goombas.forEach(goomba => {
-        data.entities.goombas.push(
-          new Goomba(spriteSheet,
-            goomba[0], goomba[1], goomba[2], goomba[3])
-        );
-      });
+      // levelOne.goombas.forEach(goomba => {
+      //   data.entities.goombas.push(
+      //     new Goomba(spriteSheet,
+      //       goomba[0], goomba[1], goomba[2], goomba[3])
+      //   );
+      // });
 
       render.init(data);
       this.run(data);
@@ -113,10 +113,9 @@ class Game {
   updateView(data) {
     const viewport = data.viewport;
     const margin = viewport.width / 4;
-    const mario = data.entities.mario;
     const center = {
-      x: mario.xPos + (mario.width  * 0.5),
-      y: mario.yPos + (mario.height * 0.5)
+      x: data.entities.mario.xPos + (data.entities.mario.width  * 0.5),
+      y: data.entities.mario.yPos + (data.entities.mario.height * 0.5)
     };
 
     if (center.x < viewport.vX + margin * 2) {
