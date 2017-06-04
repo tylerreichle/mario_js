@@ -32,7 +32,13 @@ class MapBuilder {
     // coin blocks
     level.blocks.forEach(block => {
       this.blockEntities.push(
-        new Block(true, this.tileset, block[0], block[1], block[2], block[3])
+        new Block('coin', this.tileset, block[0], block[1], block[2], block[3])
+      );
+    });
+    // mushroom blocks
+    level.mushrooms.forEach(block => {
+      this.blockEntities.push(
+        new Block('mushroom', this.tileset, block[0], block[1], block[2], block[3])
       );
     });
 

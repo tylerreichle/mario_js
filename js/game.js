@@ -70,7 +70,7 @@ class Game {
       data.entities.mario = mario;
       data.entities.score = score;
       data.entities.coins = [];
-      data.entities.mushrooms = [mushroom];
+      data.entities.mushrooms = [];
       data.entities.goombas = [];
       data.entities.koopas = [];
 

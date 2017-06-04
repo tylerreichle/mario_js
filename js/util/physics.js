@@ -193,14 +193,12 @@ export const physics = {
           }
 
           if (entity.type === 'coin') {
-            const coins = data.entities.coins;
-            const coinSound = entity.coinSound.cloneNode();
-            const index = coins.indexOf(entity);
+            const index = data.entities.coins.indexOf(entity);
 
             data.entities.score.value += 50;
             data.entities.score.coinCount += 1;
-            coinSound.play();
-            delete coins[index];
+            entity.coinSound.play();
+            delete data.entities.coins[index];
           }
         },
 
@@ -350,12 +348,10 @@ export const physics = {
                  (entity.xPos + entity.width) >= scene.xPos &&
                   entity.xPos < (scene.xPos + scene.width) && entity.velY < 0) {
                   if (scene.type === 'block') {
-                    if (scene.coin) {
-                      scene.coinSound.play();
-                      scene.coin = false;
-                      scene.drawCoin(data);
-                      data.entities.score.value += 50;
-                      data.entities.score.coinCount += 1;
+                    if (scene.contents === 'coin') {
+                      scene.collectCoin(data);
+                    } else if (scene.contents === 'mushroom') {
+                      scene.createMushroom(data);
                     }
                     scene.sprite = scene.used;
                   } else if (scene.type === 'breakable') {
