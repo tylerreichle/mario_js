@@ -347,6 +347,7 @@ export const physics = {
       } else if (scene.type === 'breakable') {
         if (entity.bigMario) {
           data.sounds.breakSound.play();
+          scene.type = 'shrub';
           const index = data.mapBuilder.breakableEntities.indexOf(scene);
           delete data.mapBuilder.breakableEntities[index];
         } else {

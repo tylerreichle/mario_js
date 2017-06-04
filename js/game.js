@@ -1,3 +1,4 @@
+'use strict';
 import { render }    from './util/render';
 import { input }     from './util/input';
 import { animation } from './util/animation';
@@ -22,7 +23,7 @@ class Game {
   init() {
     const canvasEl = document.getElementById('game-canvas');
     const ctx = canvasEl.getContext('2d');
-    ctx.scale(2, 2);
+    ctx.scale(3, 3);
 
     const canvas = {
       canvas: canvasEl,
@@ -74,19 +75,19 @@ class Game {
       data.entities.goombas = [];
       data.entities.koopas = [];
 
-      // levelOne.koopas.forEach(koopa => {
-      //   data.entities.koopas.push(
-      //     new Koopa(spriteSheet,
-      //       koopa[0], koopa[1], koopa[2], koopa[3])
-      //   );
-      // });
+      levelOne.koopas.forEach(koopa => {
+        data.entities.koopas.push(
+          new Koopa(spriteSheet,
+            koopa[0], koopa[1], koopa[2], koopa[3])
+        );
+      });
 
-      // levelOne.goombas.forEach(goomba => {
-      //   data.entities.goombas.push(
-      //     new Goomba(spriteSheet,
-      //       goomba[0], goomba[1], goomba[2], goomba[3])
-      //   );
-      // });
+      levelOne.goombas.forEach(goomba => {
+        data.entities.goombas.push(
+          new Goomba(spriteSheet,
+            goomba[0], goomba[1], goomba[2], goomba[3])
+        );
+      });
 
       render.init(data);
       this.run(data);
@@ -112,7 +113,7 @@ class Game {
 
   updateView(data) {
     const viewport = data.viewport;
-    const margin = viewport.width / 4;
+    const margin = viewport.width / 6;
     const center = {
       x: data.entities.mario.xPos + (data.entities.mario.width  * 0.5),
       y: data.entities.mario.yPos + (data.entities.mario.height * 0.5)

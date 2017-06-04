@@ -1,3 +1,4 @@
+'use strict';
 import { levelOne } from '../map/level_1-1';
 import MapBuilder from '../map/map_builder';
 
@@ -5,15 +6,16 @@ export const render = {
 
   init(data) {
     data.entities.scenery = [];
+    data.mapBuilder.create(data);
   },
 
   update(data) {
-    data.canvas.ctx.clearRect(0, 0, data.canvas.canvas.width, data.canvas.canvas.height);
+    data.canvas.ctx.clearRect(0, 0, 760, 600);
     data.canvas.ctx.fillStyle = '#6b8cff';
-    data.canvas.ctx.fillRect(0, 0, data.canvas.canvas.width, data.canvas.canvas.height);
+    data.canvas.ctx.fillRect(0, 0, 760, 600);
 
     this.drawText(data);
-    data.mapBuilder.create(data);
+    data.mapBuilder.renderMap(data);
     this.drawEntity(data.entities.mario, data);
 
     data.entities.coins.forEach(coin => {

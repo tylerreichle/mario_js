@@ -10,6 +10,8 @@ class MapBuilder {
     this.level = level;
     this.tileset = tileset;
     this.spriteSheet = spriteSheet;
+    this.mountainSheet = new Image();
+    this.mountainSheet.src = './assets/sprites/mountain.png';
 
     this.sceneryEntities = [];
     this.brickEntities = [];
@@ -25,6 +27,12 @@ class MapBuilder {
     level.shrubs.forEach(shrub => {
       this.sceneryEntities.push(
         new Shrub(this.tileset, shrub[0], shrub[1], shrub[2], shrub[3])
+      );
+    });
+
+    level.mountains.forEach(mountain => {
+      this.sceneryEntities.push(
+        new Mountain(this.mountainSheet, mountain[0], mountain[1], mountain[2], mountain[3])
       );
     });
 
@@ -49,31 +57,44 @@ class MapBuilder {
 
     level.breakables.forEach(breakable => {
       this.breakableEntities.push(
-        new Breakable(this.tileset,
-          breakable[0], breakable[1], breakable[2], breakable[3])
-        );
+        new Breakable(this.tileset, breakable[0], breakable[1], breakable[2], breakable[3]));
       });
+
     }
 
     create(data) {
       this.sceneryEntities.forEach(scene => {
-        this.drawEntity(scene, data);
         data.entities.scenery.push(scene);
       });
 
       this.brickEntities.forEach(brick => {
-        this.drawEntity(brick, data);
         data.entities.scenery.push(brick);
       });
 
       this.breakableEntities.forEach(breakable => {
-        this.drawEntity(breakable, data);
         data.entities.scenery.push(breakable);
       });
 
       this.blockEntities.forEach(block => {
-        this.drawEntity(block, data);
         data.entities.scenery.push(block);
+      });
+    }
+
+    renderMap(data) {
+            this.sceneryEntities.forEach(scene => {
+        this.drawEntity(scene, data);
+      });
+
+      this.brickEntities.forEach(brick => {
+        this.drawEntity(brick, data);
+      });
+
+      this.breakableEntities.forEach(breakable => {
+        this.drawEntity(breakable, data);
+      });
+
+      this.blockEntities.forEach(block => {
+        this.drawEntity(block, data);
       });
     }
 
@@ -142,5 +163,21 @@ class MapBuilder {
           const sprite = new Sprite(tileset, 198.5, 162.5, 53, 17);
 
           super('shrub', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Mountain extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 0, 90, 39);
+
+          super('shrub', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Cloud extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 0, 90, 39);
+
+          super('cloud', sprite, xPos, yPos, width, height);
         }
       }
