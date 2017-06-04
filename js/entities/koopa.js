@@ -25,7 +25,7 @@ class Koopa extends Entity {
         ],
         currentFrame: 0
       },
-      hiding: new Sprite(img, 237, 14, 16, 15)
+      hiding: new Sprite(img, 237.5, 14, 16, 15)
     };
 
     this.states = {

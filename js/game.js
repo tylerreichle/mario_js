@@ -101,6 +101,7 @@ class Game {
 
       this.updateView(data);
       render.update(data);
+      console.log(data.entities.mario.xPos);
 
       data.animationFrame++;
       window.requestAnimationFrame(loop);
@@ -122,13 +123,6 @@ class Game {
     } else if (center.x > viewport.vX + viewport.width - margin * 2) {
       viewport.vX =
       Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
-    }
-
-    if (center.y < viewport.vY + margin) {
-      viewport.vY = Math.max(center.y - margin, 0);
-    } else if (center.y > viewport.vY + viewport.height - margin) {
-      viewport.vY =
-      Math.min(center.y + margin - viewport.height, 800 - viewport.height);
     }
   }
 

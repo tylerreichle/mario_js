@@ -3,6 +3,7 @@ export const physics = {
     // collisions
     this.collisionDetection(data);
     this.sceneryCollisionDetection(data);
+    this.marioFallingCheck(data);
 
     // apply gravity
     this.gravity(data.entities.mario);
@@ -199,8 +200,18 @@ export const physics = {
     }
   },
 
-  marioDeath(data) {
+  marioFallingCheck(data) {
+    if (data.entities.mario.yPos >= 210) {
+      data.entities.mario.deathSound.play();
+      data.userControl = false;
 
+      setTimeout(() => {
+        data.reset();
+      }, 3000);
+    }
+  },
+
+  marioDeath(data) {
     data.userControl = false;
     data.entities.mario.deathSound.play();
 

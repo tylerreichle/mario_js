@@ -17,7 +17,7 @@ class Goomba extends Entity {
         ],
         currentFrame: 0
       },
-      dead: new Sprite(img, 147, 5, 16, 16)
+      dead: new Sprite(img, 147.5, 5, 16, 16)
     };
 
     this.states = {
