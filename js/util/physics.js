@@ -286,7 +286,7 @@ export const physics = {
           entity.yPos < scene.yPos + scene.height &&
           entity.height + entity.yPos > scene.yPos) {
           // Collision Occured
-          if (scene.type !== 'shrub') {
+          if (scene.type !== 'shrub' && scene.type !== 'cloud') {
             this.sceneryCollision(data, entity, scene);
           }
         }

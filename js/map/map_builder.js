@@ -10,7 +10,7 @@ class MapBuilder {
     this.level = level;
     this.tileset = tileset;
     this.spriteSheet = spriteSheet;
-    
+
     this.mountainSheet = new Image();
     this.mountainSheet.src = './assets/sprites/mountain.png';
     this.cloudsSheet = new Image();
@@ -62,8 +62,8 @@ class MapBuilder {
     });
 
     level.largeClouds.forEach(largeCloud => {
-      this.largeClouds.push(
-        new largeCloud(
+      this.sceneryEntities.push(
+        new LargeCloud(
           this.cloudsSheet, largeCloud[0], largeCloud[1], largeCloud[2], largeCloud[3]
         )
       );
@@ -86,7 +86,6 @@ class MapBuilder {
       this.breakableEntities.push(
         new Breakable(this.tileset, breakable[0], breakable[1], breakable[2], breakable[3]));
       });
-
     }
 
     create(data) {
@@ -203,17 +202,17 @@ class MapBuilder {
 
       class SmallCloud extends Entity {
         constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new Sprite(tileset, 64, 0, 33, 24);
+          const sprite = new Sprite(tileset, 64.5, 0, 33, 24);
 
-          super('smallCloud', sprite, xPos, yPos, width, height);
+          super('cloud', sprite, xPos, yPos, width, height);
         }
       }
 
       class MediumCloud extends Entity {
         constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new Sprite(tileset, 0, 24, 48, 24);
+          const sprite = new Sprite(tileset, 0, 24.5, 48, 24);
 
-          super('smallCloud', sprite, xPos, yPos, width, height);
+          super('cloud', sprite, xPos, yPos, width, height);
         }
       }
 
@@ -221,6 +220,6 @@ class MapBuilder {
         constructor(tileset, xPos, yPos, width, height) {
           const sprite = new Sprite(tileset, 0, 0, 64, 24);
 
-          super('smallCloud', sprite, xPos, yPos, width, height);
+          super('cloud', sprite, xPos, yPos, width, height);
         }
       }

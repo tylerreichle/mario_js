@@ -14,7 +14,6 @@ export const render = {
     data.canvas.ctx.fillStyle = '#63adff';
     data.canvas.ctx.fillRect(0, 0, 760, 600);
 
-    this.drawText(data);
     data.mapBuilder.renderMap(data);
     this.drawEntity(data.entities.mario, data);
 
@@ -33,6 +32,8 @@ export const render = {
     data.entities.koopas.forEach(koopa => {
       this.drawEntity(koopa, data);
     });
+    
+    this.drawText(data);
   },
 
   drawEntity(entity, data) {
