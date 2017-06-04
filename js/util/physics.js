@@ -297,7 +297,11 @@ export const physics = {
   sceneryCollision(data, entity, scene) {
     // Left side
     if (entity.xPos < scene.xPos && entity.yPos >= scene.yPos) {
-      entity.xPos = scene.xPos - entity.width;
+      if (scene.type === 'pipe') {
+        entity.xPos = scene.xPos - entity.width - 1;
+      } else {
+        entity.xPos = scene.xPos - entity.width;
+      }
 
       if ((entity.type === 'goomba') ||
         (entity.type === 'koopa') ||
@@ -307,7 +311,6 @@ export const physics = {
     }
     // Right side
     if (entity.xPos > scene.xPos && entity.yPos >= scene.yPos) {
-      // entity.xPos = scene.xPos + scene.width;
       entity.xPos = scene.xPos + scene.width;
 
       if ((entity.type === 'goomba') ||

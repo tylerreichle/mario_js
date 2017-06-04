@@ -4,7 +4,7 @@ class Score {
     this.coinCount = 0;
     this.xPos = xPos;
     this.yPos = yPos;
-    this.size = "16px";
+    this.size = "12px";
     this.font = "PixelEmulator";
     this.color = "white";
   }

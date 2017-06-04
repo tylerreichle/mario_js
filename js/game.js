@@ -62,7 +62,7 @@ class Game {
       };
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
-      const score = new Score(290, 30);
+      const score = new Score(270, 15);
       // backgroundMusic.play();
 
       input.init(data);
