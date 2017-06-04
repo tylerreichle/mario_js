@@ -327,11 +327,10 @@ export const physics = {
             entity.currentState = entity.states.standing;
           }
         }
-        entity.yPos = scene.yPos - entity.height;
+        entity.yPos = scene.yPos - entity.height + 1;
         entity.velY = 0;
       }
     }
-
     // Bot
     if (entity.yPos >= scene.yPos &&
       (entity.xPos + entity.width) >= scene.xPos &&
