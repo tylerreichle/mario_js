@@ -11,7 +11,7 @@ export const render = {
 
   update(data) {
     data.canvas.ctx.clearRect(0, 0, 760, 600);
-    data.canvas.ctx.fillStyle = '#6b8cff';
+    data.canvas.ctx.fillStyle = '#63adff';
     data.canvas.ctx.fillRect(0, 0, 760, 600);
 
     this.drawText(data);

@@ -10,8 +10,11 @@ class MapBuilder {
     this.level = level;
     this.tileset = tileset;
     this.spriteSheet = spriteSheet;
+    
     this.mountainSheet = new Image();
     this.mountainSheet.src = './assets/sprites/mountain.png';
+    this.cloudsSheet = new Image();
+    this.cloudsSheet.src = './assets/sprites/clouds.png';
 
     this.sceneryEntities = [];
     this.brickEntities = [];
@@ -39,6 +42,30 @@ class MapBuilder {
     level.pipes.forEach(pipe => {
       this.sceneryEntities.push(
         new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
+      );
+    });
+
+    level.smallClouds.forEach(smallCloud => {
+      this.sceneryEntities.push(
+        new SmallCloud(
+          this.cloudsSheet, smallCloud[0], smallCloud[1], smallCloud[2], smallCloud[3]
+        )
+      );
+    });
+
+    level.mediumClouds.forEach(mediumCloud => {
+      this.sceneryEntities.push(
+        new MediumCloud(
+          this.cloudsSheet, mediumCloud[0], mediumCloud[1], mediumCloud[2], mediumCloud[3]
+          )
+      );
+    });
+
+    level.largeClouds.forEach(largeCloud => {
+      this.largeClouds.push(
+        new largeCloud(
+          this.cloudsSheet, largeCloud[0], largeCloud[1], largeCloud[2], largeCloud[3]
+        )
       );
     });
 
@@ -174,10 +201,26 @@ class MapBuilder {
         }
       }
 
-      class Cloud extends Entity {
+      class SmallCloud extends Entity {
         constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new Sprite(tileset, 0, 0, 90, 39);
+          const sprite = new Sprite(tileset, 64, 0, 33, 24);
 
-          super('cloud', sprite, xPos, yPos, width, height);
+          super('smallCloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class MediumCloud extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 24, 48, 24);
+
+          super('smallCloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class LargeCloud extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 0, 0, 64, 24);
+
+          super('smallCloud', sprite, xPos, yPos, width, height);
         }
       }
