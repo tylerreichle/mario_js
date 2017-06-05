@@ -5,7 +5,7 @@ import Mushroom from './mushroom';
 
 class Block extends Entity {
   constructor(contents, tileset, xPos, yPos, width, height) {
-    const sprite = new Sprite(tileset, 432, 0, 18, 18);
+    const sprite = new Sprite(tileset, 433, 1, 17, 17);
     super('block', sprite, xPos, yPos, width, height);
 
     this.contents = contents;

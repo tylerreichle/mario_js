@@ -91,6 +91,14 @@ class MapBuilder {
       this.sceneryEntities.push(
         new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3]));
       });
+
+      this.sceneryEntities.push(
+        new Flag(this.tileset, level.flag[0], level.flag[1], level.flag[2], level.flag[3])
+      );
+
+      this.sceneryEntities.push(
+        new Flagpole(this.tileset, level.flagpole[0], level.flagpole[1], level.flagpole[2], level.flagpole[3])
+      );
     }
 
     create(data) {
@@ -197,7 +205,7 @@ class MapBuilder {
         constructor(tileset, xPos, yPos, width, height) {
           const sprite = new Sprite(tileset, 0, 0, 90, 39);
 
-          super('shrub', sprite, xPos, yPos, width, height);
+          super('mountain', sprite, xPos, yPos, width, height);
         }
       }
 
@@ -222,5 +230,21 @@ class MapBuilder {
           const sprite = new Sprite(tileset, 0, 0, 64, 24);
 
           super('cloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Flag extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 289, 153, 16, 27);
+
+          super('flag', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Flagpole extends Entity {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new Sprite(tileset, 289, 163, 16, 18);
+
+          super('flag', sprite, xPos, yPos, width, height);
         }
       }

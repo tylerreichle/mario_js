@@ -213,6 +213,7 @@ export const physics = {
 
   marioDeath(data) {
     data.userControl = false;
+    data.sounds.backgroundMusic.pause();
     data.entities.mario.deathSound.play();
 
     setTimeout(() => {
@@ -285,6 +286,17 @@ export const physics = {
     }
   },
 
+  levelFinish(data) {
+    data.entities.mario.velX = 0;
+    data.entities.mario.velY = 0;
+    data.entities.mario.xPos += 3;
+    data.sounds.levelFinish.play();
+
+    setTimeout(() => {
+      data.reset();
+    }, 6000);
+  },
+
   sceneryCollisionDetection(data) {
     this.sceneryCollisionCheck(data, [data.entities.mario], data.entities.scenery);
     this.sceneryCollisionCheck(data, data.entities.mushrooms, data.entities.scenery);
@@ -300,7 +312,11 @@ export const physics = {
           entity.yPos < scene.yPos + scene.height &&
           entity.height + entity.yPos > scene.yPos) {
           // Collision Occured
-          if (scene.type !== 'shrub' && scene.type !== 'cloud') {
+          if (scene.type === 'flag') {
+            this.levelFinish(data);
+          } else if (scene.type !== 'shrub' && 
+              scene.type !== 'cloud' && 
+              scene.type !== 'mountain') {
             this.sceneryCollision(data, entity, scene);
           }
         }
@@ -311,7 +327,7 @@ export const physics = {
   sceneryCollision(data, entity, scene) {
     // Left side
     if (entity.xPos < scene.xPos && entity.yPos >= scene.yPos) {
-      if (scene.type === 'pipe') {
+      if (scene.type === 'pipe' || scene.type === 'brick') {
         entity.xPos = scene.xPos - entity.width - 1;
       } else {
         entity.xPos = scene.xPos - entity.width;

@@ -36,7 +36,7 @@ class Game {
     };
 
     const backgroundMusic =
-    new Audio('./assets/audio/music/underground_theme.mp3');
+    new Audio('./assets/audio/music/mario_theme.mp3');
     backgroundMusic.loop = true;
 
     const spriteSheet = new Image();
@@ -55,7 +55,9 @@ class Game {
         mapBuilder: new MapBuilder(levelOne, tileset, spriteSheet),
         entities: {},
         sounds: {
-          breakSound: new Audio('./assets/audio/sounds/break_block.wav')
+          breakSound: new Audio('./assets/audio/sounds/break_block.wav'),
+          levelFinish: new Audio('./assets/audio/music/level_complete.mp3'),
+          backgroundMusic: backgroundMusic
         },
         userControl: true,
         reset: this.reset
@@ -63,7 +65,7 @@ class Game {
 
       const mario = new Mario(spriteSheet, 30, 0, 16, 16);
       const score = new Score(270, 15);
-      // backgroundMusic.play();
+      data.sounds.backgroundMusic.play();
 
       input.init(data);
       data.entities.mario = mario;
