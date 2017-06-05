@@ -1,3 +1,5 @@
+Ran out of time due to scope of project. Will complete production readme, style index page, and fix sprite clipping issues after flex project.
+
 +[Super Mario Bros JSp](https://tylerreichle.github.io/mario_js/)
 +
 +Coming Soon:
