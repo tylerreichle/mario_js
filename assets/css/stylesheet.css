@@ -1,45 +1,70 @@
+@font-face {
+    font-family: "PixelEmulator";
+    src: url("../font/pixel-emulator.otf");
+}
+
 html, body {
   overflow: hidden;
-  width: 1200px;
-  height: 600px;
-}
-
-header img {
-  width: 200px;
-  height: 100px; 
-}
-
-.background {
-  z-index: -10;
   width: 100%;
   height: 100%;
+  font-family: 'Roboto', sans-serif;
+
+  color: #ffd3b1;
+
+  background-color: #be2801;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+.description, .contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-content: center;
+
+  width: 100%;
+}
+
+.left-spacer img {
+  width: 100%;
+  height: 100px;
+
+  margin-top: 75px;
+  margin-bottom: 20px;
+}
+
+.description, .contact a {
+  font-size: 24px;
+  padding: 5px;
+  text-align: center;
+  line-height: 1.5;
+  color: #ffd3b1; 
+  /*margin: 10px;*/
+} 
+
+.contact a {
+  font-size: 30px;
+}
+
+.contact a:hover {
+  
 }
 
 .main {
-  background-image: url('../sprites/gameboy2.png') no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   display: flex;
-  justify-content: center;
-  align-content: center;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
-  border: 1px solid red;
 }
 
 canvas {
-  height: 560px;
-  width: 700px;
-  /*display: block;*/
-  /*position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border: 1px solid #212121;*/
+  height: 600px;
+  width: 760px;
+  border: 5px solid #212121;
+  margin: 10px;
   user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -49,7 +74,21 @@ canvas {
   -webkit-user-drag: none;
 }
 
-@font-face {
-    font-family: "PixelEmulator";
-    src: url("../font/pixel-emulator.otf");
+.left-spacer {
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+}
+
+.right-spacer  {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+  width: 300px;
+}
+
+.contact {
+  margin-top: 130px;
 }
