@@ -2,21 +2,21 @@
 
 ## [Play Now!](https://tylerreichle.github.io/mario_js/)
 
-## Level 1-1 in JavaScript
+# Level 1-1 in JavaScript
 
  Mario runs through each level trying to reach the castle on the other side to save the princess. Each level contains various enemies, coins to collect, and mushrooms to power-up Mario. Mario's primary form of attack is jumping on top of enemies but touching enemies from the sides results in loss of a life.
 
 <img src="docs/screens/intro.png" alt="Screenshot One" width="760" height="600"/>
 
- ### Controls
+ ## Controls
 
 | Action     | Key Input                       |
 |:----------:|:-------------------------------:|
-| Move Left  | 'A' or Left-Arrow               |
-| Move Right | 'D' or Right-Arrow              |
-| Jump       | 'W', Spacebar, or Up-Arrow      |
+| Move Left  | 'A' / Left-Arrow               |
+| Move Right | 'D' / Right-Arrow              |
+| Jump       | 'W' / Spacebar / Up-Arrow      |
 
-### Technologies Used
+## Technologies Used
 
 Super Mario Bros JS was build using the following technologies:
 
@@ -28,7 +28,7 @@ Super Mario Bros JS was build using the following technologies:
 
 <img src="docs/screens/big_mario.png" alt="Screenshot Two" width="760" height="600"/>
 
-- Technical Details
+## Technical Details
 
 **game.js**: Game contains be the main game loop and handles initial game setup. This class holds the HTML5 canvas used for main game view as well as all the entities currently in the level. UpdateView handles updating the viewport to follow Mario throughout the level.
 
