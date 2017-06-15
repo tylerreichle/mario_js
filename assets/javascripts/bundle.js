@@ -71,24 +71,6 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Sprite {
-  constructor(img, srcX, srcY, srcW, srcH) {
-    this.img = img;
-    this.srcX = srcX;
-    this.srcY = srcY;
-    this.srcW = srcW;
-    this.srcH = srcH;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Sprite);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 class Entity {
   constructor(type, sprite, xPos, yPos, width, height) {
     this.type = type;
@@ -104,12 +86,30 @@ class Entity {
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Sprite {
+  constructor(img, srcX, srcY, srcW, srcH) {
+    this.img = img;
+    this.srcX = srcX;
+    this.srcY = srcY;
+    this.srcW = srcW;
+    this.srcH = srcH;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Sprite);
+
+
+/***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
 
 
 
@@ -183,8 +183,8 @@ class Goomba extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
 
 
 
@@ -294,56 +294,6 @@ class Koopa extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
-
-
-
-class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
-  constructor(img, xPos, yPos, width, height) {
-    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16);
-    super('mushroom', sprite, xPos, yPos, width, height);
-
-    const self = this;
-
-    this.spriteAnimations = {
-      moving: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16)
-    };
-
-    this.states = {
-      moving: {
-        movement(data) {
-          if (self.direction === 'left') {
-            self.xPos -= self.velX;
-          } else {
-            self.xPos += self.velX;
-          }
-        },
-        animation(data) {
-          self.sprite = self.spriteAnimations.moving;
-        }
-      }
-    };
-
-    this.currentState = this.states.moving;
-    this.direction = 'right';
-    this.velY = 0;
-    this.velX = 1.3;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.width = width;
-    this.height = height;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Mushroom);
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -759,14 +709,14 @@ const levelOne = {
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_sprite__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_block__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_breakable__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_sprite__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_block__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_breakable__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_koopa__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_goomba__ = __webpack_require__(2);
 
@@ -1036,12 +986,12 @@ class MapBuilder {
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
 
 
 
@@ -1309,7 +1259,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1329,7 +1279,7 @@ class Score {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1359,7 +1309,7 @@ const animation = {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1440,7 +1390,7 @@ const input = {
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1466,7 +1416,7 @@ const movement = {
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1877,12 +1827,12 @@ const physics = {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_level_1_1__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__map_map_builder__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_level_1_1__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__map_map_builder__ = __webpack_require__(5);
 
 
 
@@ -1951,14 +1901,14 @@ const render = {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__coin__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mushroom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__coin__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mushroom__ = __webpack_require__(16);
 
 
 
@@ -2009,12 +1959,12 @@ class Block extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
 
 
 
@@ -2028,12 +1978,12 @@ class Breakable extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */]
 /* harmony default export */ __webpack_exports__["a"] = (Breakable);
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
 
 
 
@@ -2095,26 +2045,72 @@ class Coin extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
+
+
+
+class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
+  constructor(img, xPos, yPos, width, height) {
+    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16);
+    super('mushroom', sprite, xPos, yPos, width, height);
+
+    const self = this;
+
+    this.spriteAnimations = {
+      moving: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16)
+    };
+
+    this.states = {
+      moving: {
+        movement(data) {
+          if (self.direction === 'left') {
+            self.xPos -= self.velX;
+          } else {
+            self.xPos += self.velX;
+          }
+        },
+        animation(data) {
+          self.sprite = self.spriteAnimations.moving;
+        }
+      }
+    };
+
+    this.currentState = this.states.moving;
+    this.direction = 'right';
+    this.velY = 0;
+    this.velX = 1.3;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.width = width;
+    this.height = height;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Mushroom);
+
+
+/***/ }),
 /* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_render__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_input__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_animation__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_movement__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_physics__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__map_map_builder__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__entities_mario__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__entities_sprite__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__entities_goomba__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__entities_koopa__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__entities_mushroom__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__entities_score__ = __webpack_require__(8);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_render__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_input__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_animation__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_movement__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_physics__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__map_map_builder__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__entities_mario__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__entities_goomba__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__entities_koopa__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__entities_score__ = __webpack_require__(7);
 
 
 
@@ -2139,18 +2135,17 @@ class Game {
 
     const canvas = {
       canvas: canvasEl,
-      ctx: ctx
+      ctx,
     };
 
     const viewport = {
       width: 760,
       height: 600,
       vX: 0,
-      vY: 0
+      vY: 0,
     };
 
-    const backgroundMusic =
-    new Audio('./assets/audio/music/mario_theme.mp3');
+    const backgroundMusic = new Audio('./assets/audio/music/mario_theme.mp3');
     backgroundMusic.loop = true;
 
     const spriteSheet = new Image();
@@ -2160,25 +2155,24 @@ class Game {
     tileset.src = './assets/sprites/tileset_gutter.png';
 
     spriteSheet.addEventListener('load', () => {
-
       const data = {
+        spriteSheet,
+        canvas,
+        viewport,
         animationFrame: 0,
-        spriteSheet: spriteSheet,
-        canvas: canvas,
-        viewport: viewport,
         mapBuilder: new __WEBPACK_IMPORTED_MODULE_6__map_map_builder__["a" /* default */](__WEBPACK_IMPORTED_MODULE_5__map_level_1_1__["a" /* levelOne */], tileset, spriteSheet),
         entities: {},
         sounds: {
+          backgroundMusic,
           breakSound: new Audio('./assets/audio/sounds/break_block.wav'),
           levelFinish: new Audio('./assets/audio/music/level_complete.mp3'),
-          backgroundMusic: backgroundMusic
         },
         userControl: true,
-        reset: this.reset
+        reset: this.reset,
       };
 
       const mario = new __WEBPACK_IMPORTED_MODULE_7__entities_mario__["a" /* default */](spriteSheet, 175, 0, 16, 16);
-      const score = new __WEBPACK_IMPORTED_MODULE_12__entities_score__["a" /* default */](270, 15);
+      const score = new __WEBPACK_IMPORTED_MODULE_10__entities_score__["a" /* default */](270, 15);
       data.sounds.backgroundMusic.play();
 
       __WEBPACK_IMPORTED_MODULE_1__util_input__["a" /* input */].init(data);
@@ -2189,18 +2183,14 @@ class Game {
       data.entities.goombas = [];
       data.entities.koopas = [];
 
-      __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__["a" /* levelOne */].koopas.forEach(koopa => {
+      __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__["a" /* levelOne */].koopas.forEach((koopa) => {
         data.entities.koopas.push(
-          new __WEBPACK_IMPORTED_MODULE_10__entities_koopa__["a" /* default */](spriteSheet,
-            koopa[0], koopa[1], koopa[2], koopa[3])
-        );
+          new __WEBPACK_IMPORTED_MODULE_9__entities_koopa__["a" /* default */](spriteSheet, koopa[0], koopa[1], koopa[2], koopa[3]));
       });
 
-      __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__["a" /* levelOne */].goombas.forEach(goomba => {
+      __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__["a" /* levelOne */].goombas.forEach((goomba) => {
         data.entities.goombas.push(
-          new __WEBPACK_IMPORTED_MODULE_9__entities_goomba__["a" /* default */](spriteSheet,
-            goomba[0], goomba[1], goomba[2], goomba[3])
-        );
+          new __WEBPACK_IMPORTED_MODULE_8__entities_goomba__["a" /* default */](spriteSheet, goomba[0], goomba[1], goomba[2], goomba[3]));
       });
 
       __WEBPACK_IMPORTED_MODULE_0__util_render__["a" /* render */].init(data);
@@ -2229,7 +2219,7 @@ class Game {
     const viewport = data.viewport;
     const margin = viewport.width / 6;
     const center = {
-      x: data.entities.mario.xPos + (data.entities.mario.width  * 0.5),
+      x: data.entities.mario.xPos + (data.entities.mario.width * 0.5),
       y: data.entities.mario.yPos + (data.entities.mario.height * 0.5)
     };
 
@@ -2237,7 +2227,7 @@ class Game {
       viewport.vX = Math.max(center.x - margin, 0);
     } else if (center.x > viewport.vX + viewport.width - margin * 2) {
       viewport.vX =
-      Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
+        Math.min(center.x + margin - viewport.width, 3400 - viewport.width);
     }
   }
 
@@ -2246,7 +2236,7 @@ class Game {
   }
 }
 
-const game = new Game;
+const game = new Game();
 game.init();
 
 
