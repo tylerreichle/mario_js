@@ -2129,7 +2129,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-
 // extras: animate blocks. mario duck/run. breakable blocks when large
 
 class Game {
@@ -2178,7 +2177,7 @@ class Game {
         reset: this.reset
       };
 
-      const mario = new __WEBPACK_IMPORTED_MODULE_7__entities_mario__["a" /* default */](spriteSheet, 30, 0, 16, 16);
+      const mario = new __WEBPACK_IMPORTED_MODULE_7__entities_mario__["a" /* default */](spriteSheet, 175, 0, 16, 16);
       const score = new __WEBPACK_IMPORTED_MODULE_12__entities_score__["a" /* default */](270, 15);
       data.sounds.backgroundMusic.play();
 
