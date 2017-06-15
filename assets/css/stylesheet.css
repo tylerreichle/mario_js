@@ -26,11 +26,11 @@ html, body {
 }
 
 .description {
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .contact {
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .description img {
@@ -39,14 +39,22 @@ html, body {
 }
 
 .description h1 {
-  font-size: 60px;
+  font-size: 68px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-align: center;
+}
+
+.description h2 {
+  font-size: 50px;
+  text-align: center;
   font-weight: 800;
 }
 
 .controls {
+  margin-top: 30px;
   border-radius: 10px;
   border: 2px solid black;
-  padding: 5px;
 }
 
 .controls h2 {
@@ -62,9 +70,10 @@ html, body {
   text-align: center;
 }
 
-.info {
+.links h2 {
   text-align: center;
-  font-size: 36px;
+  font-size: 38px;
+  margin: 15px;
 }
 
 img#github, img#linkedin {
@@ -79,7 +88,7 @@ canvas {
   height: 600px;
   width: 760px;
   border-radius: 10px;
-  border: 5px solid #000000;
+  border: 10px solid #000000;
   margin: auto;
   user-select: none;
   -ms-user-select: none;
