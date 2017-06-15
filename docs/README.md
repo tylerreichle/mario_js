@@ -22,7 +22,7 @@ In addition this project will include:
 
 ## Wireframes
 
-![Index Page](./docs/wireframes/MarioJS.png)
+![Index Page](./wireframes/MarioJS.png)
 
 Plan for the background to be a Gameboy
 
@@ -30,7 +30,7 @@ Plan for the background to be a Gameboy
 
 This project will be implemented with the following technologies:
 
-- Vanilla JavaScript and a minified version of jquery for overall structure and game logic
+- Vanilla JavaScript and a minified version of jQuery for overall structure and game logic
 - HTML5 Canvas will be used for DOM manipulation and rendering of the game state
 - Webpack to bundle and serve up the various scripts in the correct order
 
