@@ -63,11 +63,29 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Sprite {
+  constructor(img, srcX, srcY, srcW, srcH) {
+    this.img = img;
+    this.srcX = srcX;
+    this.srcY = srcY;
+    this.srcW = srcW;
+    this.srcH = srcH;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Sprite);
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86,97 +104,12 @@ class Entity {
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Sprite {
-  constructor(img, srcX, srcY, srcW, srcH) {
-    this.img = img;
-    this.srcX = srcX;
-    this.srcY = srcY;
-    this.srcW = srcW;
-    this.srcH = srcH;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Sprite);
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
-
-
-
-class Coin extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
-  constructor(spriteSheet, xPos, yPos, width, height) {
-    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 5, 5, 10, 14);
-    super('coin', sprite, xPos, yPos, width, height);
-
-    const self = this;
-    this.type = "coin";
-    this.coinSound = new Audio("./assets/audio/sounds/coin.wav");
-
-    this.tileset = new Image();
-    this.tileset.src = './assets/sprites/tileset_gutter.png';
-
-    this.spriteAnimations = {
-      spin: {
-        frames: [
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 5,  5, 10, 14),
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 21, 5, 10, 14),
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 37, 5, 10, 14),
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 53, 5, 10, 14)
-        ],
-        currentFrame: 0
-      },
-      blockCoin: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](this.tileset, 486, 18, 18, 18)
-    };
-
-    this.states = {
-      spinning: {
-        animation: function(data) {
-          if (data.animationFrame % 13 === 0) {
-            self.sprite = self.spriteAnimations.spin.
-                          frames[self.spriteAnimations.spin.currentFrame];
-            self.spriteAnimations.spin.currentFrame++;
-
-            if (self.spriteAnimations.spin.currentFrame > 3) {
-              self.spriteAnimations.spin.currentFrame = 0;
-            }
-          }
-        }
-      },
-
-      blockCoin: {
-        animation(data) {
-          self.sprite = self.spriteAnimations.blockCoin;
-        }
-      }
-    };
-    this.currentState = this.states.spinning;
-    this.xPos   = xPos;
-    this.yPos   = yPos;
-    this.width  = width;
-    this.height = height;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Coin);
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
 
 
 
@@ -246,12 +179,12 @@ class Goomba extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
 
 
 
@@ -360,12 +293,755 @@ class Koopa extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+
+
+
+class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
+  constructor(img, xPos, yPos, width, height) {
+    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16);
+    super('mushroom', sprite, xPos, yPos, width, height);
+
+    const self = this;
+
+    this.spriteAnimations = {
+      moving: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16)
+    };
+
+    this.states = {
+      moving: {
+        movement(data) {
+          if (self.direction === 'left') {
+            self.xPos -= self.velX;
+          } else {
+            self.xPos += self.velX;
+          }
+        },
+        animation(data) {
+          self.sprite = self.spriteAnimations.moving;
+        }
+      }
+    };
+
+    this.currentState = this.states.moving;
+    this.direction = 'right';
+    this.velY = 0;
+    this.velX = 1.3;
+    this.xPos = xPos;
+    this.yPos = yPos;
+    this.width = width;
+    this.height = height;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Mushroom);
+
+
+/***/ }),
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
+const levelOne = {
+
+  blocks: [
+    [256, 128, 16, 16],
+    [352, 64, 16, 16],
+    [368, 128, 16, 16],
+    [1264, 128, 16, 16],
+    [1520, 64, 16, 16],
+    [1712, 128, 16, 16],
+    [1760, 128, 16, 16],
+    [1808, 128, 16, 16],
+    [2080, 64, 16, 16],
+    [2096, 64, 16, 16],
+    [2736, 128, 16, 16],
+  ],
+
+  goombas: [
+    [512, 176, 16, 16],
+    [672, 176, 16, 16],
+    [832, 176, 16, 16],
+    [2768, 176, 16, 16],
+    [560, 176, 16, 16],
+    [1920, 176, 16, 16]
+  ],
+
+  koopas: [
+    [400, 176, 16, 24],
+    [864, 176, 16, 24],
+    [2352, 176, 16, 24],
+  ],
+
+  smallClouds: [
+    [311, 16, 32, 24],
+    [903, 32, 32, 24],
+    [1080, 16, 32, 24],
+    [1687, 32, 32, 24],
+    [1863, 16, 32, 24],
+    [2455, 32, 32, 24],
+    [2631, 16, 32, 24],
+    [3223, 32, 32, 24],
+  ],
+
+  mediumClouds: [
+    [584, 16, 48, 24],
+    [1368, 16, 48, 24],
+    [2135, 16, 48, 24],
+    [2904, 16, 48, 24],
+  ],
+
+  largeClouds: [
+    [440, 32, 64, 24],
+    [1224, 32, 64, 24],
+    [1992, 32, 64, 24],
+    [2759, 32, 64, 24]
+  ],
+
+  ground: [
+    [-16, 0, 16, 200],
+    [0, 192, 16, 16],
+  [16, 192, 16, 16],
+  [32, 192, 16, 16],
+  [48, 192, 16, 16],
+  [64, 192, 16, 16],
+  [80, 192, 16, 16],
+  [96, 192, 16, 16],
+  [112, 192, 16, 16],
+  [128, 192, 16, 16],
+  [144, 192, 16, 16],
+  [160, 192, 16, 16],
+  [176, 192, 16, 16],
+  [192, 192, 16, 16],
+  [208, 192, 16, 16],
+  [224, 192, 16, 16],
+  [240, 192, 16, 16],
+  [256, 192, 16, 16],
+  [272, 192, 16, 16],
+  [288, 192, 16, 16],
+  [304, 192, 16, 16],
+  [320, 192, 16, 16],
+  [336, 192, 16, 16],
+  [352, 192, 16, 16],
+  [368, 192, 16, 16],
+  [384, 192, 16, 16],
+  [400, 192, 16, 16],
+  [416, 192, 16, 16],
+  [432, 192, 16, 16],
+  [448, 192, 16, 16],
+  [464, 192, 16, 16],
+  [480, 192, 16, 16],
+  [496, 192, 16, 16],
+  [512, 192, 16, 16],
+  [528, 192, 16, 16],
+  [544, 192, 16, 16],
+  [560, 192, 16, 16],
+  [576, 192, 16, 16],
+  [592, 192, 16, 16],
+  [608, 192, 16, 16],
+  [624, 192, 16, 16],
+  [640, 192, 16, 16],
+  [656, 192, 16, 16],
+  [672, 192, 16, 16],
+  [688, 192, 16, 16],
+  [704, 192, 16, 16],
+  [720, 192, 16, 16],
+  [736, 192, 16, 16],
+  [752, 192, 16, 16],
+  [768, 192, 16, 16],
+  [784, 192, 16, 16],
+  [800, 192, 16, 16],
+  [816, 192, 16, 16],
+  [832, 192, 16, 16],
+  [848, 192, 16, 16],
+  [864, 192, 16, 16],
+  [880, 192, 16, 16],
+  [896, 192, 16, 16],
+  [912, 192, 16, 16],
+  [928, 192, 16, 16],
+  [944, 192, 16, 16],
+  [960, 192, 16, 16],
+  [976, 192, 16, 16],
+  [992, 192, 16, 16],
+  [1008, 192, 16, 16],
+  [1024, 192, 16, 16],
+  [1040, 192, 16, 16],
+  [1056, 192, 16, 16],
+  [1072, 192, 16, 16],
+  [1088, 192, 16, 16],
+  [1136, 192, 16, 16],
+  [1152, 192, 16, 16],
+  [1168, 192, 16, 16],
+  [1184, 192, 16, 16],
+  [1200, 192, 16, 16],
+  [1216, 192, 16, 16],
+  [1232, 192, 16, 16],
+  [1248, 192, 16, 16],
+  [1264, 192, 16, 16],
+  [1280, 192, 16, 16],
+  [1296, 192, 16, 16],
+  [1312, 192, 16, 16],
+  [1328, 192, 16, 16],
+  [1344, 192, 16, 16],
+  [1360, 192, 16, 16],
+  [1376, 192, 16, 16],
+  [1392, 192, 16, 16],
+  [1440, 192, 16, 16],
+  [1456, 192, 16, 16],
+  [1472, 192, 16, 16],
+  [1488, 192, 16, 16],
+  [1504, 192, 16, 16],
+  [1520, 192, 16, 16],
+  [1536, 192, 16, 16],
+  [1552, 192, 16, 16],
+  [1568, 192, 16, 16],
+  [1584, 192, 16, 16],
+  [1600, 192, 16, 16],
+  [1616, 192, 16, 16],
+  [1632, 192, 16, 16],
+  [1648, 192, 16, 16],
+  [1664, 192, 16, 16],
+  [1680, 192, 16, 16],
+  [1696, 192, 16, 16],
+  [1712, 192, 16, 16],
+  [1728, 192, 16, 16],
+  [1744, 192, 16, 16],
+  [1760, 192, 16, 16],
+  [1776, 192, 16, 16],
+  [1792, 192, 16, 16],
+  [1808, 192, 16, 16],
+  [1824, 192, 16, 16],
+  [1840, 192, 16, 16],
+  [1856, 192, 16, 16],
+  [1872, 192, 16, 16],
+  [1888, 192, 16, 16],
+  [1904, 192, 16, 16],
+  [1920, 192, 16, 16],
+  [1936, 192, 16, 16],
+  [1952, 192, 16, 16],
+  [1968, 192, 16, 16],
+  [1984, 192, 16, 16],
+  [2000, 192, 16, 16],
+  [2016, 192, 16, 16],
+  [2032, 192, 16, 16],
+  [2048, 192, 16, 16],
+  [2064, 192, 16, 16],
+  [2080, 192, 16, 16],
+  [2096, 192, 16, 16],
+  [2112, 192, 16, 16],
+  [2128, 192, 16, 16],
+  [2144, 192, 16, 16],
+  [2160, 192, 16, 16],
+  [2176, 192, 16, 16],
+  [2192, 192, 16, 16],
+  [2208, 192, 16, 16],
+  [2224, 192, 16, 16],
+  [2240, 192, 16, 16],
+  [2256, 192, 16, 16],
+  [2272, 192, 16, 16],
+  [2288, 192, 16, 16],
+  [2304, 192, 16, 16],
+  [2320, 192, 16, 16],
+  [2336, 192, 16, 16],
+  [2352, 192, 16, 16],
+  [2368, 192, 16, 16],
+  [2384, 192, 16, 16],
+  [2400, 192, 16, 16],
+  [2416, 192, 16, 16],
+  [2432, 192, 16, 16],
+  [2448, 192, 16, 16],
+  [2496, 192, 16, 16],
+  [2512, 192, 16, 16],
+  [2528, 192, 16, 16],
+  [2544, 192, 16, 16],
+  [2560, 192, 16, 16],
+  [2576, 192, 16, 16],
+  [2592, 192, 16, 16],
+  [2608, 192, 16, 16],
+  [2624, 192, 16, 16],
+  [2640, 192, 16, 16],
+  [2656, 192, 16, 16],
+  [2672, 192, 16, 16],
+  [2688, 192, 16, 16],
+  [2704, 192, 16, 16],
+  [2720, 192, 16, 16],
+  [2736, 192, 16, 16],
+  [2752, 192, 16, 16],
+  [2768, 192, 16, 16],
+  [2784, 192, 16, 16],
+  [2800, 192, 16, 16],
+  [2816, 192, 16, 16],
+  [2832, 192, 16, 16],
+  [2848, 192, 16, 16],
+  [2864, 192, 16, 16],
+  [2880, 192, 16, 16],
+  [2896, 192, 16, 16],
+  [2912, 192, 16, 16],
+  [2928, 192, 16, 16],
+  [2944, 192, 16, 16],
+  [2960, 192, 16, 16],
+  [2976, 192, 16, 16],
+  [2992, 192, 16, 16],
+  [3008, 192, 16, 16],
+  [3024, 192, 16, 16],
+  [3040, 192, 16, 16],
+  [3056, 192, 16, 16],
+  [3072, 192, 16, 16],
+  [3088, 192, 16, 16],
+  [3104, 192, 16, 16],
+  [3120, 192, 16, 16],
+  [3136, 192, 16, 16],
+  [3152, 192, 16, 16],
+  [3168, 192, 16, 16],
+  [3184, 192, 16, 16],
+  [3200, 192, 16, 16],
+  [3216, 192, 16, 16],
+  [3232, 192, 16, 16],
+  [3248, 192, 16, 16],
+  [3264, 192, 16, 16],
+  [3280, 192, 16, 16],
+  [3296, 192, 16, 16],
+  [3312, 192, 16, 16],
+  [3328, 192, 16, 16],
+  [3344, 192, 16, 16],
+  [3360, 192, 16, 16],
+  [3376, 192, 16, 16],
+  [3392, 192, 16, 16],
+  [3408, 192, 16, 16],
+  [3424, 192, 16, 16],
+  [3440, 192, 16, 16],
+  [3456, 192, 16, 16],
+  [3472, 192, 16, 16],
+  [3488, 192, 16, 16],
+  [3504, 192, 16, 16],
+  [3520, 192, 16, 16],
+  [3536, 192, 16, 16],
+  [3552, 192, 16, 16],
+  [3568, 192, 16, 16],
+  [3584, 192, 16, 16],
+  [3600, 192, 16, 16],
+  [3616, 192, 16, 16],
+  [3632, 192, 16, 16],
+  [3648, 192, 16, 16],
+  [3664, 192, 16, 16],
+  [3680, 192, 16, 16],
+  [3696, 192, 16, 16],
+  [3712, 192, 16, 16],
+  [3728, 192, 16, 16],
+  [3744, 192, 16, 16],
+  [3760, 192, 16, 16],
+  [3776, 192, 16, 16],
+  [3792, 192, 16, 16],
+  [3808, 192, 16, 16],
+  [3824, 192, 16, 16],
+  [3840, 192, 16, 16],
+  [2208, 128, 16, 64], [2192, 144, 16, 48], [2176, 160, 16, 32],
+  [2256, 128, 16, 64], [2272, 144, 16, 48],
+  [2288, 160, 16, 32], [2304, 176, 16, 16], [2384, 176, 16, 16],
+  [2400, 160, 16, 32], [2416, 144, 16, 48], [2432, 128, 32, 64],
+  [2496, 128, 16, 64], [2512, 144, 16, 48], [2528, 160, 16, 32],
+  [2544, 176, 16, 16], [3024, 64, 32, 128],
+  [46, 3024, 80, 96],  [3008, 80, 16, 112], [2992, 96, 16, 96],
+  [2976, 112, 16, 80], [2960, 128, 16, 64], [2944, 144, 16, 48],
+  [2928, 160, 16, 32], [2912, 176, 16, 16]
+  ],
+
+  bricks: [
+    [2160, 176, 16, 16], [2176, 160, 16, 16], [2176, 176, 16, 16],
+    [2192, 144, 16, 16], [2192, 160, 16, 16], [2192, 176, 16, 16],
+    [2208, 128, 16, 16], [2208, 144, 16, 16], [2208, 160, 16, 16],
+    [2208, 176, 16, 16], [2256, 128, 16, 16], [2256, 144, 16, 16],
+    [2256, 160, 16, 16], [2256, 176, 16, 16], [2272, 144, 16, 16],
+    [2272, 160, 16, 16], [2272, 176, 16, 16], [2288, 160, 16, 16],
+    [2288, 176, 16, 16], [2304, 176, 16, 16], [3184, 176, 16, 16],
+
+    [2384, 176, 16, 16],
+    [2400, 160, 16, 16], [2400, 176, 16, 16],
+    [2416, 144, 16, 16], [2416, 160, 16, 16], [2416, 176, 16, 16],
+    [2432, 128, 16, 16], [2432, 144, 16, 16], [2432, 160, 16, 16], [2432, 176, 16, 16],
+    [2448, 128, 16, 16], [2448, 144, 16, 16], [2448, 160, 16, 16], [2448, 176, 16, 16],
+
+    [2496, 128, 16, 16], [2496, 144, 16, 16], [2496, 160, 16, 16], [2496, 176, 16, 16],
+    [2512, 144, 16, 16], [2512, 160, 16, 16], [2512, 176, 16, 16],
+    [2528, 160, 16, 16], [2528, 176, 16, 16],
+    [2544, 176, 16, 16],
+
+    [2912, 176, 16, 16],
+    [2928, 160, 16, 16], [2928, 176, 16, 16],
+    [2944, 144, 16, 16], [2944, 160, 16, 16], [2944, 176, 16, 16],
+    [2960, 128, 16, 16], [2960, 144, 16, 16], [2960, 160, 16, 16], [2960, 176, 16, 16],
+    [2976, 112, 16, 16], [2976, 128, 16, 16], [2976, 144, 16, 16], [2976, 160, 16, 16], [2976, 176, 16, 16],
+    [2992, 96, 16, 16], [2992, 112, 16, 16], [2992, 128, 16, 16], [2992, 144, 16, 16], [2992, 160, 16, 16], [2992, 176, 16, 16],
+    [3008, 80, 16, 16], [3008, 96, 16, 16], [3008, 112, 16, 16], [3008, 128, 16, 16], [3008, 144, 16, 16], [3008, 160, 16, 16], [3008, 176, 16, 16],
+    [3024, 64, 16, 16], [3024, 80, 16, 16], [3024, 96, 16, 16], [3024, 112, 16, 16], [3024, 128, 16, 16], [3024, 144, 16, 16], [3024, 160, 16, 16], [3024, 176, 16, 16],
+    [3040, 64, 16, 16], [3040, 80, 16, 16], [3040, 96, 16, 16], [3040, 112, 16, 16], [3040, 128, 16, 16], [3040, 144, 16, 16], [3040, 160, 16, 16], [3040, 176, 16, 16],
+  ],
+
+  shrubs: [
+    [183, 176, 54, 16],
+    [375, 176, 32, 16],
+    [663, 176, 32, 16],
+    [951, 176, 32, 16],
+    [1143, 176, 32, 16],
+    [1447, 176, 32, 16],
+    [1735, 176, 32, 16],
+    [1927, 176, 32, 16],
+    [2224, 176, 32, 16],
+    [2695, 176, 32, 16]
+  ],
+
+  mountains: [
+    [255, 172, 48, 19],
+    [767, 157, 80, 35],
+    [1023, 172, 49, 20],
+    [1551, 157, 82, 35],
+    [1807, 172, 50, 20],
+    [2320, 157, 80, 35],
+    [2575, 172, 50, 20],
+    [3087, 157, 81, 35],
+    [3359, 157, 81, 35]
+  ],
+
+  flag: [3185, 24, 16, 24],
+
+  flagpole: [3185, 48, 16, 135],
+
+  castle: [3263, 112, 80, 80],
+
+  pipes: [
+    [3568, 128, 32, 64], [3536, 160, 32, 32], [2880, 160, 32, 32],
+    [2624, 160, 32, 32], [448, 160, 32, 32], [608, 144, 32, 48],
+    [736, 128, 32, 64], [912, 128, 32, 64],
+  ],
+
+  coins: [
+    [256, 128, 16,16], [336, 128, 16,16]
+  ],
+
+  mushrooms: [[336, 128, 16, 16], [1760, 64, 16, 16]],
+
+  breakables: [
+    [384, 128, 16, 16],
+    [352, 128, 16, 16],
+    [320, 128, 16, 16],
+    [2752, 128, 16, 16], [2720, 128, 16, 16], [2704, 128, 16, 16],
+    [2096, 128, 16, 16], [2080, 128, 16, 16], [2064, 64, 16, 16],
+    [2112, 64, 16, 16],
+    [1952, 64, 16, 16],
+    [1968, 64, 16, 16],
+    [1984, 64, 16, 16],
+    [1632, 128, 16, 16],
+    [1616, 128, 16, 16],
+    [1504, 64, 16, 16],
+    [1488, 64, 16, 16],
+    [1472, 64, 16, 16],
+    [1520, 128, 16, 16],
+    [1408, 64, 16, 16],
+    [1392, 64, 16, 16],
+    [1376, 64, 16, 16],
+    [1360, 64, 16, 16],
+    [1344, 64, 16, 16],
+    [1328, 64, 16, 16],
+    [1312, 64, 16, 16],
+    [1296, 64, 16, 16],
+    [1280, 128, 16, 16],
+    [1248, 128, 16, 16],
+    [1904, 128, 16, 16]
+  ],
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = levelOne;
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_block__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_breakable__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_koopa__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_goomba__ = __webpack_require__(2);
+
+
+
+
+
+
+
+class MapBuilder {
+  constructor(level, tileset, spriteSheet) {
+    this.level = level;
+    this.tileset = tileset;
+    this.spriteSheet = spriteSheet;
+
+    this.mountainSheet = new Image();
+    this.mountainSheet.src = './assets/sprites/mountain.png';
+    this.cloudsSheet = new Image();
+    this.cloudsSheet.src = './assets/sprites/clouds.png';
+    this.castleSheet = new Image();
+    this.castleSheet.src = './assets/sprites/castle.png';
+
+    this.sceneryEntities = [];
+    this.brickEntities = [];
+    this.breakableEntities = [];
+    this.blockEntities = [];
+
+    level.ground.forEach(ground => {
+      this.sceneryEntities.push(
+        new Ground(this.tileset, ground[0], ground[1], ground[2], ground[3])
+      );
+    });
+
+    level.shrubs.forEach(shrub => {
+      this.sceneryEntities.push(
+        new Shrub(this.tileset, shrub[0], shrub[1], shrub[2], shrub[3])
+      );
+    });
+
+    level.mountains.forEach(mountain => {
+      this.sceneryEntities.push(
+        new Mountain(this.mountainSheet, mountain[0], mountain[1], mountain[2], mountain[3])
+      );
+    });
+
+    level.pipes.forEach(pipe => {
+      this.sceneryEntities.push(
+        new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
+      );
+    });
+
+    level.smallClouds.forEach(smallCloud => {
+      this.sceneryEntities.push(
+        new SmallCloud(
+          this.cloudsSheet, smallCloud[0], smallCloud[1], smallCloud[2], smallCloud[3]
+        )
+      );
+    });
+
+    level.mediumClouds.forEach(mediumCloud => {
+      this.sceneryEntities.push(
+        new MediumCloud(
+          this.cloudsSheet, mediumCloud[0], mediumCloud[1], mediumCloud[2], mediumCloud[3]
+          )
+      );
+    });
+
+    level.largeClouds.forEach(largeCloud => {
+      this.sceneryEntities.push(
+        new LargeCloud(
+          this.cloudsSheet, largeCloud[0], largeCloud[1], largeCloud[2], largeCloud[3]
+        )
+      );
+    });
+
+    // coin blocks
+    level.blocks.forEach(block => {
+      this.blockEntities.push(
+        new __WEBPACK_IMPORTED_MODULE_2__entities_block__["a" /* default */]('coin', this.tileset, block[0], block[1], block[2], block[3])
+      );
+    });
+    // mushroom blocks
+    level.mushrooms.forEach(block => {
+      this.blockEntities.push(
+        new __WEBPACK_IMPORTED_MODULE_2__entities_block__["a" /* default */]('mushroom', this.tileset, block[0], block[1], block[2], block[3])
+      );
+    });
+
+    level.breakables.forEach(breakable => {
+      this.breakableEntities.push(
+        new __WEBPACK_IMPORTED_MODULE_3__entities_breakable__["a" /* default */](this.tileset, breakable[0], breakable[1], breakable[2], breakable[3]));
+      });
+
+    level.bricks.forEach(brick => {
+      this.sceneryEntities.push(
+        new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3]));
+      });
+
+      this.sceneryEntities.push(
+        new Flag(this.tileset, level.flag[0], level.flag[1], level.flag[2], level.flag[3])
+      );
+
+      this.sceneryEntities.push(
+        new Flagpole(this.tileset, level.flagpole[0], level.flagpole[1], level.flagpole[2], level.flagpole[3])
+      );
+
+      this.sceneryEntities.push(
+        new Castle(this.castleSheet, level.castle[0], level.castle[1], level.castle[2], level.castle[3])
+      );
+    }
+
+    create(data) {
+      this.sceneryEntities.forEach(scene => {
+        data.entities.scenery.push(scene);
+      });
+
+      this.breakableEntities.forEach(breakable => {
+        data.entities.scenery.push(breakable);
+      });
+
+      this.blockEntities.forEach(block => {
+        data.entities.scenery.push(block);
+      });
+    }
+
+    renderMap(data) {
+      this.sceneryEntities.forEach(scene => {
+        this.drawEntity(scene, data);
+      });
+
+      this.brickEntities.forEach(brick => {
+        this.drawEntity(brick, data);
+      });
+
+      this.breakableEntities.forEach(breakable => {
+        this.drawEntity(breakable, data);
+      });
+
+      this.blockEntities.forEach(block => {
+        this.drawEntity(block, data);
+      });
+    }
+
+    drawEntity(entity, data) {
+      const ctx = data.canvas.ctx;
+      const viewport = data.viewport;
+
+      if (((entity.xPos + entity.width >= viewport.vX &&
+        entity.xPos + entity.width <= viewport.vX + viewport.width)) &&
+        ((entity.yPos + entity.height >= viewport.vY &&
+          entity.yPos + entity.height <= viewport.vY + viewport.height))) {
+
+            ctx.drawImage(
+              entity.sprite.img,
+              entity.sprite.srcX, entity.sprite.srcY,
+              entity.sprite.srcW, entity.sprite.srcH,
+              entity.xPos - viewport.vX, entity.yPos - viewport.vY,
+              entity.width, entity.height
+            );
+          }
+        }
+      }
+
+      /* harmony default export */ __webpack_exports__["a"] = (MapBuilder);
+
+      class Ground extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 16, 16);
+          super('ground', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Pipe extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 180, 35, 35);
+
+          super('pipe', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Coin extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */]('');
+
+          super('coin', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */]('');
+
+          super('mushroom', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Brick extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 18, 18, 18);
+
+          super('brick', sprite, xPos, yPos, width, height);
+        }
+      }
+      class Shrub extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 198.5, 162.5, 53, 17);
+
+          super('shrub', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Mountain extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 90, 39);
+
+          super('mountain', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class SmallCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 64.5, 0, 33, 24);
+
+          super('cloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class MediumCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 24.5, 48, 24);
+
+          super('cloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class LargeCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 64, 24);
+
+          super('cloud', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Flag extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 289, 153, 16, 27);
+
+          super('flag', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Flagpole extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 289, 163, 16, 18);
+
+          super('flag', sprite, xPos, yPos, width, height);
+        }
+      }
+
+      class Castle extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
+        constructor(tileset, xPos, yPos, width, height) {
+          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 80, 80);
+
+          super('flag', sprite, xPos, yPos, width, height);
+        }
+      }
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
 
 
 
@@ -375,7 +1051,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
     super('mario', sprite, xPos, yPos, width, height);
 
     let self = this;
-    this.jumpSound  = new Audio('./assets/audio/sounds/mario_jump.mp3');
+    this.jumpSound  = new Audio('./assets/audio/sounds/jump.wav');
     this.deathSound = new Audio('./assets/audio/sounds/mario_death.wav');
     this.bumpSound  = new Audio('./assets/audio/sounds/bump.wav');
     this.powerupSound = new Audio('./assets/audio/sounds/powerup.wav');
@@ -400,7 +1076,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
       },
       bigWalkRight : {
         frames: [
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 295, 7, 16, 32),
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 295, 5, 16, 32),
           new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 311, 5, 16, 32),
           new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 327, 5, 16, 32)
         ],
@@ -410,7 +1086,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
         frames: [
           new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 583, 37, 16, 32),
           new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 567, 37, 16, 32),
-          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 561, 37, 16, 32)
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 551, 37, 16, 32)
         ],
         currentFrame: 0
       },
@@ -437,8 +1113,8 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
       jumpRight:  new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 731, 5, 16, 16),
       jumpLeft:   new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 778, 22, 16, 16),
 
-      bigStandRight: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 279, 5, 16, 32),
-      bigStandLeft:  new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 599, 37, 16, 32),
+      bigStandRight: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 278.7, 5, 16, 32),
+      bigStandLeft:  new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 599.5, 37, 16, 32),
       bigJumpRight:  new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 359, 5, 16, 32),
       bigJumpLeft:   new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 519, 37, 16, 32),
       dead:          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 748, 5, 16, 16)
@@ -449,7 +1125,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
         movement(data) {
           if (self.velY === 1.2) {
             const jumpSound = self.jumpSound.cloneNode();
-            // jumpSound.play();
+            jumpSound.play();
             self.velY -= 14;
           }
         },
@@ -633,57 +1309,7 @@ class Mario extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
-
-
-
-class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
-  constructor(img, xPos, yPos, width, height) {
-    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16);
-    super('mushroom', sprite, xPos, yPos, width, height);
-
-    const self = this;
-
-    this.spriteAnimations = {
-      moving: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](img, 625, 5, 16, 16)
-    };
-
-    this.states = {
-      moving: {
-        movement(data) {
-          if (self.direction === 'left') {
-            self.xPos -= self.velX;
-          } else {
-            self.xPos += self.velX;
-          }
-        },
-        animation(data) {
-          self.sprite = self.spriteAnimations.moving;
-        }
-      }
-    };
-
-    this.currentState = this.states.moving;
-    this.direction = 'right';
-    this.velY = 0;
-    this.velX = 1.3;
-    this.xPos = xPos;
-    this.yPos = yPos;
-    this.width = width;
-    this.height = height;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Mushroom);
-
-
-/***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -703,7 +1329,7 @@ class Score {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -733,7 +1359,7 @@ const animation = {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -814,7 +1440,7 @@ const input = {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -840,7 +1466,7 @@ const movement = {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1251,13 +1877,12 @@ const physics = {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_level_1_1__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__map_map_builder__ = __webpack_require__(16);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__map_level_1_1__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__map_map_builder__ = __webpack_require__(6);
 
 
 
@@ -1274,7 +1899,6 @@ const render = {
     data.canvas.ctx.fillRect(0, 0, 760, 600);
 
     data.mapBuilder.renderMap(data);
-    this.drawEntity(data.entities.mario, data);
 
     data.entities.coins.forEach(coin => {
       this.drawEntity(coin, data);
@@ -1291,8 +1915,9 @@ const render = {
     data.entities.koopas.forEach(koopa => {
       this.drawEntity(koopa, data);
     });
-    
+
     this.drawText(data);
+    this.drawEntity(data.entities.mario, data);
   },
 
   drawEntity(entity, data) {
@@ -1326,14 +1951,14 @@ const render = {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__coin__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mushroom__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__coin__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mushroom__ = __webpack_require__(4);
 
 
 
@@ -1384,24 +2009,110 @@ class Block extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+
+
+
+class Breakable extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
+  constructor(tileset, xPos, yPos, width, height) {
+    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](tileset, 18, 0, 18, 18);
+    super('breakable', sprite, xPos, yPos, width, height);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Breakable);
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(0);
+
+
+
+class Coin extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
+  constructor(spriteSheet, xPos, yPos, width, height) {
+    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 5, 5, 10, 14);
+    super('coin', sprite, xPos, yPos, width, height);
+
+    const self = this;
+    this.type = "coin";
+    this.coinSound = new Audio("./assets/audio/sounds/coin.wav");
+
+    this.tileset = new Image();
+    this.tileset.src = './assets/sprites/tileset_gutter.png';
+
+    this.spriteAnimations = {
+      spin: {
+        frames: [
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 5,  5, 10, 14),
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 21, 5, 10, 14),
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 37, 5, 10, 14),
+          new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](spriteSheet, 53, 5, 10, 14)
+        ],
+        currentFrame: 0
+      },
+      blockCoin: new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](this.tileset, 486, 18, 18, 18)
+    };
+
+    this.states = {
+      spinning: {
+        animation: function(data) {
+          if (data.animationFrame % 13 === 0) {
+            self.sprite = self.spriteAnimations.spin.
+                          frames[self.spriteAnimations.spin.currentFrame];
+            self.spriteAnimations.spin.currentFrame++;
+
+            if (self.spriteAnimations.spin.currentFrame > 3) {
+              self.spriteAnimations.spin.currentFrame = 0;
+            }
+          }
+        }
+      },
+
+      blockCoin: {
+        animation(data) {
+          self.sprite = self.spriteAnimations.blockCoin;
+        }
+      }
+    };
+    this.currentState = this.states.spinning;
+    this.xPos   = xPos;
+    this.yPos   = yPos;
+    this.width  = width;
+    this.height = height;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Coin);
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_render__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_input__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_animation__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_movement__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_physics__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__map_map_builder__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__entities_mario__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__entities_sprite__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__entities_goomba__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__entities_koopa__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__entities_mushroom__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__entities_score__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_render__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__util_input__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_animation__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_movement__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_physics__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_level_1_1__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__map_map_builder__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__entities_mario__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__entities_sprite__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__entities_goomba__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__entities_koopa__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__entities_mushroom__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__entities_score__ = __webpack_require__(8);
 
 
 
@@ -1539,682 +2250,6 @@ class Game {
 const game = new Game;
 game.init();
 
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const levelOne = {
-
-  blocks: [
-    [256, 128, 16, 16],
-    [352, 64, 16, 16],
-    [368, 128, 16, 16],
-    [1264, 128, 16, 16],
-    [1520, 64, 16, 16],
-    [1712, 128, 16, 16],
-    [1760, 128, 16, 16],
-    [1808, 128, 16, 16],
-    [2080, 64, 16, 16],
-    [2096, 64, 16, 16],
-    [2736, 128, 16, 16],
-  ],
-  
-  goombas: [
-    [512, 176, 16, 16],
-    [672, 176, 16, 16],
-    [832, 176, 16, 16],
-    [2768, 176, 16, 16],
-    [560, 176, 16, 16],
-    [1920, 176, 16, 16]
-  ],
-
-  koopas: [
-    [400, 176, 16, 24],
-    [864, 176, 16, 24],
-    [2352, 176, 16, 24],
-  ],
-
-  smallClouds: [
-    [311, 16, 32, 24],
-    [903, 32, 32, 24],
-    [1080, 16, 32, 24],
-    [1687, 32, 32, 24],
-    [1863, 16, 32, 24],
-    [2455, 32, 32, 24],
-    [2631, 16, 32, 24],
-    [3223, 32, 32, 24],
-  ],
-
-  mediumClouds: [
-    [584, 16, 48, 24],
-    [1368, 16, 48, 24],
-    [2135, 16, 48, 24],
-    [2904, 16, 48, 24],
-  ],
-
-  largeClouds: [
-    [440, 32, 64, 24],
-    [1224, 32, 64, 24],
-    [1992, 32, 64, 24],
-    [2759, 32, 64, 24]
-  ],
-
-  ground: [
-    [-16, 0, 16, 200],
-    [0, 192, 16, 16],
-  [16, 192, 16, 16],
-  [32, 192, 16, 16],
-  [48, 192, 16, 16],
-  [64, 192, 16, 16],
-  [80, 192, 16, 16],
-  [96, 192, 16, 16],
-  [112, 192, 16, 16],
-  [128, 192, 16, 16],
-  [144, 192, 16, 16],
-  [160, 192, 16, 16],
-  [176, 192, 16, 16],
-  [192, 192, 16, 16],
-  [208, 192, 16, 16],
-  [224, 192, 16, 16],
-  [240, 192, 16, 16],
-  [256, 192, 16, 16],
-  [272, 192, 16, 16],
-  [288, 192, 16, 16],
-  [304, 192, 16, 16],
-  [320, 192, 16, 16],
-  [336, 192, 16, 16],
-  [352, 192, 16, 16],
-  [368, 192, 16, 16],
-  [384, 192, 16, 16],
-  [400, 192, 16, 16],
-  [416, 192, 16, 16],
-  [432, 192, 16, 16],
-  [448, 192, 16, 16],
-  [464, 192, 16, 16],
-  [480, 192, 16, 16],
-  [496, 192, 16, 16],
-  [512, 192, 16, 16],
-  [528, 192, 16, 16],
-  [544, 192, 16, 16],
-  [560, 192, 16, 16],
-  [576, 192, 16, 16],
-  [592, 192, 16, 16],
-  [608, 192, 16, 16],
-  [624, 192, 16, 16],
-  [640, 192, 16, 16],
-  [656, 192, 16, 16],
-  [672, 192, 16, 16],
-  [688, 192, 16, 16],
-  [704, 192, 16, 16],
-  [720, 192, 16, 16],
-  [736, 192, 16, 16],
-  [752, 192, 16, 16],
-  [768, 192, 16, 16],
-  [784, 192, 16, 16],
-  [800, 192, 16, 16],
-  [816, 192, 16, 16],
-  [832, 192, 16, 16],
-  [848, 192, 16, 16],
-  [864, 192, 16, 16],
-  [880, 192, 16, 16],
-  [896, 192, 16, 16],
-  [912, 192, 16, 16],
-  [928, 192, 16, 16],
-  [944, 192, 16, 16],
-  [960, 192, 16, 16],
-  [976, 192, 16, 16],
-  [992, 192, 16, 16],
-  [1008, 192, 16, 16],
-  [1024, 192, 16, 16],
-  [1040, 192, 16, 16],
-  [1056, 192, 16, 16],
-  [1072, 192, 16, 16],
-  [1088, 192, 16, 16],
-  [1136, 192, 16, 16],
-  [1152, 192, 16, 16],
-  [1168, 192, 16, 16],
-  [1184, 192, 16, 16],
-  [1200, 192, 16, 16],
-  [1216, 192, 16, 16],
-  [1232, 192, 16, 16],
-  [1248, 192, 16, 16],
-  [1264, 192, 16, 16],
-  [1280, 192, 16, 16],
-  [1296, 192, 16, 16],
-  [1312, 192, 16, 16],
-  [1328, 192, 16, 16],
-  [1344, 192, 16, 16],
-  [1360, 192, 16, 16],
-  [1376, 192, 16, 16],
-  [1392, 192, 16, 16],
-  [1440, 192, 16, 16],
-  [1456, 192, 16, 16],
-  [1472, 192, 16, 16],
-  [1488, 192, 16, 16],
-  [1504, 192, 16, 16],
-  [1520, 192, 16, 16],
-  [1536, 192, 16, 16],
-  [1552, 192, 16, 16],
-  [1568, 192, 16, 16],
-  [1584, 192, 16, 16],
-  [1600, 192, 16, 16],
-  [1616, 192, 16, 16],
-  [1632, 192, 16, 16],
-  [1648, 192, 16, 16],
-  [1664, 192, 16, 16],
-  [1680, 192, 16, 16],
-  [1696, 192, 16, 16],
-  [1712, 192, 16, 16],
-  [1728, 192, 16, 16],
-  [1744, 192, 16, 16],
-  [1760, 192, 16, 16],
-  [1776, 192, 16, 16],
-  [1792, 192, 16, 16],
-  [1808, 192, 16, 16],
-  [1824, 192, 16, 16],
-  [1840, 192, 16, 16],
-  [1856, 192, 16, 16],
-  [1872, 192, 16, 16],
-  [1888, 192, 16, 16],
-  [1904, 192, 16, 16],
-  [1920, 192, 16, 16],
-  [1936, 192, 16, 16],
-  [1952, 192, 16, 16],
-  [1968, 192, 16, 16],
-  [1984, 192, 16, 16],
-  [2000, 192, 16, 16],
-  [2016, 192, 16, 16],
-  [2032, 192, 16, 16],
-  [2048, 192, 16, 16],
-  [2064, 192, 16, 16],
-  [2080, 192, 16, 16],
-  [2096, 192, 16, 16],
-  [2112, 192, 16, 16],
-  [2128, 192, 16, 16],
-  [2144, 192, 16, 16],
-  [2160, 192, 16, 16],
-  [2176, 192, 16, 16],
-  [2192, 192, 16, 16],
-  [2208, 192, 16, 16],
-  [2224, 192, 16, 16],
-  [2240, 192, 16, 16],
-  [2256, 192, 16, 16],
-  [2272, 192, 16, 16],
-  [2288, 192, 16, 16],
-  [2304, 192, 16, 16],
-  [2320, 192, 16, 16],
-  [2336, 192, 16, 16],
-  [2352, 192, 16, 16],
-  [2368, 192, 16, 16],
-  [2384, 192, 16, 16],
-  [2400, 192, 16, 16],
-  [2416, 192, 16, 16],
-  [2432, 192, 16, 16],
-  [2448, 192, 16, 16],
-  [2496, 192, 16, 16],
-  [2512, 192, 16, 16],
-  [2528, 192, 16, 16],
-  [2544, 192, 16, 16],
-  [2560, 192, 16, 16],
-  [2576, 192, 16, 16],
-  [2592, 192, 16, 16],
-  [2608, 192, 16, 16],
-  [2624, 192, 16, 16],
-  [2640, 192, 16, 16],
-  [2656, 192, 16, 16],
-  [2672, 192, 16, 16],
-  [2688, 192, 16, 16],
-  [2704, 192, 16, 16],
-  [2720, 192, 16, 16],
-  [2736, 192, 16, 16],
-  [2752, 192, 16, 16],
-  [2768, 192, 16, 16],
-  [2784, 192, 16, 16],
-  [2800, 192, 16, 16],
-  [2816, 192, 16, 16],
-  [2832, 192, 16, 16],
-  [2848, 192, 16, 16],
-  [2864, 192, 16, 16],
-  [2880, 192, 16, 16],
-  [2896, 192, 16, 16],
-  [2912, 192, 16, 16],
-  [2928, 192, 16, 16],
-  [2944, 192, 16, 16],
-  [2960, 192, 16, 16],
-  [2976, 192, 16, 16],
-  [2992, 192, 16, 16],
-  [3008, 192, 16, 16],
-  [3024, 192, 16, 16],
-  [3040, 192, 16, 16],
-  [3056, 192, 16, 16],
-  [3072, 192, 16, 16],
-  [3088, 192, 16, 16],
-  [3104, 192, 16, 16],
-  [3120, 192, 16, 16],
-  [3136, 192, 16, 16],
-  [3152, 192, 16, 16],
-  [3168, 192, 16, 16],
-  [3184, 192, 16, 16],
-  [3200, 192, 16, 16],
-  [3216, 192, 16, 16],
-  [3232, 192, 16, 16],
-  [3248, 192, 16, 16],
-  [3264, 192, 16, 16],
-  [3280, 192, 16, 16],
-  [3296, 192, 16, 16],
-  [3312, 192, 16, 16],
-  [3328, 192, 16, 16],
-  [3344, 192, 16, 16],
-  [3360, 192, 16, 16],
-  [3376, 192, 16, 16],
-  [3392, 192, 16, 16],
-  [3408, 192, 16, 16],
-  [3424, 192, 16, 16],
-  [3440, 192, 16, 16],
-  [3456, 192, 16, 16],
-  [3472, 192, 16, 16],
-  [3488, 192, 16, 16],
-  [3504, 192, 16, 16],
-  [3520, 192, 16, 16],
-  [3536, 192, 16, 16],
-  [3552, 192, 16, 16],
-  [3568, 192, 16, 16],
-  [3584, 192, 16, 16],
-  [3600, 192, 16, 16],
-  [3616, 192, 16, 16],
-  [3632, 192, 16, 16],
-  [3648, 192, 16, 16],
-  [3664, 192, 16, 16],
-  [3680, 192, 16, 16],
-  [3696, 192, 16, 16],
-  [3712, 192, 16, 16],
-  [3728, 192, 16, 16],
-  [3744, 192, 16, 16],
-  [3760, 192, 16, 16],
-  [3776, 192, 16, 16],
-  [3792, 192, 16, 16],
-  [3808, 192, 16, 16],
-  [3824, 192, 16, 16],
-  [3840, 192, 16, 16],
-  [2208, 128, 16, 64], [2192, 144, 16, 48], [2176, 160, 16, 32],
-  [2256, 128, 16, 64], [2272, 144, 16, 48],
-  [2288, 160, 16, 32], [2304, 176, 16, 16], [2384, 176, 16, 16],
-  [2400, 160, 16, 32], [2416, 144, 16, 48], [2432, 128, 32, 64],
-  [2496, 128, 16, 64], [2512, 144, 16, 48], [2528, 160, 16, 32],
-  [2544, 176, 16, 16], [3024, 64, 32, 128],
-  [46, 3024, 80, 96],  [3008, 80, 16, 112], [2992, 96, 16, 96],
-  [2976, 112, 16, 80], [2960, 128, 16, 64], [2944, 144, 16, 48],
-  [2928, 160, 16, 32], [2912, 176, 16, 16]
-  ],
-
-  bricks: [
-    [2160, 176, 16, 16], [2176, 160, 16, 16], [2176, 176, 16, 16],
-    [2192, 144, 16, 16], [2192, 160, 16, 16], [2192, 176, 16, 16],
-    [2208, 128, 16, 16], [2208, 144, 16, 16], [2208, 160, 16, 16], 
-    [2208, 176, 16, 16], [2256, 128, 16, 16], [2256, 144, 16, 16],
-    [2256, 160, 16, 16], [2256, 176, 16, 16], [2272, 144, 16, 16],
-    [2272, 160, 16, 16], [2272, 176, 16, 16], [2288, 160, 16, 16],
-    [2288, 176, 16, 16], [2304, 176, 16, 16], [3184, 176, 16, 16]
-  ],
-
-  shrubs: [
-    [183, 176, 54, 16],
-    [375, 176, 32, 16],
-    [663, 176, 32, 16],
-    [951, 176, 32, 16],
-    [1143, 176, 32, 16],
-    [1447, 176, 32, 16],
-    [1735, 176, 32, 16],
-    [1927, 176, 32, 16],
-    [2224, 176, 32, 16],
-    [2695, 176, 32, 16]
-  ],
-
-  mountains: [
-    [255, 172, 48, 19],
-    [767, 157, 80, 35],
-    [1023, 172, 49, 20],
-    [1551, 157, 82, 35],
-    [1807, 172, 50, 20],
-    [2320, 157, 80, 35],
-    [2575, 172, 50, 20],
-    [3087, 157, 81, 35],
-    [3359, 157, 81, 35]
-  ],
-
-  flag: [3185, 24, 16, 24],
-
-  flagpole: [3185, 48, 16, 135],
-
-  pipes: [
-    [3568, 128, 32, 64], [3536, 160, 32, 32], [2880, 160, 32, 32],
-    [2624, 160, 32, 32], [448, 160, 32, 32], [608, 144, 32, 48],
-    [736, 128, 32, 64], [912, 128, 32, 64],
-  ],
-
-  coins: [
-    [256, 128, 16,16], [336, 128, 16,16]
-  ],
-
-  mushrooms: [[336, 128, 16, 16], [1760, 64, 16, 16]],
-
-  breakables: [
-    [384, 128, 16, 16],
-    [352, 128, 16, 16],
-    [320, 128, 16, 16],
-    [2752, 128, 16, 16], [2720, 128, 16, 16], [2704, 128, 16, 16],
-    [2096, 128, 16, 16], [2080, 128, 16, 16], [2064, 64, 16, 16],
-    [2112, 64, 16, 16],
-    [1952, 64, 16, 16],
-    [1968, 64, 16, 16],
-    [1984, 64, 16, 16],
-    [1632, 128, 16, 16],
-    [1616, 128, 16, 16],
-    [1504, 64, 16, 16],
-    [1488, 64, 16, 16],
-    [1472, 64, 16, 16],
-    [1520, 128, 16, 16],
-    [1408, 64, 16, 16],
-    [1392, 64, 16, 16],
-    [1376, 64, 16, 16],
-    [1360, 64, 16, 16],
-    [1344, 64, 16, 16],
-    [1328, 64, 16, 16],
-    [1312, 64, 16, 16],
-    [1296, 64, 16, 16],
-    [1280, 128, 16, 16],
-    [1248, 128, 16, 16],
-    [1904, 128, 16, 16]
-  ],
-
-};
-/* harmony export (immutable) */ __webpack_exports__["a"] = levelOne;
-
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entities_entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__entities_sprite__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__entities_block__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__entities_breakable__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__entities_koopa__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__entities_goomba__ = __webpack_require__(3);
-
-
-
-
-
-
-
-class MapBuilder {
-  constructor(level, tileset, spriteSheet) {
-    this.level = level;
-    this.tileset = tileset;
-    this.spriteSheet = spriteSheet;
-
-    this.mountainSheet = new Image();
-    this.mountainSheet.src = './assets/sprites/mountain.png';
-    this.cloudsSheet = new Image();
-    this.cloudsSheet.src = './assets/sprites/clouds.png';
-
-    this.sceneryEntities = [];
-    this.brickEntities = [];
-    this.breakableEntities = [];
-    this.blockEntities = [];
-
-    level.ground.forEach(ground => {
-      this.sceneryEntities.push(
-        new Ground(this.tileset, ground[0], ground[1], ground[2], ground[3])
-      );
-    });
-
-    level.shrubs.forEach(shrub => {
-      this.sceneryEntities.push(
-        new Shrub(this.tileset, shrub[0], shrub[1], shrub[2], shrub[3])
-      );
-    });
-
-    level.mountains.forEach(mountain => {
-      this.sceneryEntities.push(
-        new Mountain(this.mountainSheet, mountain[0], mountain[1], mountain[2], mountain[3])
-      );
-    });
-
-    level.pipes.forEach(pipe => {
-      this.sceneryEntities.push(
-        new Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3])
-      );
-    });
-
-    level.smallClouds.forEach(smallCloud => {
-      this.sceneryEntities.push(
-        new SmallCloud(
-          this.cloudsSheet, smallCloud[0], smallCloud[1], smallCloud[2], smallCloud[3]
-        )
-      );
-    });
-
-    level.mediumClouds.forEach(mediumCloud => {
-      this.sceneryEntities.push(
-        new MediumCloud(
-          this.cloudsSheet, mediumCloud[0], mediumCloud[1], mediumCloud[2], mediumCloud[3]
-          )
-      );
-    });
-
-    level.largeClouds.forEach(largeCloud => {
-      this.sceneryEntities.push(
-        new LargeCloud(
-          this.cloudsSheet, largeCloud[0], largeCloud[1], largeCloud[2], largeCloud[3]
-        )
-      );
-    });
-
-    // coin blocks
-    level.blocks.forEach(block => {
-      this.blockEntities.push(
-        new __WEBPACK_IMPORTED_MODULE_2__entities_block__["a" /* default */]('coin', this.tileset, block[0], block[1], block[2], block[3])
-      );
-    });
-    // mushroom blocks
-    level.mushrooms.forEach(block => {
-      this.blockEntities.push(
-        new __WEBPACK_IMPORTED_MODULE_2__entities_block__["a" /* default */]('mushroom', this.tileset, block[0], block[1], block[2], block[3])
-      );
-    });
-
-    level.breakables.forEach(breakable => {
-      this.breakableEntities.push(
-        new __WEBPACK_IMPORTED_MODULE_3__entities_breakable__["a" /* default */](this.tileset, breakable[0], breakable[1], breakable[2], breakable[3]));
-      });
-
-    level.bricks.forEach(brick => {
-      this.sceneryEntities.push(
-        new Brick(this.tileset, brick[0], brick[1], brick[2], brick[3]));
-      });
-
-      this.sceneryEntities.push(
-        new Flag(this.tileset, level.flag[0], level.flag[1], level.flag[2], level.flag[3])
-      );
-
-      this.sceneryEntities.push(
-        new Flagpole(this.tileset, level.flagpole[0], level.flagpole[1], level.flagpole[2], level.flagpole[3])
-      );
-    }
-
-    create(data) {
-      this.sceneryEntities.forEach(scene => {
-        data.entities.scenery.push(scene);
-      });
-
-      this.breakableEntities.forEach(breakable => {
-        data.entities.scenery.push(breakable);
-      });
-
-      this.blockEntities.forEach(block => {
-        data.entities.scenery.push(block);
-      });
-    }
-
-    renderMap(data) {
-            this.sceneryEntities.forEach(scene => {
-        this.drawEntity(scene, data);
-      });
-
-      this.brickEntities.forEach(brick => {
-        this.drawEntity(brick, data);
-      });
-
-      this.breakableEntities.forEach(breakable => {
-        this.drawEntity(breakable, data);
-      });
-
-      this.blockEntities.forEach(block => {
-        this.drawEntity(block, data);
-      });
-    }
-
-    drawEntity(entity, data) {
-      const ctx = data.canvas.ctx;
-      const viewport = data.viewport;
-
-      if (((entity.xPos + entity.width >= viewport.vX &&
-        entity.xPos + entity.width <= viewport.vX + viewport.width)) &&
-        ((entity.yPos + entity.height >= viewport.vY &&
-          entity.yPos + entity.height <= viewport.vY + viewport.height))) {
-
-            ctx.drawImage(
-              entity.sprite.img,
-              entity.sprite.srcX, entity.sprite.srcY,
-              entity.sprite.srcW, entity.sprite.srcH,
-              entity.xPos - viewport.vX, entity.yPos - viewport.vY,
-              entity.width, entity.height
-            );
-          }
-        }
-      }
-
-      /* harmony default export */ __webpack_exports__["a"] = (MapBuilder);
-
-      class Ground extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 16, 16);
-          super('ground', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Pipe extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 180, 35, 35);
-
-          super('pipe', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Coin extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */]('');
-
-          super('coin', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Mushroom extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */]('');
-
-          super('mushroom', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Brick extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 18, 18, 18);
-
-          super('brick', sprite, xPos, yPos, width, height);
-        }
-      }
-      class Shrub extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 198.5, 162.5, 53, 17);
-
-          super('shrub', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Mountain extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 90, 39);
-
-          super('mountain', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class SmallCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 64.5, 0, 33, 24);
-
-          super('cloud', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class MediumCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 24.5, 48, 24);
-
-          super('cloud', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class LargeCloud extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 0, 0, 64, 24);
-
-          super('cloud', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Flag extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 289, 153, 16, 27);
-
-          super('flag', sprite, xPos, yPos, width, height);
-        }
-      }
-
-      class Flagpole extends __WEBPACK_IMPORTED_MODULE_0__entities_entity__["a" /* default */] {
-        constructor(tileset, xPos, yPos, width, height) {
-          const sprite = new __WEBPACK_IMPORTED_MODULE_1__entities_sprite__["a" /* default */](tileset, 289, 163, 16, 18);
-
-          super('flag', sprite, xPos, yPos, width, height);
-        }
-      }
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__entity__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__sprite__ = __webpack_require__(1);
-
-
-
-class Breakable extends __WEBPACK_IMPORTED_MODULE_0__entity__["a" /* default */] {
-  constructor(tileset, xPos, yPos, width, height) {
-    const sprite = new __WEBPACK_IMPORTED_MODULE_1__sprite__["a" /* default */](tileset, 18, 0, 18, 18);
-    super('breakable', sprite, xPos, yPos, width, height);
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Breakable);
 
 /***/ })
 /******/ ]);
