@@ -7,49 +7,8 @@ html, body {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
-
-  color: #ffd3b1;
-  background-color: #be2801;
-}
-
-header {
-  display: flex;
-  justify-content: center;
-}
-
-.description, .contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  
-  align-content: center;
-
-  width: 100%;
-}
-
-.left-spacer img {
-  width: 100%;
-  height: 100px;
-
-  margin-top: 75px;
-  margin-bottom: 20px;
-}
-
-.description, .contact a {
-  font-size: 24px;
-  padding: 5px;
-  text-align: center;
-  line-height: 1.5;
-  color: #ffd3b1; 
-  /*margin: 10px;*/
-} 
-
-.contact a {
-  font-size: 30px;
-}
-
-.contact a:hover {
-  
+  font-family: 'Patrick Hand SC', cursive;
+  background-color: lightgray;
 }
 
 .main {
@@ -59,11 +18,78 @@ header {
   height: 100%;
 }
 
+.description, .contact {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  justify-content: space-around;
+}
+
+.contact {
+  justify-content: center;
+}
+
+.description img {
+  width: 100%;
+  height: 100px;
+}
+
+.description h1 {
+  font-size: 68px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-align: center;
+}
+
+.description h2 {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.controls {
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.controls h2 {
+  color: black;
+  font-size: 32px;
+  text-align: center;
+}
+
+.controls h3 {
+  color: black;
+  font-size: 22px;
+  margin: 10px 5px;
+  text-align: center;
+}
+
+.links h2 {
+  text-align: center;
+  font-size: 38px;
+  margin: 15px;
+}
+
+img#github, img#linkedin {
+  width: 75px;
+  height: 75px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 5px solid black;
+}
+
 canvas {
   height: 600px;
   width: 760px;
-  border: 5px solid #212121;
-  margin: 10px;
+  border-radius: 10px;
+  border: 10px solid #000000;
+  margin: auto;
   user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -71,23 +97,4 @@ canvas {
   -moz-user-select: none;
   -webkit-touch-callout: none;
   -webkit-user-drag: none;
-}
-
-.left-spacer {
-  display: flex;
-  flex-direction: column;
-
-  width: 300px;
-}
-
-.right-spacer  {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-
-  width: 300px;
-}
-
-.contact {
-  margin-top: 130px;
 }

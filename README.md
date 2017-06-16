@@ -1,8 +1,7 @@
-<img src="assets/images/SMBLogo.png" alt="SMB Logo" width="500" height="200"/>
+# Mario JS
+## Super Mario Bros Level 1-1 in JavaScript
 
 ## [Play Now!](https://tylerreichle.github.io/mario_js/)
-
-# Level 1-1 in JavaScript
 
  Mario runs through each level trying to reach the castle on the other side to save the princess. Each level contains various enemies, coins to collect, and mushrooms to power-up Mario. Mario's primary form of attack is jumping on top of enemies but touching enemies from the sides results in loss of a life.
 
