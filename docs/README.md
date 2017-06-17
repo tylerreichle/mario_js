@@ -36,17 +36,19 @@ This project will be implemented with the following technologies:
 
 In addition to the webpack entry file, there will be the following scripts used in this project:
 
-**entities.js**: Entities will be used to store the current state of all entities in the game. This includes the construction of Mario, enemies, coins and walls locations.
+**game.js**: Game contains be the main game loop and handles initial game setup. This class holds the HTML5 canvas used for main game view as well as all the entities currently in the level. UpdateView handles updating the viewport to follow Mario throughout the level.
 
-**game.js**: Game will be the main game class and handle logic for running the game loop. This will also create the foreground and background canvas.
+The complete game is rendered and updated using five helper scripts inside of the main game loop. Each is called 60 times per second creating a smooth playing experience for the user.
 
-**input.js**: Input will handle listening for user input and passing on that to the game state.
+**animation.js**: Helper used for looping through calling the animation method of each entity in the game after user input.
 
-**animation.js** and **movement.js**: Movement will control enemy movement and update the game state based on player input. Animations will be a helper function used for calling the animation method of each entity in the game after user input.
+**input.js**: Helper function that handles listening for user input and passing on that to the game state. Mario's current state (standing, walking, jumping) set by which keys are currently pressed.
 
-**physics.js**: Physics will be in charge of collision detection of all the game entities. This will also apply gravity to all entities.
+**movement.js**: Movement controls enemy movement and updates the game state with Mario's current velocity and direction based on player input.
 
-**render.js**: Render will draw each game entity onto the main canvas along with drawing the hud onto the canvas.
+**physics.js**: Physics handles all collision detection between game entities including Mario, enemies, and the map terrain. After detecting a collision between entities it determines the effects of the collision based on the two entity types. Physics also applies gravity to all entities.
+
+**render.js**: Render will draw each game entity onto the main canvas along with drawing the hud onto the canvas. Render also holds all scenery entities loaded by the map builder. Render will only draw entities currently in the viewport, preventing unnessesary usage of resources and memory.
 
 ## Implementation Timeline
 
