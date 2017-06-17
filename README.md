@@ -1,11 +1,11 @@
 # Mario JS
-## Super Mario Bros Level 1-1 in JavaScript
+### Super Mario Bros Level 1-1 recreated in JavaScript
 
 ## [Play Now!](https://tylerreichle.github.io/mario_js/)
 
  Mario runs through each level trying to reach the castle on the other side to save the princess. Each level contains various enemies, coins to collect, and mushrooms to power-up Mario. Mario's primary form of attack is jumping on top of enemies but touching enemies from the sides results in loss of a life.
 
-<img src="docs/screens/gameplay.gif" alt="gameplay gif" width="760" height="600"/>
+<img src="docs/screens/gameplay.gif" alt="gameplay gif" width="560" height="400"/>
 
  ## Controls
 
@@ -27,7 +27,8 @@ Super Mario Bros JS was build using the following technologies:
 
 - Webpack used to bundle and serve up the various scripts in the correct order.
 
-<img src="docs/screens/big_mario.png" alt="Screenshot Two" width="760" height="600"/>
+
+<img src="docs/screens/intro.png" alt="Screenshot One" width="560" height="400"/>
 
 ## Technical Details
 
@@ -61,9 +62,10 @@ drawEntity(entity, data) {
   }
 ```
 
-Entities animated by drawing multiple sprites
+Entities are animated by looping through and drawing a series sprites similar to a flipbook. SpriteAnimations object holds groups of sprites corresponding to each state an entity could be in such as walking, jumping, squashed, or dying. An entity's currentState is updated depending on changes to x and y velocity as well as collisions with other entities in the game.
 
 ```javascript
+// coin.js
 this.spriteAnimations = {
   spin: {
     frames: [
@@ -91,9 +93,13 @@ this.states = {
   },
 ```
 
-Map builder
+MapBuilder was designed with the goal of allowing easy addition of levels after the completion of the project. Data for each level is stored in an object containing all the locations of scenery entities and enemy spawn points. When the main Game class is initialized it creates and instance of MapBuilder loading in the current level. MapBuilder then creates the appropriate scene and enemy entities for the current level and begins rendering them to the canvas.
 
 ```javascript
+// game.js
+mapBuilder: new MapBuilder(levelOne, tileset, spriteSheet),
+
+// mapBuilder.js
 level.ground.forEach((ground) => {
   this.sceneryEntities.push(
     new Scenery.Ground(this.tileset, ground[0], ground[1], ground[2], ground[3]),
@@ -115,6 +121,8 @@ renderMap(data) {
     this.drawEntity(brick, data);
   });
 ```
+
+<img src="docs/screens/big_mario.png" alt="Screenshot Two" width="560" height="400"/>
 
 ## Bonus features
 There are many additional feature that could be added in the future. Some anticipated updates are:
