@@ -5,7 +5,7 @@
 
  Mario runs through each level trying to reach the castle on the other side to save the princess. Each level contains various enemies, coins to collect, and mushrooms to power-up Mario. Mario's primary form of attack is jumping on top of enemies but touching enemies from the sides results in loss of a life.
 
-<img src="docs/screens/intro.png" alt="Screenshot One" width="760" height="600"/>
+<img src="docs/screens/gameplay.gif" alt="gameplay gif" width="760" height="600"/>
 
  ## Controls
 
@@ -19,7 +19,9 @@
 
 Super Mario Bros JS was build using the following technologies:
 
-- Vanilla JavaScript (No Libraries used) and a minified version of jQuery used for overall structure and game logic.
+- Vanilla JavaScript used for overall game structure and logic.
+
+- Minified version of jQuery used to detect user input.
 
 - A HTML5 Canvas used for rendering of the current game state and all game entities.
 
@@ -29,19 +31,90 @@ Super Mario Bros JS was build using the following technologies:
 
 ## Technical Details
 
-**game.js**: Game contains be the main game loop and handles initial game setup. This class holds the HTML5 canvas used for main game view as well as all the entities currently in the level. UpdateView handles updating the viewport to follow Mario throughout the level.
+Game viewport updates to follow Mario based of his current x pos on the canvas. Render will only draw entities currently in the viewport, preventing unnessesary usage of resources and memory.
 
-The complete game is rendered and updated using five helper scripts inside of the main game loop. Each is called 60 times per second creating a smooth playing experience for the user.
+```javascript
+// game.js
+static updateView(data) {
+  const viewport = data.viewport;
+  const margin = viewport.width / 6;
+  const center = {
+    x: data.entities.mario.xPos + (data.entities.mario.width * 0.5),
+    y: data.entities.mario.yPos + (data.entities.mario.height * 0.5),
+  };
 
-**animation.js**: Helper used for looping through calling the animation method of each entity in the game after user input.
+  if (center.x < viewport.vX + (margin * 2)) {
+    viewport.vX = Math.max(center.x - margin, 0);
+  } else if (center.x > (viewport.vX + viewport.width) - (margin * 2)) {
+    viewport.vX = Math.min((center.x + margin) - viewport.width, 3400 - viewport.width);
+  }
+}
 
-**input.js**: Helper function that handles listening for user input and passing on that to the game state. Mario's current state (standing, walking, jumping) set by which keys are currently pressed.
+// render.js
+drawEntity(entity, data) {
+  if (((entity.xPos + entity.width >= data.viewport.vX &&
+        entity.xPos + entity.width <= data.viewport.vX + data.viewport.width)) &&
+      ((entity.yPos + entity.height >= data.viewport.vY &&
+        entity.yPos + entity.height <= data.viewport.vY + data.viewport.height))) {
+      // draw entity to screen
+    }
+  }
+```
 
-**movement.js**: Movement controls enemy movement and updates the game state with Mario's current velocity and direction based on player input.
+Entities animated by drawing multiple sprites
 
-**physics.js**: Physics handles all collision detection between game entities including Mario, enemies, and the map terrain. After detecting a collision between entities it determines the effects of the collision based on the two entity types. Physics also applies gravity to all entities.
+```javascript
+this.spriteAnimations = {
+  spin: {
+    frames: [
+      new Sprite(spriteSheet, 5, 5, 10, 14),
+      new Sprite(spriteSheet, 21, 5, 10, 14),
+      new Sprite(spriteSheet, 37, 5, 10, 14),
+      new Sprite(spriteSheet, 53, 5, 10, 14),
+    ],
+    currentFrame: 0,
+  }
 
-**render.js**: Render will draw each game entity onto the main canvas along with drawing the hud onto the canvas. Render also holds all scenery entities loaded by the map builder. Render will only draw entities currently in the viewport, preventing unnessesary usage of resources and memory.
+this.states = {
+  spinning: {
+    animation(data) {
+      if (data.animationFrame % 13 === 0) {
+        self.sprite =
+          self.spriteAnimations.spin.frames[self.spriteAnimations.spin.currentFrame];
+        self.spriteAnimations.spin.currentFrame += 1;
+
+        if (self.spriteAnimations.spin.currentFrame > 3) {
+          self.spriteAnimations.spin.currentFrame = 0;
+        }
+      }
+    },
+  },
+```
+
+Map builder
+
+```javascript
+level.ground.forEach((ground) => {
+  this.sceneryEntities.push(
+    new Scenery.Ground(this.tileset, ground[0], ground[1], ground[2], ground[3]),
+  );
+});
+
+level.pipes.forEach((pipe) => {
+  this.sceneryEntities.push(
+    new Scenery.Pipe(this.tileset, pipe[0], pipe[1], pipe[2], pipe[3]),
+  );
+});
+
+renderMap(data) {
+  this.sceneryEntities.forEach((scene) => {
+    this.drawEntity(scene, data);
+  });
+
+  this.brickEntities.forEach((brick) => {
+    this.drawEntity(brick, data);
+  });
+```
 
 ## Bonus features
 There are many additional feature that could be added in the future. Some anticipated updates are:
