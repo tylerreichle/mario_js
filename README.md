@@ -1,5 +1,5 @@
 # Mario JS
-## Super Mario Bros Level 1-1 in JavaScript
+### Super Mario Bros Level 1-1 recreated in JavaScript
 
 ## [Play Now!](https://tylerreichle.github.io/mario_js/)
 
