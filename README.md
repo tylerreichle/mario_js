@@ -5,7 +5,7 @@
 
  Mario runs through each level trying to reach the castle on the other side to save the princess. Each level contains various enemies, coins to collect, and mushrooms to power-up Mario. Mario's primary form of attack is jumping on top of enemies but touching enemies from the sides results in loss of a life.
 
-<img src="docs/screens/gameplay.gif" alt="gameplay gif" width="760" height="600"/>
+<img src="docs/screens/gameplay.gif" alt="gameplay gif" width="560" height="400"/>
 
  ## Controls
 
@@ -28,7 +28,7 @@ Super Mario Bros JS was build using the following technologies:
 - Webpack used to bundle and serve up the various scripts in the correct order.
 
 
-<img src="docs/screens/intro.png" alt="Screenshot One" width="760" height="600"/>
+<img src="docs/screens/intro.png" alt="Screenshot One" width="560" height="400"/>
 
 ## Technical Details
 
@@ -122,7 +122,7 @@ renderMap(data) {
   });
 ```
 
-<img src="docs/screens/big_mario.png" alt="Screenshot Two" width="760" height="600"/>
+<img src="docs/screens/big_mario.png" alt="Screenshot Two" width="560" height="400"/>
 
 ## Bonus features
 There are many additional feature that could be added in the future. Some anticipated updates are:
