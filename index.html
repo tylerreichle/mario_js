@@ -8,17 +8,26 @@
   <link href="assets/css/reset.css" rel="stylesheet" />
   <link href="assets/css/stylesheet.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-101227805-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </head>
 
 <body>
-  <header>
-  </header>
-
   <div class="main">
     <div class="description">
       <div>
-      <h1>Mario</h1>
-      <h2>JS</h2>
+        <h1>Mario</h1>
+        <h2>JS</h2>
       </div>
       <div class="controls">
         <h2>Controls</h2>
@@ -27,8 +36,8 @@
         <h3>Jump: &#8679; / W / Spacebar</h3>
       </div>
 
-      <div class="third-one" > </div>
-      <div class="fourth-one" > </div>
+      <div class="third-one"> </div>
+      <div class="fourth-one"> </div>
     </div>
 
     <canvas id="game-canvas" width="760" height="600"></canvas>
@@ -40,11 +49,12 @@
 
       <div class="links">
         <h2>Tyler Reichle</h2>
-      <a href="https://github.com/tylerreichle/mario_js">
+        <a target="_blank" href="https://github.com/tylerreichle/mario_js">
         <img id="github" alt="github link" src="assets/images/github.png">
       </a>
-      <a href="https://www.linkedin.com/in/tyler-reichle-36b379130/">
-        <img id="linkedin" alt="linked link" src="assets/images/linkedin.png">
+
+        <a target="_blank" href="https://www.linkedin.com/in/tyler-reichle-36b379130/">
+        <img id="linkedin" alt="linkedin link" src="assets/images/linkedin.png">
       </a>
       </div>
     </div>
