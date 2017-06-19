@@ -11,9 +11,9 @@
 
 | Action     | Key Input                       |
 |:----------:|:-------------------------------:|
-| Move Left  | 'A' / Left-Arrow               |
-| Move Right | 'D' / Right-Arrow              |
-| Jump       | 'W' / Spacebar / Up-Arrow      |
+| Move Left  | 'A' / Left-Arrow                |
+| Move Right | 'D' / Right-Arrow               |
+| Jump       | 'W' / Spacebar / Up-Arrow       |
 
 ## Technologies Used
 
