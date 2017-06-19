@@ -11,10 +11,10 @@
 
   <script>
     (function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date(); a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-101227805-1', 'auto');
@@ -29,6 +29,7 @@
         <h1>Mario</h1>
         <h2>JS</h2>
       </div>
+
       <div class="controls">
         <h2>Controls</h2>
         <h3>Move Left: &#8678; / A</h3>
@@ -36,11 +37,14 @@
         <h3>Jump: &#8679; / W / Spacebar</h3>
       </div>
 
-      <div class="third-one"> </div>
+      <div id="mute-button"></div>
       <div class="fourth-one"> </div>
     </div>
 
     <canvas id="game-canvas" width="760" height="600"></canvas>
+    <audio id="background_music" autoplay loop>
+      <source src="./assets/audio/music/mario_theme.mp3" type="audio/mp3" />
+    </audio>
 
     <div class="contact">
       <div class="info">
@@ -61,7 +65,10 @@
 
   </div>
 </body>
+
 <script src="assets/javascripts/jquery.min.js"></script>
 <script src="assets/javascripts/bundle.js"></script>
 
 </html>
+
+<!-- Mute icons made by Madebyoliver. http://www.flaticon.com/authors/madebyoliver -->

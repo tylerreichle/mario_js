@@ -70,6 +70,23 @@ html, body {
   text-align: center;
 }
 
+div#mute-button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-size: 40px;
+  background-position: center;
+  background-image: url('../images/muted.png');
+}
+
+div#mute-button:focus {
+  outline: none;
+}
+
+div#mute-button.muted {
+  background-image: url('../images/speaker.png');
+}
+
 .links h2 {
   text-align: center;
   font-size: 38px;
