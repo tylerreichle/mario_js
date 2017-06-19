@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "PixelEmulator";
-    src: url("../font/pixel-emulator.otf");
+  font-family: "PixelEmulator";
+  src: url("../font/pixel-emulator.otf");
 }
 
 html, body {
@@ -52,19 +52,19 @@ html, body {
 }
 
 .controls {
-  margin: 30px 5px 5px 5px;
+  margin: 30px 15px 5px 15px;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 2px solid #000000;
 }
 
 .controls h2 {
-  color: black;
+  color: #000000;
   font-size: 32px;
   text-align: center;
 }
 
 .controls h3 {
-  color: black;
+  color: #000000;
   font-size: 22px;
   margin: 10px 5px;
   text-align: center;
@@ -98,7 +98,7 @@ img#github, img#linkedin {
   height: 75px;
   margin: 5px;
   border-radius: 10px;
-  border: 5px solid black;
+  border: 5px solid #000000;
 }
 
 canvas {
