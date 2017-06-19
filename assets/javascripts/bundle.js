@@ -2088,8 +2088,22 @@ class Game {
       vY: 0,
     };
 
-    const backgroundMusic = new Audio('./assets/audio/music/mario_theme.mp3');
-    backgroundMusic.loop = true;
+    const backgroundMusic = document.getElementById('background_music');
+
+    // Add mute button
+    this.muted = false;
+
+    document.getElementById('mute-button').addEventListener('click', (e) => {
+      backgroundMusic.muted = !backgroundMusic.muted;
+      if (this.muted) {
+        this.muted = false;
+        e.target.className = '';
+      } else {
+        this.muted = true;
+        e.target.className += 'muted';
+      }
+      e.preventDefault();
+    }, false);
 
     const spriteSheet = new Image();
     spriteSheet.src = './assets/sprites/spritesheet.png';
@@ -2116,7 +2130,7 @@ class Game {
 
       const mario = new __WEBPACK_IMPORTED_MODULE_7__entities_mario__["a" /* default */](spriteSheet, 175, 0, 16, 16);
       const score = new __WEBPACK_IMPORTED_MODULE_10__entities_score__["a" /* default */](270, 15);
-      data.sounds.backgroundMusic.play();
+      // data.sounds.backgroundMusic.play();
 
       __WEBPACK_IMPORTED_MODULE_1__util_input__["a" /* default */].init(data);
       data.entities.mario = mario;
