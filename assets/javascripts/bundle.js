@@ -2130,7 +2130,6 @@ class Game {
 
       const mario = new __WEBPACK_IMPORTED_MODULE_7__entities_mario__["a" /* default */](spriteSheet, 175, 0, 16, 16);
       const score = new __WEBPACK_IMPORTED_MODULE_10__entities_score__["a" /* default */](270, 15);
-      // data.sounds.backgroundMusic.play();
 
       __WEBPACK_IMPORTED_MODULE_1__util_input__["a" /* default */].init(data);
       data.entities.mario = mario;
