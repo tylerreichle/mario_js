@@ -17,7 +17,7 @@
 
 ## Technologies Used
 
-Super Mario Bros JS was build using the following technologies:
+Mario JS was build using the following technologies:
 
 - Vanilla JavaScript used for overall game structure and logic.
 
@@ -32,7 +32,7 @@ Super Mario Bros JS was build using the following technologies:
 
 ## Technical Details
 
-Game viewport updates to follow Mario based of his current x pos on the canvas. Render will only draw entities currently in the viewport, preventing unnessesary usage of resources and memory.
+Game viewport updates to follow Mario based of his current x-position on the canvas. Render will only draw entities currently in the viewport, preventing unnessesary usage of resources and memory.
 
 ```javascript
 // game.js
@@ -93,7 +93,9 @@ this.states = {
   },
 ```
 
-MapBuilder was designed with the goal of allowing easy addition of levels after the completion of the project. Data for each level is stored in an object containing all the locations of scenery entities and enemy spawn points. When the main Game class is initialized it creates and instance of MapBuilder loading in the current level. MapBuilder then creates the appropriate scene and enemy entities for the current level and begins rendering them to the canvas.
+MapBuilder was designed with the goal of allowing easy addition of levels after the completion of the project. Data for each level is stored in an object containing all the locations of scenery entities and enemy spawn points.
+
+When the main Game class is initialized it creates and instance of MapBuilder loading in the current level. MapBuilder then creates the appropriate scene and enemy entities for the current level and begins rendering them to the canvas.
 
 ```javascript
 // game.js
@@ -127,6 +129,6 @@ renderMap(data) {
 ## Bonus features
 There are many additional feature that could be added in the future. Some anticipated updates are:
 
-- Add the ability to grab flower power-ups and shoot fireballs at enemies
-- Underground portion of level
+- Add the ability to grab flower power-ups and shoot fireballs at enemies.
+- Underground portion of level.
 - Multiple levels and additional enemy types.
