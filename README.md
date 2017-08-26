@@ -1,4 +1,7 @@
 # Mario JS
+
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 ### Super Mario Bros Level 1-1 recreated in JavaScript
 
 ## [Play Now!](https://tylerreichle.github.io/mario_js/)
